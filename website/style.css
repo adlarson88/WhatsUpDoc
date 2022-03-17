@@ -1,0 +1,46 @@
+.grid-container {
+    padding: 0px;
+    margin: 0px;
+    display: grid;
+    grid-template-columns: 18vw 78vw;
+    grid-template-rows: 18vh 78vw;
+}
+
+.nau {
+    order: 1;
+
+}
+
+.sidebar {
+    display: grid;
+    grid-template-rows: repeat(8, 1fr);
+    order: 3;
+    background-color: #002454;
+    border-style: solid;
+    border-color: #FAC01A;
+}
+
+.content {
+    order: 4;
+}
+
+.banner {
+    order: 2;    
+    object-fit: fill;
+}
+
+.logo {
+    width: 99%;
+    height: 99%;
+}
+
+.link {
+    background-color: #002454;
+    border-width: 1px;
+    place-self: center;
+    font-size: 1.5em;
+}
+
+a {
+    color: #FAC01A;
+}
