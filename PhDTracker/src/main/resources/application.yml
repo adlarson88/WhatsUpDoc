@@ -1,0 +1,22 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration: spring.security.oauth2.client.registration
+          google: (ID for client registration)
+            client-id: (google-client-id).apps.googleusercontent.com
+            client-secret: (google-client-secret)
+  jpa:
+    hibernate:
+      ddl-auto: none
+      #show-sql: true
+  datasource:
+    url: jdbc.mysql://${MYSQL_HOST:localhost}:3306/
+    username: ${DBUser}
+    password: ${DBPass}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      enable: true
+      max-file-size: 10MB
+      max-request-size: 15MB
