@@ -1,22 +1,19 @@
 spring:
-  security:
-    oauth2:
-      client:
-        registration: spring.security.oauth2.client.registration
-          google: (ID for client registration)
-            client-id: (google-client-id).apps.googleusercontent.com
-            client-secret: (google-client-secret)
   jpa:
     hibernate:
       ddl-auto: none
       #show-sql: true
   datasource:
-    url: jdbc.mysql://${MYSQL_HOST:localhost}:3306/
-    username: ${DBUser}
-    password: ${DBPass}
+    url: jdbc:mysql://localhost:3306/capstone
+    username: baseUser
+    password: basePassword1!
     driver-class-name: com.mysql.cj.jdbc.Driver
   servlet:
     multipart:
-      enable: true
+      enabled: true
       max-file-size: 10MB
       max-request-size: 15MB
+  security:
+    user:
+      name: u0dNHg3aictfzwy4lj5OBk1vR
+      password: 2hJ04Bu8qniOYxtSl9er1A765
