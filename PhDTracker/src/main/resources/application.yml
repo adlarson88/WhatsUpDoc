@@ -5,8 +5,8 @@ spring:
       #show-sql: true
   datasource:
     url: jdbc:mysql://localhost:3306/capstone
-    username: baseUser
-    password: basePassword1!
+    username: ${DBUser}
+    password: ${DBPassword}
     driver-class-name: com.mysql.cj.jdbc.Driver
   servlet:
     multipart:
@@ -15,5 +15,5 @@ spring:
       max-request-size: 15MB
   security:
     user:
-      name: u0dNHg3aictfzwy4lj5OBk1vR
-      password: 2hJ04Bu8qniOYxtSl9er1A765
+      name: ${SECUser}
+      password: ${SECPassword}
