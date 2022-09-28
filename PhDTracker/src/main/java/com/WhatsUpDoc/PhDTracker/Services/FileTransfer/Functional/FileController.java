@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @CrossOrigin("http://localhost:8080")
-public class FileControllerTD {
+public class FileController {
 
     @Autowired
     private FileStorageService storageService;
@@ -40,12 +40,12 @@ public class FileControllerTD {
             String fileDownloadUri = ServletUriComponentsBuilder
                     .fromCurrentContextPath()
                     .path("/files/")
-                    .path(dbFile.getUserId())
+                    .path(dbFile.getId())
                     .toUriString();
             return new ResponseFile(
-                    dbFile.getFilename(),
+                    dbFile.getName(),
                     fileDownloadUri,
-                    dbFile.getFiletype(),
+                    dbFile.getType(),
                     dbFile.getData().length);
         }).collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.OK).body(files);
@@ -53,9 +53,9 @@ public class FileControllerTD {
 
     @GetMapping("/files/{id}")
     public ResponseEntity<byte[]> getFile(@PathVariable String id) {
-        PrimaryFile primaryFile = storageService.getFile(id);
+        FileDB fileDB = storageService.getFile(id);
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + primaryFile.getFilename() + "\"")
-                .body(primaryFile.getData());
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
+                .body(fileDB.getData());
     }
 }

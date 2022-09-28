@@ -6,7 +6,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.stream.Stream;
 
 @Service
@@ -14,19 +13,17 @@ public class FileStorageService {
     @Autowired
     private FileDBRepository fileDBRepository;
 
-    public PrimaryFile store(MultipartFile file) throws IOException {
+    public FileDB store(MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        PrimaryFile primaryFile = new PrimaryFile(fileName, file.getContentType(), file.getBytes());
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        primaryFile.setUploadTime(timestamp.toString());
-        return fileDBRepository.save(primaryFile);
+        FileDB fileDB = new FileDB(fileName, file.getContentType(), file.getBytes());
+        return fileDBRepository.save(fileDB);
     }
 
-    public PrimaryFile getFile(String id) {
+    public FileDB getFile(String id) {
         return fileDBRepository.findById(id).get();
     }
 
-    public Stream<PrimaryFile> getAllFiles() {
+    public Stream<FileDB> getAllFiles() {
         return fileDBRepository.findAll().stream();
     }
 }
