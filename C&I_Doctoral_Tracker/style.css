@@ -1,0 +1,92 @@
+.loginWindow {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	align-content: space-evenly;
+	justify-content: space-evenly;
+	background-color: #c9c9c9;
+	border-style: double;
+	border-color: #0a0a0a;
+	border-width: 2px;
+	height: 50vh;
+	width: 25vw;
+	margin: 25vh 37.5vw;
+}
+
+form {
+	display: flex;
+	align-items: center;
+	flex: 1;
+	align-content: space-evenly;
+	justify-content: space-evenly;
+}
+
+.milestoneUpdate {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	align-content: space-evenly;
+	justify-content: space-evenly;
+	background-color: #c9c9c9;
+	border-style: double;
+	border-color: #0a0a0a;
+	border-width: 2px;
+	height: 30vh;
+	width: 25vw;
+	margin: 25vh 37.5vw;
+}
+
+.progressBar {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: stretch;
+	background-color: #f2f5f2;
+	border-style: solid;
+	position: fixed;
+	width: 90vw;
+	left: 5vw;
+	top: 5vh;
+}
+
+.milestone{
+	flex: 1;
+	border-style: solid;
+	border-top-style: none;
+	border-width: 1px;
+	border-spacing: 0px;
+	text-align: center;
+	text-justify: center;
+}
+
+.milestoneData{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: stretch;
+	background-color: #f2f5f2;
+	border-style: solid;
+	position: relative;
+	width: 90vw;
+	left: 4.70vw;
+	top: 6vh;
+}
+
+.milestoneDataText{
+	flex: 1;
+	border-style: solid;
+	border-top-style: none;
+	border-width: 1px;
+	border-spacing: 0px;
+	padding-bottom: 500px;
+	text-align: center;
+	text-justify: center;
+}
+
+.dropdown {
+	display: none;
+}
+
+.signOut {
+	vertical-align: right;
+}

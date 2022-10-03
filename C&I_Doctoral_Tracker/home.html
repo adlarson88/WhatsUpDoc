@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Milestones</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="scripts/emergency.js"></script>
+  </head>
+
+  <body>
+    <a class="signOut" href="index.html">Sign Out</a>
+
+    <div class="progressBar">
+        <span class="milestone" id="one">Milestone #1</span>
+        <span class="milestone" id="two">Milestone #2</span>
+        <span class="milestone" id="three">Milestone #3</span>
+        <span class="milestone" id="four">Milestone #4</span>
+        <span class="milestone" id="five">Milestone #5</span>
+    </div>
+
+    <div class="milestoneData">
+        <span id="milOne" class="dropdown milestoneDataText">Milestone One Data:
+            <p id="milestoneOne">Milestone 1 Completed 5/6/2020!</p>
+        </span>
+        <span id="milTwo" class="dropdown milestoneDataText">Milestone Two Data:
+            <p id="milestoneTwo"></p>
+        </span>
+        <span id="milThree" class="dropdown milestoneDataText">Milestone Three Data:
+            <p id="milestoneThree"></p>
+        </span>
+        <span id="milFour" class="dropdown milestoneDataText">Milestone Four Data:
+            <p id="milestoneFour"></p>
+        </span>
+        <span id="milFive" class="dropdown milestoneDataText">Milestone Five Data:
+            <p id="milestoneFive"></p>
+        </span>
+    </div>
+
+    <div class="milestoneUpdate">
+        <button onclick="dropDown('milOne')">Update Milestone #1</button>
+
+        <button onclick="location.href='index.html'">Return to Login</button>
+    </div>
+
+  </body>
+</html>
