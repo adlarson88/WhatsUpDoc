@@ -1,3 +1,13 @@
+/* styles the img above and below the login window on the index.html page */
+
+img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+  
+}
+
+/* styles the login window on the index.html page */
 .loginWindow {
 	display: flex;
 	flex-direction: column;
@@ -13,6 +23,8 @@
 	margin: 25vh 37.5vw;
 }
 
+/* #### HOME.HTML STYLING WILL FOLLOW UNDER HERE #### */
+/* styles all the forms on the home page */
 form {
 	display: flex;
 	align-items: center;
@@ -21,6 +33,7 @@ form {
 	justify-content: space-evenly;
 }
 
+/* styles the milestones update button on the home page */
 .milestoneUpdate {
 	display: flex;
 	flex-direction: column;
@@ -36,6 +49,7 @@ form {
 	margin: 25vh 37.5vw;
 }
 
+/* styles the milestones bar on the home page */
 .progressBar {
 	display: flex;
 	flex-direction: row;
@@ -49,7 +63,7 @@ form {
 	top: 5vh;
 	margin: auto;
 }
-
+/* styles the milestones in the progress bar */
 .milestone{
 	flex: 1;
 	border-style: solid;
@@ -63,6 +77,8 @@ form {
 	cursor: pointer;
 }
 
+
+/* styles the drop down menu */
 .milestoneData{
 	display: flex;
 	flex-direction: column;
@@ -77,6 +93,7 @@ form {
 	top: 8vh;
 }
 
+/* styles the task bars in the drop down menu */
 .milestoneDataText{
 	flex: 1;
 	width: inherit;
