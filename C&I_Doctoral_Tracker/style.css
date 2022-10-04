@@ -17,7 +17,8 @@
 	height: 75vh;
 	width: 45vw;
 	margin: auto;
-	max-height: 500px;
+	max-height:600px;
+	max-width: 630px;
 }
 
 .carrotBanner {
