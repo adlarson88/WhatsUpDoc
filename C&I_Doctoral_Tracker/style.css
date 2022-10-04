@@ -36,6 +36,7 @@ form {
 	margin: 25vh 37.5vw;
 }
 
+/* styles the milestones bar on the home page */
 .progressBar {
 	display: flex;
 	flex-direction: row;
@@ -49,6 +50,7 @@ form {
 	top: 5vh;
 }
 
+/* styles the milestones in the progress bar */
 .milestone{
 	flex: 1;
 	border-style: solid;
@@ -59,6 +61,7 @@ form {
 	text-justify: center;
 }
 
+/* styles the drop down menu */
 .milestoneData{
 	display: flex;
 	flex-direction: row;
@@ -72,6 +75,7 @@ form {
 	top: 6vh;
 }
 
+/* styles the task bars in the drop down menu */
 .milestoneDataText{
 	flex: 1;
 	border-style: solid;
@@ -83,10 +87,3 @@ form {
 	text-justify: center;
 }
 
-.dropdown {
-	display: none;
-}
-
-.signOut {
-	vertical-align: right;
-}
