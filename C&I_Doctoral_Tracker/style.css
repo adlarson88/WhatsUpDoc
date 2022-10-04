@@ -1,7 +1,7 @@
 /* styles the select login window on the index.html page */
 
 .nauLetterLogo {
-	margin-top: 100px;
+	margin-top: 10px;
 }
 
 .loginWindow {
@@ -13,15 +13,27 @@
 	background-color: #002454;
 	border-style: double;
 	border-color: #FAC01A;
-	border-width: 2px;
-	height: 40vh;
-	width: 25vw;
+	border-width: 4px;
+	height: 75vh;
+	width: 45vw;
 	margin: auto;
+	max-height: 500px;
 }
 
 .carrotBanner {
 	margin-top: 10px;
 }
+
+/* #### studentlogin.html STYLING BEGINS HERE #### */
+.g_id_signin {
+	text-align: center;
+	width: 50%;
+	margin: auto;
+	max-width: fit-content;
+}
+
+
+
 
 /* #### HOME.HTML STYLING WILL FOLLOW UNDER HERE #### */
 /* styles all the forms on the home page */
