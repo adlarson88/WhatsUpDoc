@@ -1,26 +1,26 @@
-/* styles the img above and below the login window on the index.html page */
+/* styles the select login window on the index.html page */
 
-img {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-  
+.nauLetterLogo {
+	margin-top: 100px;
 }
 
-/* styles the login window on the index.html page */
 .loginWindow {
 	display: flex;
 	flex-direction: column;
 	text-align: center;
 	align-content: space-evenly;
 	justify-content: space-evenly;
-	background-color: #c9c9c9;
+	background-color: #002454;
 	border-style: double;
-	border-color: #0a0a0a;
+	border-color: #FAC01A;
 	border-width: 2px;
-	height: 50vh;
+	height: 30vh;
 	width: 25vw;
-	margin: 25vh 37.5vw;
+	margin: auto;
+}
+
+.carrotBanner {
+	margin-top: 10px;
 }
 
 /* #### HOME.HTML STYLING WILL FOLLOW UNDER HERE #### */
