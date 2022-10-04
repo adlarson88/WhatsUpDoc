@@ -36,7 +36,6 @@ form {
 	margin: 25vh 37.5vw;
 }
 
-/* styles the milestones bar on the home page */
 .progressBar {
 	display: flex;
 	flex-direction: row;
@@ -44,13 +43,12 @@ form {
 	align-items: stretch;
 	background-color: #f2f5f2;
 	border-style: solid;
-	position: fixed;
+	/* position: fixed; */
 	width: 90vw;
 	left: 5vw;
 	top: 5vh;
 }
 
-/* styles the milestones in the progress bar */
 .milestone{
 	flex: 1;
 	border-style: solid;
@@ -59,31 +57,48 @@ form {
 	border-spacing: 0px;
 	text-align: center;
 	text-justify: center;
+	cursor: pointer;
 }
 
-/* styles the drop down menu */
 .milestoneData{
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: space-evenly;
 	align-items: stretch;
 	background-color: #f2f5f2;
 	border-style: solid;
-	position: relative;
-	width: 90vw;
+	border-top-style: none;
+	/* position: fixed; */
+	width: 25vw;
 	left: 4.70vw;
-	top: 6vh;
+	top: 8vh;
 }
 
-/* styles the task bars in the drop down menu */
 .milestoneDataText{
 	flex: 1;
-	border-style: solid;
-	border-top-style: none;
-	border-width: 1px;
-	border-spacing: 0px;
-	padding-bottom: 500px;
+	width: inherit;
+	border-style: none;
+	border-top-style: solid;
 	text-align: center;
 	text-justify: center;
+	cursor: pointer;
 }
 
+.dropdown {
+	display: none;
+}
+
+.signOut {
+	vertical-align: right;
+}
+
+.fileView {
+	position: absolute;
+	background-color: #f2f5f2;
+	border-style: solid;
+	/* position: fixed; */
+	width: 70vw;
+	height: 85vh;
+	left: 25vw;
+	top: 5vh;
+}
