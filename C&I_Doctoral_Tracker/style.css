@@ -1,18 +1,58 @@
+/* styles the select landing page on the index.html page */
+
+.nauLetterLogo {
+	margin-top: 10px;
+}
+
 .loginWindow {
 	display: flex;
 	flex-direction: column;
 	text-align: center;
 	align-content: space-evenly;
 	justify-content: space-evenly;
-	background-color: #c9c9c9;
+	background-color: #002454;
 	border-style: double;
-	border-color: #0a0a0a;
-	border-width: 2px;
-	height: 50vh;
-	width: 25vw;
-	margin: 25vh 37.5vw;
+	border-color: #FAC01A;
+	border-width: 4px;
+	height: 75vh;
+	width: 45vw;
+	margin: auto;
+	max-height:600px;
+	max-width: 630px;
 }
 
+.carrotBanner {
+	margin-top: 10px;
+}
+
+/* #### All Google Sign-In Button STYLING BEGINS HERE #### */
+.g_id_signin {
+	text-align: center;
+	width: 50%;
+	margin: auto;
+	max-width: fit-content;
+}
+
+/* #### Styles the admin.html page #### */
+.searchWindow {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	align-content: space-evenly;
+	justify-content: space-evenly;
+	background-color: #002454;
+	border-style: double;
+	border-color: #FAC01A;
+	border-width: 4px;
+	height: 75vh;
+	width: 45vw;
+	margin: auto;
+	max-height: 200px;
+}
+
+
+/* #### HOME.HTML STYLING WILL FOLLOW UNDER HERE #### */
+/* styles all the forms on the home page */
 form {
 	display: flex;
 	align-items: center;
@@ -21,6 +61,7 @@ form {
 	justify-content: space-evenly;
 }
 
+/* styles the milestones update button on the home page */
 .milestoneUpdate {
 	display: flex;
 	flex-direction: column;
@@ -36,6 +77,7 @@ form {
 	margin: 25vh 37.5vw;
 }
 
+/* styles the milestones bar on the home page */
 .progressBar {
 	display: flex;
 	flex-direction: row;
@@ -49,7 +91,7 @@ form {
 	top: 5vh;
 	margin: auto;
 }
-
+/* styles the milestones in the progress bar */
 .milestone{
 	flex: 1;
 	border-style: solid;
@@ -63,6 +105,8 @@ form {
 	cursor: pointer;
 }
 
+
+/* styles the drop down menu */
 .milestoneData{
 	display: flex;
 	flex-direction: column;
@@ -77,6 +121,7 @@ form {
 	top: 8vh;
 }
 
+/* styles the task bars in the drop down menu */
 .milestoneDataText{
 	flex: 1;
 	width: inherit;
