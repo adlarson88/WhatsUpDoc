@@ -7,21 +7,21 @@
     <script src="scripts/home.js"></script>
   </head>
 
-  <body onload="prepare()" style="background-color: #C3B8B2;">
+  <body onload="prepare(); dropDown('milOne'); dropDown('milOne task1.1');" style="background-color: #C3B8B2;">
     <a class="signOut" href="index.html">Sign Out</a>
 
     <div class="progressBar">
-        <button onclick="dropDown('milOne');" class="milestone" id="milOne">Coursework</button>
-        <button onclick="dropDown('milTwo');" class="milestone" id="milTwo">Qualitative Research Project/ Comprehensive Exams</button>
-        <button onclick="dropDown('milThree');" class="milestone" id="milThree">Proposal and Prospectus</button>
-        <button onclick="dropDown('milFour');" class="milestone" id="milFour">Research and Dissertation</button>
+        <button onclick="dropDown('milOne');" class="milestone" id="milOne">Phase 1: Coursework</button>
+        <button onclick="dropDown('milTwo');" class="milestone" id="milTwo">Phase 2: Qualitative Research Project/ Comprehensive Exams</button>
+        <button onclick="dropDown('milThree');" class="milestone" id="milThree">Phase 3: Proposal and Prospectus</button>
+        <button onclick="dropDown('milFour');" class="milestone" id="milFour">Phase 4: Research and Dissertation</button>
     </div>
 
 <!--Phase Dropdowns-->
     <div class="milOne milestoneData">
         <div class="milOne task1.1 fileView">Initial Program of Study</div>
         <div class="milOne task1.2 fileView">Residency Plan Form</div>
-        <div class="milOne task1.3 fileView">Student Self-Evalutaion 1</div>
+        <div class="milOne task1.3 fileView">Student Self-Evaluation 1</div>
         <div class="milOne task1.4 fileView">Petition for Transfer Credit Form</div>
         <button onclick="dropDown('milOne task1.1')" class="milOne milestoneDataText" id='task1.1'>Initial Program of Study:
             <p>Completed 1/6/2020!</p>
@@ -29,7 +29,7 @@
         <button onclick="dropDown('milOne task1.2')" class="milOne milestoneDataText" id='task1.2'>Residency Plan Form:
             <p></p>
         </button>
-        <button onclick="dropDown('milOne task1.3')" class="milOne milestoneDataText" id='task1.3'>Student Self-Evalutaion 1:
+        <button onclick="dropDown('milOne task1.3')" class="milOne milestoneDataText" id='task1.3'>Student Self-Evaluation 1:
             <p></p>
         </button>
         <button onclick="dropDown('milOne task1.4')" class="milOne milestoneDataText" id='task1.4'>Petition for Transfer Credit Form:

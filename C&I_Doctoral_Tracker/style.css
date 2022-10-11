@@ -137,6 +137,7 @@ form {
 	text-align: center;
 	text-justify: center;
 	cursor: pointer;
+	font-size: 1vw;
 }
 
 
@@ -164,8 +165,10 @@ form {
 	border-color: #000000;
 	background-color: #00ADB5;
 	text-align: center;
+	font-size: 1vw;
 	text-justify: center;
 	cursor: pointer;
+	height: 15vh;
 }
 
 .dropdown {
@@ -184,4 +187,5 @@ form {
 	width: 75vw;
 	height: 85vh;
 	left: 20vw;
+	font-size: 1vw;
 }
