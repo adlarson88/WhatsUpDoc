@@ -17,7 +17,7 @@
 	height: 75vh;
 	width: 45vw;
 	margin: auto;
-	max-height:300px;
+	max-height:250px;
 	max-width: 500px;
 	min-width: 400px;
 }
@@ -43,7 +43,7 @@
 .carrotBanner {
 	display: block;
 	margin: auto;
-	margin-top: 10px;
+	margin-top: 50px;
 }
 
 .formWindow {
@@ -59,8 +59,8 @@
 	height: 75vh;
 	width: 45vw;
 	margin: auto;
-	margin-top: 500px;
-	max-height:250px;
+	margin-top: 1000px;
+	max-height:350px;
 	max-width: 325px;
 	min-width: 325px;
 }
@@ -139,6 +139,7 @@ form {
 	text-align: center;
 	text-justify: center;
 	cursor: pointer;
+	font-size: 1vw;
 }
 
 
@@ -166,8 +167,10 @@ form {
 	border-color: #000000;
 	background-color: #00ADB5;
 	text-align: center;
+	font-size: 1vw;
 	text-justify: center;
 	cursor: pointer;
+	height: 15vh;
 }
 
 .dropdown {
@@ -186,4 +189,5 @@ form {
 	width: 75vw;
 	height: 85vh;
 	left: 20vw;
+	font-size: 1vw;
 }
