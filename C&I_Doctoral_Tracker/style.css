@@ -1,36 +1,86 @@
 /* styles the select landing page on the index.html page */
 
 .nauLetterLogo {
-	margin-top: 10px;
+	margin-top: 25px;
 }
 
 .loginWindow {
-	display: flex;
+	display: block;
 	flex-direction: column;
 	text-align: center;
 	align-content: space-evenly;
 	justify-content: space-evenly;
 	background-color: #002454;
-	border-style: double;
-	border-color: #FAC01A;
-	border-width: 4px;
+	border-style: solid;
+	border-color: #F68300;
+	border-width: 2px;
 	height: 75vh;
 	width: 45vw;
 	margin: auto;
-	max-height:600px;
-	max-width: 630px;
+	max-height:275px;
+	max-width: 500px;
+	min-width: 300px;
 }
 
-.carrotBanner {
-	margin-top: 10px;
+.studentAndAdminLoginWindow {
+	display: block;
+	flex-direction: column;
+	text-align: center;
+	align-content: space-evenly;
+	justify-content: space-evenly;
+	background-color: #002454;
+	border-style: solid;
+	border-color: #F68300;
+	border-width: 2px;
+	height: 75vh;
+	width: 45vw;
+	margin: auto;
+	max-height:200px;
+	max-width: 500px;
+	min-width: 300px;
 }
 
 /* #### All Google Sign-In Button STYLING BEGINS HERE #### */
 .g_id_signin {
 	text-align: center;
-	width: 50%;
+	width: auto;
 	margin: auto;
 	max-width: fit-content;
+}
+
+.carrotBanner {
+	display: block;
+	margin: auto;
+	margin-top: 10px;
+}
+
+.formWindow {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	align-content: space-evenly;
+	justify-content: space-evenly;
+	background-color: #007A33;
+	border-style: solid;
+	border-color: #002454;
+	border-width: 2px;
+	height: 75vh;
+	width: 45vw;
+	margin: auto;
+	margin-top: 135px;
+	max-height:250px;
+	max-width: 325px;
+	min-width: 325px;
+}
+
+input[type=submit] {
+	background-color: #ffffff;
+	border: none;
+	color: rgb(0, 0, 0);
+	padding: 7px 15px;
+	text-decoration: none;
+	margin: 20px 20px;
+	cursor: pointer;
 }
 
 /* #### Styles the admin.html page #### */
@@ -41,9 +91,9 @@
 	align-content: space-evenly;
 	justify-content: space-evenly;
 	background-color: #002454;
-	border-style: double;
-	border-color: #FAC01A;
-	border-width: 4px;
+	border-style: solid;
+	border-color: #F68300;
+	border-width: 2px;
 	height: 75vh;
 	width: 45vw;
 	margin: auto;
