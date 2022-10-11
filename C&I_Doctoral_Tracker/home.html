@@ -7,135 +7,107 @@
     <script src="scripts/home.js"></script>
   </head>
 
-  <body onload="prepare()" style="background-color:#002454;">
+  <body onload="prepare()" style="background-color: #C3B8B2;">
     <a class="signOut" href="index.html">Sign Out</a>
 
     <div class="progressBar">
-        <button onclick="dropDown('milOne');" class="milestone" id="milOne">Milestone #1</button>
-        <button onclick="dropDown('milTwo');" class="milestone" id="milTwo">Milestone #2</button>
-        <button onclick="dropDown('milThree');" class="milestone" id="milThree">Milestone #3</button>
-        <button onclick="dropDown('milFour');" class="milestone" id="milFour">Milestone #4</button>
-        <button onclick="dropDown('milFive');" class="milestone" id="milFive">Milestone #5</button>
+        <button onclick="dropDown('milOne');" class="milestone" id="milOne">Coursework</button>
+        <button onclick="dropDown('milTwo');" class="milestone" id="milTwo">Qualitative Research Project/ Comprehensive Exams</button>
+        <button onclick="dropDown('milThree');" class="milestone" id="milThree">Proposal and Prospectus</button>
+        <button onclick="dropDown('milFour');" class="milestone" id="milFour">Research and Dissertation</button>
     </div>
 
-<!--Milestone Dropdowns-->
+<!--Phase Dropdowns-->
     <div class="milOne milestoneData">
-        <button onclick="dropDown('milOne task1.1')" class="milOne milestoneDataText" id='task1.1'>Task One Data:
-            <p>Task 1 Completed 1/6/2020!</p>
+        <div class="milOne task1.1 fileView">Initial Program of Study</div>
+        <div class="milOne task1.2 fileView">Residency Plan Form</div>
+        <div class="milOne task1.3 fileView">Student Self-Evalutaion 1</div>
+        <div class="milOne task1.4 fileView">Petition for Transfer Credit Form</div>
+        <button onclick="dropDown('milOne task1.1')" class="milOne milestoneDataText" id='task1.1'>Initial Program of Study:
+            <p>Completed 1/6/2020!</p>
         </button>
-        <div class="milOne task1.1 fileView">Placeholder 1.1</div>
-        <button onclick="dropDown('milOne task1.2')" class="milOne milestoneDataText" id='task1.2'>Task Two Data:
+        <button onclick="dropDown('milOne task1.2')" class="milOne milestoneDataText" id='task1.2'>Residency Plan Form:
             <p></p>
         </button>
-        <div class="milOne task1.2 fileView">Placeholder 1.2</div>
-        <button onclick="dropDown('milOne task1.3')" class="milOne milestoneDataText" id='task1.3'>Task Three Data:
+        <button onclick="dropDown('milOne task1.3')" class="milOne milestoneDataText" id='task1.3'>Student Self-Evalutaion 1:
             <p></p>
         </button>
-        <div class="milOne task1.3 fileView">Placeholder 1.3</div>
-        <button onclick="dropDown('milOne task1.4')" class="milOne milestoneDataText" id='task1.4'>Task Four Data:
+        <button onclick="dropDown('milOne task1.4')" class="milOne milestoneDataText" id='task1.4'>Petition for Transfer Credit Form:
             <p></p>
         </button>
-        <div class="milOne task1.4 fileView">Placeholder 1.4</div>
-        <button onclick="dropDown('milOne task1.5')" class="milOne milestoneDataText" id='task1.5'>Task Five Data:
-            <p></p>
-        </button>
-        <div class="milOne task1.5 fileView">Placeholder 1.5</div>
     </div>
 
     <div class="milTwo milestoneData">
-      <button onclick="dropDown('milTwo task2.1')" class="milTwo milestoneDataText" id='task2.1'>Task One Data:
-          <p>Task 1 Completed 2/6/2020!</p>
+      <div class="milTwo task2.1 fileView">Qualifying Research Completion Form</div>
+      <div class="milTwo task2.2 fileView">Comprehensive Exam Scheduling Form</div>
+      <div class="milTwo task2.2 fileView">Comprehensive Exam Scheduling Form</div>
+      <div class="milTwo task2.4 fileView">Recommendation of Dissertation Committee Form (completed with chair)</div>
+      <div class="milTwo task2.5 fileView">Graduate college letter confirming dissertation committee</div>
+      <div class="milTwo task2.5 fileView">Student Self-Evaluation 2 </div>
+      <button onclick="dropDown('milTwo task2.1')" class="milTwo milestoneDataText" id='task2.1'>Qualifying Research Completion form:
+          <p>Completed 2/6/2020!</p>
       </button>
-      <div class="milTwo task2.1 fileView">Placeholder 2.1</div>
-      <button onclick="dropDown('milTwo task2.2')" class="milTwo milestoneDataText" id='task2.2'>Task Two Data:
+      <button onclick="dropDown('milTwo task2.2')" class="milTwo milestoneDataText" id='task2.2'>Comprehensive Exam Scheduling Form:
           <p></p>
       </button>
-      <div class="milTwo task2.2 fileView">Placeholder 2.2</div>
-      <button onclick="dropDown('milTwo task2.3')" class="milTwo milestoneDataText" id='task2.3'>Task Three Data:
+      <button onclick="dropDown('milTwo task2.3')" class="milTwo milestoneDataText" id='task2.3'>Comprehensive Exam Results Form:
           <p></p>
       </button>
-      <div class="milTwo task2.3 fileView">Placeholder 2.3</div>
-      <button onclick="dropDown('milTwo task2.4')" class="milTwo milestoneDataText" id='task2.4'>Task Four Data:
+      <button onclick="dropDown('milTwo task2.4')" class="milTwo milestoneDataText" id='task2.4'>Recommendation of Dissertation Committee Form (completed with chair):
           <p></p>
       </button>
-      <div class="milTwo task2.4 fileView">Placeholder 2.4</div>
-      <button onclick="dropDown('milTwo task2.5')" class="milTwo milestoneDataText" id='task2.5'>Task Five Data:
+      <button onclick="dropDown('milTwo task2.5')" class="milTwo milestoneDataText" id='task2.5'>Graduate college letter confirming dissertation committee:
           <p></p>
       </button>
-      <div class="milTwo task2.5 fileView">Placeholder 2.5</div>
+      <button onclick="dropDown('milTwo task2.5')" class="milTwo milestoneDataText" id='task2.5'>Student Self-Evaluation 2 :
+        <p></p>
+      </button>
     </div>
 
     <div class="milThree milestoneData">
-      <button onclick="dropDown('milThree task3.1')" class="milThree milestoneDataText" id='task3.1'>Task One Data:
-          <p>Task 1 Completed 3/6/2020!</p>
+      <div class="milThree task3.1 fileView">Prospectus Defense Scheduling Form</div>
+      <div class="milThree task3.2 fileView">Prospectus Title Page With Signatures</div>
+      <div class="milThree task3.3 fileView">Final Signed Program of Study</div>
+      <div class="milThree task3.4 fileView">Application For Candidacy Form</div>
+      <div class="milThree task3.5 fileView">Student Self-Evaluation 3</div>
+      <button onclick="dropDown('milThree task3.1')" class="milThree milestoneDataText" id='task3.1'>Prospectus Defense Scheduling Form:
+          <p>Completed 3/6/2020!</p>
       </button>
-      <div class="milThree task3.1 fileView">Placeholder 3.1</div>
-      <button onclick="dropDown('milThree task3.2')" class="milThree milestoneDataText" id='task3.2'>Task Two Data:
+      <button onclick="dropDown('milThree task3.2')" class="milThree milestoneDataText" id='task3.2'>Prospectus Title Page With Signatures:
           <p></p>
       </button>
-      <div class="milThree task3.2 fileView">Placeholder 3.2</div>
-      <button onclick="dropDown('milThree task3.3')" class="milThree milestoneDataText" id='task3.3'>Task Three Data:
+      <button onclick="dropDown('milThree task3.3')" class="milThree milestoneDataText" id='task3.3'>Final Signed Program of Study:
           <p></p>
       </button>
-      <div class="milThree task3.3 fileView">Placeholder 3.3</div>
-      <button onclick="dropDown('milThree task3.4')" class="milThree milestoneDataText" id='task3.4'>Task Four Data:
+      <button onclick="dropDown('milThree task3.4')" class="milThree milestoneDataText" id='task3.4'>Application For Candidacy Form:
           <p></p>
       </button>
-      <div class="milThree task3.4 fileView">Placeholder 3.4</div>
-      <button onclick="dropDown('milThree task3.5')" class="milThree milestoneDataText" id='task3.5'>Task Five Data:
+      <button onclick="dropDown('milThree task3.5')" class="milThree milestoneDataText" id='task3.5'>Student Self-Evaluation 3:
           <p></p>
       </button>
-      <div class="milThree task3.5 fileView">Placeholder 3.5</div>
     </div>
 
     <div class="milFour milestoneData">
-      <button onclick="dropDown('milFour task4.1')" class="milFour milestoneDataText" id='task4.1'>Task One Data:
-          <p>Task 1 Completed 4/6/2020!</p>
+      <div class="milFour task4.1 fileView">Apply for Graduation (NO FORM) (upload pdf of email)</div>
+      <div class="milFour task4.2 fileView">Dissertation format review (No Form)(upload pdf of email)</div>
+      <div class="milFour task4.3 fileView">Oral Defense Scheduling Form</div>
+      <div class="milFour task4.4 fileView">Pro-Quest – Dissertation (No Form)(upload pdf of email)</div>
+      <button onclick="dropDown('milFour task4.1')" class="milFour milestoneDataText" id='task4.1'>Apply for Graduation (NO FORM) (upload pdf of email):
+          <p>Completed 4/6/2020!</p>
       </button>
-      <div class="milFour task4.1 fileView">Placeholder 4.1</div>
-      <button onclick="dropDown('milFour task4.2')" class="milFour milestoneDataText" id='task4.2'>Task Two Data:
+      <button onclick="dropDown('milFour task4.2')" class="milFour milestoneDataText" id='task4.2'>Dissertation format review (No Form)(upload pdf of email):
           <p></p>
       </button>
-      <div class="milFour task4.2 fileView">Placeholder 4.2</div>
-      <button onclick="dropDown('milFour task4.3')" class="milFour milestoneDataText" id='task4.3'>Task Three Data:
+      <button onclick="dropDown('milFour task4.3')" class="milFour milestoneDataText" id='task4.3'>Oral Defense Scheduling Form:
           <p></p>
       </button>
-      <div class="milFour task4.3 fileView">Placeholder 4.3</div>
-      <button onclick="dropDown('milFour task4.4')" class="milFour milestoneDataText" id='task4.4'>Task Four Data:
+      <button onclick="dropDown('milFour task4.4')" class="milFour milestoneDataText" id='task4.4'>Pro-Quest – Dissertation (No Form)(upload pdf of email):
           <p></p>
       </button>
-      <div class="milFour task4.4 fileView">Placeholder 4.4</div>
-      <button onclick="dropDown('milFour task4.5')" class="milFour milestoneDataText" id='task4.5'>Task Five Data:
-          <p></p>
-      </button>
-      <div class="milFour task4.5 fileView">Placeholder 4.5</div>
     </div>
 
-    <div class="milFive milestoneData">
-      <button onclick="dropDown('milFive task5.1')" class="milFive milestoneDataText" id='task5.1'>Task One Data:
-          <p>Task 1 Completed 5/6/2020!</p>
-      </button>
-      <div class="milFive task5.1 fileView">Placeholder 5.1</div>
-      <button onclick="dropDown('milFive task5.2')" class="milFive milestoneDataText" id='task5.2'>Task Two Data:
-          <p></p>
-      </button>
-      <div class="milFive task5.2 fileView">Placeholder 5.2</div>
-      <button onclick="dropDown('milFive task5.3')" class="milFive milestoneDataText" id='task5.3'>Task Three Data:
-          <p></p>
-      </button>
-      <div class="milFive task5.3 fileView">Placeholder 5.3</div>
-      <button onclick="dropDown('milFive task5.4')" class="milFive milestoneDataText" id='task5.4'>Task Four Data:
-          <p></p>
-      </button>
-      <div class="milFive task5.4 fileView">Placeholder 5.4</div>
-      <button onclick="dropDown('milFive task5.5')" class="milFive milestoneDataText" id='task5.5'>Task Five Data:
-          <p></p>
-      </button>
-      <div class="milFive task5.5 fileView">Placeholder 5.5</div>
-    </div>
-<!--End Milestone Dropdowns-->
+<!--End Phase Dropdowns-->
 
-<!--Task Dropdowns-->
 
   </body>
 </html>

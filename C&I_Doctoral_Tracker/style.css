@@ -91,9 +91,9 @@ input[type=submit] {
 	align-content: space-evenly;
 	justify-content: space-evenly;
 	background-color: #002454;
-	border-style: solid;
-	border-color: #F68300;
-	border-width: 2px;
+	border-style: double;
+	border-color: #FAC01A;
+	border-width: 4px;
 	height: 75vh;
 	width: 45vw;
 	margin: auto;
@@ -111,31 +111,15 @@ form {
 	justify-content: space-evenly;
 }
 
-/* styles the milestones update button on the home page */
-.milestoneUpdate {
-	display: flex;
-	flex-direction: column;
-	text-align: center;
-	align-content: space-evenly;
-	justify-content: space-evenly;
-	background-color: #c9c9c9;
-	border-style: double;
-	border-color: #0a0a0a;
-	border-width: 2px;
-	height: 30vh;
-	width: 25vw;
-	margin: 25vh 37.5vw;
-}
-
-/* styles the milestones bar on the home page */
+/* styles the phases bar on the home page */
 .progressBar {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
 	align-items: stretch;
-	background-color: #C3B8B2;
+	background-color: #00ADB5;
 	border-style: solid;
-	border-color: #FAC01A;
+	border-color: #000000;
 	width: 90vw;
 	left: 5vw;
 	top: 5vh;
@@ -148,8 +132,8 @@ form {
 	border-top-style: none;
 	border-width: 1px;
 	border-spacing: 0px;
-	border-color: #FAC01A;
-	background-color: #C3B8B2;
+	border-color: #000000;
+	background-color: #00ADB5;
 	text-align: center;
 	text-justify: center;
 	cursor: pointer;
@@ -162,10 +146,10 @@ form {
 	flex-direction: column;
 	justify-content: space-evenly;
 	align-items: stretch;
-	background-color: #C3B8B2;
+	background-color: #00ADB5;
 	border-style: solid;
 	border-top-style: none;
-	border-color: #FAC01A;
+	border-color: #000000;
 	width: 20vw;
 	left: 4.70vw;
 	top: 8vh;
@@ -177,8 +161,8 @@ form {
 	width: inherit;
 	border-style: none;
 	border-top-style: solid;
-	border-color: #FAC01A;
-	background-color: #C3B8B2;
+	border-color: #000000;
+	background-color: #00ADB5;
 	text-align: center;
 	text-justify: center;
 	cursor: pointer;
@@ -194,11 +178,10 @@ form {
 
 .fileView {
 	position: absolute;
-	background-color: #C3B8B2;
+	background-color: #00ADB5;
 	border-style: solid;
-	border-color: #FAC01A;
+	border-color: #000000;
 	width: 75vw;
 	height: 85vh;
 	left: 20vw;
-	top: 5vh;
 }
