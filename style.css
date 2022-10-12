@@ -105,6 +105,18 @@ input[type=submit] {
 
 /* #### HOME.HTML STYLING WILL FOLLOW UNDER HERE #### */
 /* styles all the forms on the home page */
+
+.submit_doc_form {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	align-content: space-evenly;
+	justify-content: space-evenly;
+	background-color: #C3B8B2;
+	border-style: solid;
+	border-color: #FFDA0B;
+}
+
 form {
 	display: flex;
 	align-items: center;
@@ -128,6 +140,20 @@ form {
 	margin: auto;
 }
 /* styles the milestones in the progress bar */
+
+.milestoneOne{
+	flex: 1;
+	border-style: solid;
+	border-top-style: none;
+	border-width: 1px;
+	border-spacing: 0px;
+	border-color: #000000;
+	background-color: #22d61c;
+	text-align: center;
+	text-justify: center;
+	cursor: pointer;
+	font-size: 1vw;
+}
 .milestone{
 	flex: 1;
 	border-style: solid;
@@ -165,7 +191,7 @@ form {
 	border-style: none;
 	border-top-style: solid;
 	border-color: #000000;
-	background-color: #00ADB5;
+	background-color: #22d61c;
 	text-align: center;
 	font-size: 1vw;
 	text-justify: center;

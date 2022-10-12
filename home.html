@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Milestones</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="scripts/home.js"></script>
+  </head>
+
+  <body onload="prepare(); dropDown('milOne'); dropDown('milOne task1.1');" style="background-color: #C3B8B2;">
+    <a class="signOut" href="index.html">Sign Out</a>
+
+    <div class="progressBar">
+        <button onclick="dropDown('milOne');" class="milestoneOne" id="milOne">Phase 1: Coursework</button>
+        <button onclick="dropDown('milTwo');" class="milestone" id="milTwo">Phase 2: Qualitative Research Project/ Comprehensive Exams</button>
+        <button onclick="dropDown('milThree');" class="milestone" id="milThree">Phase 3: Proposal and Prospectus</button>
+        <button onclick="dropDown('milFour');" class="milestone" id="milFour">Phase 4: Research and Dissertation</button>
+    </div>
+
+<!--Phase Dropdowns-->
+    <div class="milOne milestoneData">
+        <div class="milOne task1.1 fileView">
+            <div class="pdfViewer">
+                <h3 style="color:#000000;">Dottie's Initial Program of Study</h3>
+                
+                <div class="submit_doc_form">
+                    <form action="/action_page.php">
+                        <input type="file" id="myFile" name="filename">
+                        <input type="submit" value="Upload">
+                      </form>
+                </div>
+                
+                <iframe src="images/POS_dottie_doc_app.pdf" 
+                        width=100%
+                        height=905>
+                </iframe>
+            </div>
+        </div>
+        
+        <div class="milOne task1.2 fileView">
+            <div class="pdfViewer">
+                <h3 style="color:#000000;">Dottie's Residency Plan Form</h3>
+
+                <div class="submit_doc_form">
+                    <form action="/action_page.php">
+                        <input type="file" id="myFile" name="filename">
+                        <input type="submit" value="Upload">
+                      </form>
+                </div>
+
+                <iframe src="images/Residency_form_Dottie_doc_app.pdf" 
+                        width=100%
+                        height=905>
+                </iframe>
+            </div>
+        </div>
+
+        <div class="milOne task1.3 fileView">
+            <div class="pdfViewer">
+                <h3 style="color:#000000;">Dottie's Self-Evaluation 1</h3>
+
+                <div class="submit_doc_form">
+                    <form action="/action_page.php">
+                        <input type="file" id="myFile" name="filename">
+                        <input type="submit" value="Upload">
+                      </form>
+                </div>
+
+                <iframe src="images/dottie_doc_self_reflection.pdf" 
+                        width=100%
+                        height=905>
+                </iframe>
+            </div>
+        </div>
+
+        <div class="milOne task1.4 fileView">N/A
+            <div class="submit_doc_form">
+                <form action="/action_page.php">
+                    <input type="file" id="myFile" name="filename">
+                    <input type="submit" value="Upload">
+                  </form>
+            </div>
+        </div>
+        <button onclick="dropDown('milOne task1.1')" class="milOne milestoneDataText" id='task1.1'>Initial Program of Study:
+            <p>Completed 1/6/2020!</p>
+        </button>
+        <button onclick="dropDown('milOne task1.2')" class="milOne milestoneDataText" id='task1.2'>Residency Plan Form:
+            <p>Completed 2/6/2020!</p>
+        </button>
+        <button onclick="dropDown('milOne task1.3')" class="milOne milestoneDataText" id='task1.3'>Student Self-Evaluation 1:
+            <p>Completed 3/6/2020!</p>
+        </button>
+        <button onclick="dropDown('milOne task1.4')" class="milOne milestoneDataText" id='task1.4'>Petition for Transfer Credit Form:
+            <p>Completed 4/6/2020!</p>
+        </button>
+    </div>
+
+    <div class="milTwo milestoneData">
+      <div class="milTwo task2.1 fileView">
+        <div class="pdfViewer">
+            <h3 style="color:#000000;">Dottie's Qualifying Research Completion Form</h3>
+
+            <div class="submit_doc_form">
+                <form action="/action_page.php">
+                    <input type="file" id="myFile" name="filename">
+                    <input type="submit" value="Upload">
+                  </form>
+            </div>
+
+            <iframe src="images/Phse_2_QRP_completion_form.pdf" 
+                    width=100%
+                    height=905>
+            </iframe>
+        </div>
+    </div>
+      <div class="milTwo task2.2 fileView">Comprehensive Exam Scheduling Form
+        <div class="submit_doc_form">
+            <form action="/action_page.php">
+                <input type="file" id="myFile" name="filename">
+                <input type="submit" value="Upload">
+              </form>
+        </div>
+      </div>
+      <div class="milTwo task2.3 fileView">Comprehensive Exam Results Form
+        <div class="submit_doc_form">
+            <form action="/action_page.php">
+                <input type="file" id="myFile" name="filename">
+                <input type="submit" value="Upload">
+              </form>
+        </div>
+      </div>
+      <div class="milTwo task2.4 fileView">Recommendation of Dissertation Committee Form (completed with chair)
+        <div class="submit_doc_form">
+            <form action="/action_page.php">
+                <input type="file" id="myFile" name="filename">
+                <input type="submit" value="Upload">
+              </form>
+        </div>
+      </div>
+      <div class="milTwo task2.5 fileView">Graduate college letter confirming dissertation committee
+        <div class="submit_doc_form">
+            <form action="/action_page.php">
+                <input type="file" id="myFile" name="filename">
+                <input type="submit" value="Upload">
+              </form>
+        </div>
+      </div>
+      <div class="milTwo task2.5 fileView">Student Self-Evaluation 2 
+        <div class="submit_doc_form">
+            <form action="/action_page.php">
+                <input type="file" id="myFile" name="filename">
+                <input type="submit" value="Upload">
+              </form>
+        </div>
+      </div>
+      <button onclick="dropDown('milTwo task2.1')" class="milTwo milestoneDataText" id='task2.1'>Qualifying Research Completion form:
+          <p>Completed 2/6/2020!</p>
+      </button>
+      <button onclick="dropDown('milTwo task2.2')" class="milTwo milestoneDataText" id='task2.2'>Comprehensive Exam Scheduling Form:
+          <p></p>
+      </button>
+      <button onclick="dropDown('milTwo task2.3')" class="milTwo milestoneDataText" id='task2.3'>Comprehensive Exam Results Form:
+          <p></p>
+      </button>
+      <button onclick="dropDown('milTwo task2.4')" class="milTwo milestoneDataText" id='task2.4'>Recommendation of Dissertation Committee Form (completed with chair):
+          <p></p>
+      </button>
+      <button onclick="dropDown('milTwo task2.5')" class="milTwo milestoneDataText" id='task2.5'>Graduate college letter confirming dissertation committee:
+          <p></p>
+      </button>
+      <button onclick="dropDown('milTwo task2.5')" class="milTwo milestoneDataText" id='task2.5'>Student Self-Evaluation 2 :
+        <p></p>
+      </button>
+    </div>
+
+    <div class="milThree milestoneData">
+      <div class="milThree task3.1 fileView">Prospectus Defense Scheduling Form</div>
+      <div class="milThree task3.2 fileView">Prospectus Title Page With Signatures</div>
+      <div class="milThree task3.3 fileView">Final Signed Program of Study</div>
+      <div class="milThree task3.4 fileView">Application For Candidacy Form</div>
+      <div class="milThree task3.5 fileView">Student Self-Evaluation 3</div>
+      <button onclick="dropDown('milThree task3.1')" class="milThree milestoneDataText" id='task3.1'>Prospectus Defense Scheduling Form:
+          <p>Completed 3/6/2020!</p>
+      </button>
+      <button onclick="dropDown('milThree task3.2')" class="milThree milestoneDataText" id='task3.2'>Prospectus Title Page With Signatures:
+          <p></p>
+      </button>
+      <button onclick="dropDown('milThree task3.3')" class="milThree milestoneDataText" id='task3.3'>Final Signed Program of Study:
+          <p></p>
+      </button>
+      <button onclick="dropDown('milThree task3.4')" class="milThree milestoneDataText" id='task3.4'>Application For Candidacy Form:
+          <p></p>
+      </button>
+      <button onclick="dropDown('milThree task3.5')" class="milThree milestoneDataText" id='task3.5'>Student Self-Evaluation 3:
+          <p></p>
+      </button>
+    </div>
+
+    <div class="milFour milestoneData">
+      <div class="milFour task4.1 fileView">Apply for Graduation (NO FORM) (upload pdf of email)</div>
+      <div class="milFour task4.2 fileView">Dissertation format review (No Form)(upload pdf of email)</div>
+      <div class="milFour task4.3 fileView">Oral Defense Scheduling Form</div>
+      <div class="milFour task4.4 fileView">Pro-Quest – Dissertation (No Form)(upload pdf of email)</div>
+      <button onclick="dropDown('milFour task4.1')" class="milFour milestoneDataText" id='task4.1'>Apply for Graduation (NO FORM) (upload pdf of email):
+          <p>Completed 4/6/2020!</p>
+      </button>
+      <button onclick="dropDown('milFour task4.2')" class="milFour milestoneDataText" id='task4.2'>Dissertation format review (No Form)(upload pdf of email):
+          <p></p>
+      </button>
+      <button onclick="dropDown('milFour task4.3')" class="milFour milestoneDataText" id='task4.3'>Oral Defense Scheduling Form:
+          <p></p>
+      </button>
+      <button onclick="dropDown('milFour task4.4')" class="milFour milestoneDataText" id='task4.4'>Pro-Quest – Dissertation (No Form)(upload pdf of email):
+          <p></p>
+      </button>
+    </div>
+
+<!--End Phase Dropdowns-->
+
+
+  </body>
+</html>
