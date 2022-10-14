@@ -58,7 +58,6 @@ target = document.getElementsByClassName('fileView');
   checkProgress('milTwo');
   checkProgress('milThree');
   checkProgress('milFour');
-  checkProgress('milFive');
 
 }
 
