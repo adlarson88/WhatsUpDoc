@@ -1,0 +1,219 @@
+/* styles the select landing page on the index.html page */
+
+.nauLetterLogo {
+	margin-top: 25px;
+}
+
+.loginWindow {
+	display: block;
+	flex-direction: column;
+	text-align: center;
+	align-content: space-evenly;
+	justify-content: space-evenly;
+	background-color: #002454;
+	border-style: solid;
+	border-color: #F68300;
+	border-width: 2px;
+	height: 75vh;
+	width: 45vw;
+	margin: auto;
+	max-height:250px;
+	max-width: 500px;
+	min-width: 400px;
+}
+
+.studentAndAdminLoginWindow {
+	display: block;
+	flex-direction: column;
+	text-align: center;
+	align-content: space-evenly;
+	justify-content: space-evenly;
+	background-color: #002454;
+	border-style: solid;
+	border-color: #F68300;
+	border-width: 2px;
+	height: 75vh;
+	width: 45vw;
+	margin: auto;
+	max-height:200px;
+	max-width: 500px;
+	min-width: 300px;
+}
+
+.carrotBanner {
+	display: block;
+	margin: auto;
+	margin-top: 50px;
+}
+
+.formWindow {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	align-content: space-evenly;
+	justify-content: space-evenly;
+	background-color: #007A33;
+	border-style: solid;
+	border-color: #002454;
+	border-width: 2px;
+	height: 75vh;
+	width: 45vw;
+	margin: auto;
+	margin-top: 1000px;
+	max-height:350px;
+	max-width: 325px;
+	min-width: 325px;
+}
+
+input[type=submit] {
+	display:inline-block;
+	background-color: #ffffff;
+	border: none;
+	color: rgb(0, 0, 0);
+	padding: 7px 15px;
+	text-decoration: none;
+	margin: 35px 20px;
+	cursor: pointer;
+}
+
+/* #### All Google Sign-In Button STYLING BEGINS HERE #### */
+.g_id_signin {
+	text-align: center;
+	width: auto;
+	margin: auto;
+	max-width: fit-content;
+}
+
+
+/* #### Styles the admin.html page #### */
+.searchWindow {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	align-content: space-evenly;
+	justify-content: space-evenly;
+	background-color: #002454;
+	border-style: double;
+	border-color: #FAC01A;
+	border-width: 4px;
+	height: 75vh;
+	width: 45vw;
+	margin: auto;
+	max-height: 200px;
+}
+
+
+/* #### HOME.HTML STYLING WILL FOLLOW UNDER HERE #### */
+/* styles all the forms on the home page */
+
+.submit_doc_form {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	align-content: space-evenly;
+	justify-content: space-evenly;
+	background-color: #C3B8B2;
+	border-style: solid;
+	border-color: #FFDA0B;
+}
+
+form {
+	display: flex;
+	align-items: center;
+	flex: 1;
+	align-content: space-evenly;
+	justify-content: space-evenly;
+}
+
+/* styles the phases bar on the home page */
+.progressBar {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: stretch;
+	background-color: #00ADB5;
+	border-style: solid;
+	border-color: #000000;
+	width: 90vw;
+	left: 5vw;
+	top: 5vh;
+	margin: auto;
+}
+/* styles the milestones in the progress bar */
+
+.milestoneOne{
+	flex: 1;
+	border-style: solid;
+	border-top-style: none;
+	border-width: 1px;
+	border-spacing: 0px;
+	border-color: #000000;
+	background-color: #22d61c;
+	text-align: center;
+	text-justify: center;
+	cursor: pointer;
+	font-size: 1vw;
+}
+.milestone{
+	flex: 1;
+	border-style: solid;
+	border-top-style: none;
+	border-width: 1px;
+	border-spacing: 0px;
+	border-color: #000000;
+	background-color: #00ADB5;
+	text-align: center;
+	text-justify: center;
+	cursor: pointer;
+	font-size: 1vw;
+}
+
+
+/* styles the drop down menu */
+.milestoneData{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: stretch;
+	background-color: #00ADB5;
+	border-style: solid;
+	border-top-style: none;
+	border-color: #000000;
+	width: 20vw;
+	left: 4.70vw;
+	top: 8vh;
+}
+
+/* styles the task bars in the drop down menu */
+.milestoneDataText{
+	flex: 1;
+	width: inherit;
+	border-style: none;
+	border-top-style: solid;
+	border-color: #000000;
+	background-color: #22d61c;
+	text-align: center;
+	font-size: 1vw;
+	text-justify: center;
+	cursor: pointer;
+	height: 15vh;
+}
+
+.dropdown {
+	display: none;
+}
+
+.signOut {
+	vertical-align: right;
+}
+
+.fileView {
+	position: absolute;
+	background-color: #00ADB5;
+	border-style: solid;
+	border-color: #000000;
+	width: 75vw;
+	height: 85vh;
+	left: 20vw;
+	font-size: 1vw;
+}
