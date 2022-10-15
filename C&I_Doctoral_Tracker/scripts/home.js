@@ -23,17 +23,27 @@ function dropDown(doc)
     if (!doc.includes('task')) {
       target = document.getElementById(doc);
       if (target.style.fontWeight === "bold") {
-          target.style.fontWeight = "normal"
+          target.style.fontWeight = "normal";
+          target.style.borderStyle = 'none';
+          target.style.borderTopStyle = 'solid';
+          target.style.borderWidth = '0px';
         } else {
-          target.style.fontWeight = "bold"
+          target.style.fontWeight = "bold";
+          target.style.borderStyle = 'solid';
+          target.style.borderWidth = '2px';
         }
     } else {
       taskDoc = doc.split(" ");
       target = document.getElementById(taskDoc[1]);
       if (target.style.fontWeight === "bold") {
-          target.style.fontWeight = "normal"
+          target.style.fontWeight = "normal";
+          target.style.borderStyle = 'none';
+          target.style.borderTopStyle = 'solid';
+          target.style.borderWidth = '0px';
         } else {
-          target.style.fontWeight = "bold"
+          target.style.fontWeight = "bold"; 
+          target.style.borderStyle = 'solid';
+          target.style.borderWidth = '2px';
         }
     }
 }
@@ -65,19 +75,29 @@ function checkProgress(doc)
 {
   var index;
   var target;
-  var children;
-  var completed = true;
+  var tasks;
+  var completed; 
+  completed = true;
   target = document.getElementById(doc);
-  children = document.getElementsByClassName(doc);
-  for (var index = 0; index < children.length; index++) {
-    if( !children[index].classList.contains('complete') )
+  tasks = document.getElementsByClassName(doc);
+  for (var index = 0; index < tasks.length; index++) 
+  {
+    if( !(tasks[index].classList.contains('complete') 
+          || tasks[index].classList.contains('fileView') 
+          || tasks[index].classList.contains('milestoneData') ) )
     {
       completed = false;
+    }
+    else if (tasks[index].classList.contains('complete'))
+    {
+      tasks[index].style.backgroundColor = "#FAC01A";
+      tasks[index].style.color = "#002454";
     }
   }
   if( completed )
   {
-  document.getElementById(doc).style.backgroundColor = "#41F415";
+    target.style.backgroundColor = "#FAC01A";
+    target.style.color = "#002454";
   }
 }
 
