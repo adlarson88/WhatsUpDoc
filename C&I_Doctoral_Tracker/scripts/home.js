@@ -5,36 +5,31 @@ function dropDown(doc)
     var taskDoc;
     for (index = 0; index < target.length; index++) {
       if (!target[index].classList.contains('fileView')) {
-        if (target[index].style.display === "none") {
-            target[index].style.display = "block";
-        } else {
-          target[index].style.display = "none";
-        }
+
+        target[index].style.display = "block";
+
       }
       else if(doc.includes('task')){
-        if (target[index].style.display === "none") {
-            target[index].style.display = "block";
-        } else {
-          target[index].style.display = "none";
-        }
+
+        target[index].style.display = "block";
 
       }
     }
     if (!doc.includes('task')) {
       target = document.getElementById(doc);
-      if (target.style.fontWeight === "bold") {
-          target.style.fontWeight = "normal"
-        } else {
-          target.style.fontWeight = "bold"
-        }
+
+      target.style.fontWeight = "bold";
+      target.style.borderStyle = 'solid';
+      target.style.borderWidth = '.4vw';
+
     } else {
       taskDoc = doc.split(" ");
       target = document.getElementById(taskDoc[1]);
-      if (target.style.fontWeight === "bold") {
-          target.style.fontWeight = "normal"
-        } else {
-          target.style.fontWeight = "bold"
-        }
+
+      target.style.fontWeight = "bold"; 
+      target.style.borderStyle = 'solid';
+      target.style.borderWidth = '.4vw';
+
     }
 }
 
@@ -65,19 +60,29 @@ function checkProgress(doc)
 {
   var index;
   var target;
-  var children;
-  var completed = true;
+  var tasks;
+  var completed; 
+  completed = true;
   target = document.getElementById(doc);
-  children = document.getElementsByClassName(doc);
-  for (var index = 0; index < children.length; index++) {
-    if( !children[index].classList.contains('complete') )
+  tasks = document.getElementsByClassName(doc);
+  for (var index = 0; index < tasks.length; index++) 
+  {
+    if( !(tasks[index].classList.contains('complete') 
+          || tasks[index].classList.contains('fileView') 
+          || tasks[index].classList.contains('milestoneData') ) )
     {
       completed = false;
+    }
+    else if (tasks[index].classList.contains('complete'))
+    {
+      tasks[index].style.backgroundColor = "#FAC01A";
+      tasks[index].style.color = "#002454";
     }
   }
   if( completed )
   {
-  document.getElementById(doc).style.backgroundColor = "#41F415";
+    target.style.backgroundColor = "#FAC01A";
+    target.style.color = "#002454";
   }
 }
 
@@ -93,4 +98,41 @@ function upload(doc)
 {
 
   checkProgress(doc);
+}
+
+function hideClass(doc)
+{
+  var target = document.getElementsByClassName(doc);
+  var index;
+
+  if(doc.includes('milestoneDataText')){
+    hideClass('fileView');
+    target = document.getElementsByClassName('milestoneDataText');
+    for (index = 0; index < target.length; index++) {
+      target[index].style.fontWeight = "normal";
+      target[index].style.borderStyle = 'none';
+      target[index].style.borderTopStyle = 'solid';
+      target[index].style.borderWidth = '0.2vw';
+    }
+  }
+  else if(doc.includes('milestoneData')){
+    target = document.getElementsByClassName('milestoneData');
+    for (index = 0; index < target.length; index++) {
+      target[index].style.display = "none";
+    }
+  }
+  else if(doc.includes('milestone')){
+    hideClass('milestoneData');
+    target = document.getElementsByClassName('milestone');
+    for (index = 0; index < target.length; index++) {
+      target[index].style.fontWeight = "normal";
+      target[index].style.borderWidth = '0.2vw';
+    }
+  }
+  if(doc.includes('fileView')){
+    target = document.getElementsByClassName('fileView');
+    for (index = 0; index < target.length; index++) {
+      target[index].style.display = "none";
+    }
+  }
 }
