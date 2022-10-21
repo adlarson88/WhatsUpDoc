@@ -1,20 +1,21 @@
-package com.WhatsUpDoc.PhDTracker.Users;
+package com.WhatsUpDoc.PhDTracker.Controllers;
 
+import com.WhatsUpDoc.PhDTracker.Services.DBFields.Files;
+import com.WhatsUpDoc.PhDTracker.Services.DBFields.User;
 import com.WhatsUpDoc.PhDTracker.Services.Exceptions.StudentAlreadyExistsException;
 import com.WhatsUpDoc.PhDTracker.Services.Exceptions.StudentNotFoundException;
-import com.WhatsUpDoc.PhDTracker.Services.FileTransfer.Functional.PrimaryFile;
 import com.WhatsUpDoc.PhDTracker.Services.FileTransfer.Functional.FileStorageService;
-import com.WhatsUpDoc.PhDTracker.Services.FileTransfer.Service.ResponseMessage;
 import com.WhatsUpDoc.PhDTracker.Services.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
@@ -25,13 +26,13 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private FileStorageService storageService;
+    private FileStorageService fileStorageService;
 
-    // needs better understanding, likely needs to be in a webconfig class for use in below requests
-    // and/or token storage (so constant logging in does not occur)
+//    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @GetMapping
-    public Map<String, Object> currentUser(OAuth2AuthenticationToken oAuth2AuthenticationToken) {
-        return oAuth2AuthenticationToken.getPrincipal().getAttributes();
+    public Map<String, Object> user(@AuthenticationPrincipal OAuth2User principal) {
+        return Collections.singletonMap("name", principal.getAttribute("name"));
     }
 
     @PostMapping(path="/create")
@@ -54,7 +55,7 @@ public class UserController {
             // throw some 403 exception
         // }
         user.setUserID(id);
-        Optional<User> oExistingUser = userRepository.findById(user.getUserID());
+        Optional<User> oExistingUser = userRepository.findById(id);
         if (oExistingUser.isPresent()) {
             User existingUser = oExistingUser.get();
             existingUser.copyFrom(user);
@@ -80,26 +81,30 @@ public class UserController {
         throw new StudentNotFoundException();
     }
 
-    // needs work and verify - does not track who uploads
-    @PostMapping(value = "/{id}/upload", consumes = MediaType.TEXT_XML_VALUE)
-    public @ResponseBody ResponseEntity<ResponseMessage> uploadFile(@RequestBody MultipartFile file, @PathVariable String id) {
-        String message = "";
+
+    @PostMapping("/{id}/upload/{uploadAs}")
+    public ResponseEntity<?> handleFileUpload( @RequestParam("file") MultipartFile file, @PathVariable String id,
+                                               @PathVariable String uploadAs) {
+        String fileName = file.getOriginalFilename();
         try {
-            storageService.store(file);
-            message = "Uploaded the file successfully: " + file.getOriginalFilename();
-            return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+            fileStorageService.storeFile(file, id, uploadAs);
         } catch (Exception e) {
-            message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
         }
+        return ResponseEntity.ok("File uploaded successfully.");
     }
 
-    // needs work and verify - may drop path variable and use @requestbody
-    @GetMapping("/{id}/files")
+    @GetMapping("/files/{id}")
     public ResponseEntity<byte[]> getFile(@PathVariable String id) {
-        PrimaryFile primaryFile = storageService.getFile(id);
+        Files f = fileStorageService.getFile(id);
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + primaryFile.getFilename() + "\"")
-                .body(primaryFile.getData());
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + f.getFilename() + "\"")
+                .body(f.getData());
     }
+
+    @GetMapping("/files/exists/{fileId}")
+    public HttpStatus existingFile(@PathVariable String fileId) {
+        return fileStorageService.fileExists(fileId);
+    }
+
 }
