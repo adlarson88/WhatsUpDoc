@@ -5,27 +5,51 @@
 <head>
   <title>Login Page</title>
   <link rel="stylesheet" href="style.css">
-</head>
-
-<div class="nauLetterLogo" style="text-align: center;">
-  <img src="images/naulogo1noaxe.png" alt="NAU Axe Logo" style="width:150px;height:50px;">
-</div>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
+  <script type="text/javascript" src="DataTables/datatables.min.js"></script>
+  <script src="scripts/jquery-3.6.1.js"></script>
+</head> 
 
 <body>
 
-<div class="searchWindow">
-  
-  <form action="home.html">
-    <label for="studentID" style="font-size: 3vh; color:#FAC01A;">Search by Student UserID: </label>
-    <input type="text" name="studentID" value="">
-    <input type="submit" value="Search">
-  </form>
+  <div class="adminControlsTaskBar">
+    <button onclick="openAdminStudentControlsWindow()" class="adminControlButton" id="adminStudentControls">Add/Remove Student</button>
+    <button onclick="openSearchWindow()" class="adminControlButton" id="searchWindowControls">Open Search Window</button>
+  </div>
+
+  <div class="adminStudentControlsWindow">
+
+    <table id="studentTable" class="display">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>UserId</th>
+          <th>Student Name (LastName, FirstName)</th>
+          <th>Advisor Name (LastName, FirstName)</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>bjs397</td>
+          <td>Shaffer, Brandon</td>
+          <td>Advisorson, Joe</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
 
 
-  <form action="index.html">
-    <input type="submit" value="Sign Out">
-  </form>
-</div>
+  <div class="formWindow">
+    <form action="index.html">
+      <input type="submit" value="Sign Out">
+    </form>
+  </div>
+
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 
 </body>
 
