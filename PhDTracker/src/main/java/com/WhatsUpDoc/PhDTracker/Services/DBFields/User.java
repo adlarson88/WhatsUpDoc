@@ -1,4 +1,4 @@
-package com.WhatsUpDoc.PhDTracker.Users;
+package com.WhatsUpDoc.PhDTracker.Services.DBFields;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -29,11 +29,11 @@ public class User {
         this.admin = user.isAdmin();
         return this;
     }
-    
-    public String getUserID(){
+
+    public String getUserID() {
         return userID;
     }
-    
+
     public void setUserID(String userID) {
         this.userID = userID;
     }
@@ -61,4 +61,5 @@ public class User {
     public void setAdmin(boolean admin) {
         this.admin = admin;
     }
+
 }
