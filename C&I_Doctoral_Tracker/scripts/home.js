@@ -137,19 +137,23 @@ function parseCompleteList()
 function phaseCheck(elementID)
 {
   var target = document.getElementById(elementID);
+  /* 
   if( completeList.querySelector(elementID) && !(target.classList.contains('complete')) )
   {
     target.classList.add('complete');
   }
+  */
 }
 
 async function pingDB(user)
 {
-  
-  const downloadRequest = 'https://doctracker.org:8443/user/'+user+'/getFiles';
+  /*
+  const downloadRequest = 'https://doctracker.org:8443/user/all';
+  //'https://doctracker.org:8443/user/'+user+'/getFiles';
  
   const jsonText = {
-    headers: {'Content-Type' : "application/json"},
+    mode: 'no-cors',
+    headers: {'Content-Type' : 'text/plain'},
   } ;
 
   const downloadJson = JSON.stringify(jsonText);
@@ -158,8 +162,14 @@ async function pingDB(user)
 
   const response = await fetch(request);
   
-  completeList = await response.json();
+  completeList = await response.text();
 
+  console.log(completeList);
+  */
+
+  fetch('https://doctracker.org:8443/user/all', {mode: 'same-origin'})
+    .then(response => response.text())
+    .then(text => console.log(text));
 }
 
 async function download(milestoneName)
