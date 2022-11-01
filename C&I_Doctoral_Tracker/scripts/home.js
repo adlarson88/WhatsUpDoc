@@ -1,3 +1,7 @@
+var userData = 'eml292'; //temporary userID
+var completeList;
+var userID;
+
 function dropDown(doc)
 {
     var target = document.getElementsByClassName(doc);
@@ -9,13 +13,13 @@ function dropDown(doc)
         target[index].style.display = "block";
 
       }
-      else if(doc.includes('task')){
+      else if(doc.includes('phase')){
 
         target[index].style.display = "block";
 
       }
     }
-    if (!doc.includes('task')) {
+    if (!doc.includes('phase')) {
       target = document.getElementById(doc);
 
       target.style.fontWeight = "bold";
@@ -48,6 +52,8 @@ target = document.getElementsByClassName('fileView');
   for (index = 0; index < target.length; index++) {
     target[index].style.display = "none";
   }
+  pingDB(userID);
+  parseCompleteList();
 
   checkProgress('milOne');
   checkProgress('milTwo');
@@ -94,10 +100,76 @@ function displayFile(doc)
   var index;
 }
 
-function upload(doc)
+function checkFile(doc)
 {
 
-  checkProgress(doc);
+}
+
+function parseCompleteList()
+{
+  phaseCheck('phase1.1');
+  phaseCheck('phase1.2');
+  phaseCheck('phase1.3');
+  phaseCheck('phase1.4');
+
+  
+  phaseCheck('phase2.1');
+  phaseCheck('phase2.2');
+  phaseCheck('phase2.3');
+  phaseCheck('phase2.4');
+  phaseCheck('phase2.5');
+  phaseCheck('phase2.6');
+  
+
+  phaseCheck('phase3.1');
+  phaseCheck('phase3.2');
+  phaseCheck('phase3.3');
+  phaseCheck('phase3.4');
+  phaseCheck('phase3.5');
+
+
+  phaseCheck('phase4.1');
+  phaseCheck('phase4.2');
+  phaseCheck('phase4.3');
+  phaseCheck('phase4.4');
+}
+
+function phaseCheck(elementID)
+{
+  var target = document.getElementById(elementID);
+  if( completeList.querySelector(elementID) && !(target.classList.contains('complete')) )
+  {
+    target.classList.add('complete');
+  }
+}
+
+async function pingDB(user)
+{
+  
+  const downloadRequest = 'https://doctracker.org:8443/user/'+user+'/getFiles';
+ 
+  const jsonText = {
+    headers: {'Content-Type' : "application/json"},
+  } ;
+
+  const downloadJson = JSON.stringify(jsonText);
+
+  const request = new Request(downloadRequest, jsonText);
+
+  const response = await fetch(request);
+  
+  completeList = await response.json();
+
+}
+
+async function download(milestoneName)
+{
+  const downloadRequest = 'https://doctracker.org:8443/user/'+userID+'/upload/'+milestoneName;
+
+  const request = new Request(downloadRequest);
+
+  const response = await fetch(request);
+
 }
 
 function hideClass(doc)
