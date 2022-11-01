@@ -25,6 +25,10 @@ function dropDown(doc)
       target.style.fontWeight = "bold";
       target.style.borderStyle = 'solid';
       target.style.borderWidth = '.4vw';
+      if (!(target.classList.contains('complete')))
+      {
+        target.style.borderColor = '#C3B8B2';
+      }
 
     } else {
       taskDoc = doc.split(" ");
@@ -33,6 +37,10 @@ function dropDown(doc)
       target.style.fontWeight = "bold"; 
       target.style.borderStyle = 'solid';
       target.style.borderWidth = '.4vw';
+      if (!(target.classList.contains('complete')))
+      {
+        target.style.borderColor = '#C3B8B2';
+      }
 
     }
 }
@@ -89,6 +97,7 @@ function checkProgress(doc)
   {
     target.style.backgroundColor = "#FAC01A";
     target.style.color = "#002454";
+    target.classList.add('complete');
   }
 }
 
@@ -147,29 +156,28 @@ function phaseCheck(elementID)
 
 async function pingDB(user)
 {
-  /*
-  const downloadRequest = 'https://doctracker.org:8443/user/all';
-  //'https://doctracker.org:8443/user/'+user+'/getFiles';
+  
+  //const downloadRequest = 'https://doctracker.org:8443/user/all';
+  const downloadRequest = 'https://doctracker.org:8443/user/'+user+'/getFiles';
  
-  const jsonText = {
-    mode: 'no-cors',
+  const downloadOptions = {
     headers: {'Content-Type' : 'text/plain'},
   } ;
 
-  const downloadJson = JSON.stringify(jsonText);
-
-  const request = new Request(downloadRequest, jsonText);
+  const request = new Request(downloadRequest, downloadOptions);
 
   const response = await fetch(request);
   
-  completeList = await response.text();
+  const cl = response;
 
-  console.log(completeList);
-  */
+  console.log(cl);
+  
 
-  fetch('https://doctracker.org:8443/user/all', {mode: 'same-origin'})
+  /*
+  fetch('https://doctracker.org:8443/user/all', {mode: 'no-cors'})
     .then(response => response.text())
     .then(text => console.log(text));
+    */
 }
 
 async function download(milestoneName)
@@ -195,6 +203,7 @@ function hideClass(doc)
       target[index].style.borderStyle = 'none';
       target[index].style.borderTopStyle = 'solid';
       target[index].style.borderWidth = '0.2vw';
+      target[index].style.borderColor = '#000000';
     }
   }
   else if(doc.includes('milestoneData')){
@@ -209,6 +218,7 @@ function hideClass(doc)
     for (index = 0; index < target.length; index++) {
       target[index].style.fontWeight = "normal";
       target[index].style.borderWidth = '0.2vw';
+      target[index].style.borderColor = '#000000';
     }
   }
   if(doc.includes('fileView')){
