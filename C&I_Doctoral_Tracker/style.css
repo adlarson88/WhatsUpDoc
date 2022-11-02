@@ -1,7 +1,7 @@
 /* styles the select landing page on the index.html page */
 
 .nauLetterLogo {
-	margin-top: 25px;
+	margin-top: 2ch;
 }
 
 .loginWindow {
@@ -42,7 +42,7 @@
 	text-align: center;
 	display: block;
 	margin: auto;
-	margin-top: 75px;
+	margin-top: 15%;
 }
 
 /* #### All Google Sign-In Button STYLING BEGINS HERE #### */
@@ -80,6 +80,26 @@
 	min-width: 325px;
 }
 
+.g_id_signout {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	align-content: space-evenly;
+	justify-content: space-evenly;
+	background-color: #007A33;
+	border-style: solid;
+	border-color: #002454;
+	border-width: 2px;
+	height: 5vh;
+	width: 5vw;
+	margin: auto;
+	margin-top: 2ch;
+	margin-left: 93%;
+	max-height:10%;
+	max-width: 325px;
+	min-width: 5%;
+}
+
 input[type=submit] {
 	background-color: #ffffff;
 	border: none;
@@ -97,41 +117,49 @@ input[type=submit] {
 	justify-content: space-evenly;
 	align-items: stretch;
 	background-color: #002454;
-	width: 25vw;
-	height: 5vh;
+	border-style: solid;
+	border-color: #FAC01A;
+	width: 30vw;
+	height: 10vh;
 	left: 5vw;
 	top: 5vh;
 	margin: auto;
+	min-width: 30vw;
+	min-height: 10vh;
+}
+
+.adminControlButton {
+	background-color: #FAC01A;
+	color: #002454;
+	font-size: large;
 }
 
 .adminStudentControlsWindow {
 	display: flex;
 	flex-direction: column;
 	text-align: center;
-	background-color: #C3B8B2;
 	border-style: solid;
 	border-color: #007A33;
-	width: 27.55%;
+	width: 75%;
 	margin-top: 5ch;
 	margin-left: auto;
 	margin-right: auto;
+	min-width: auto;
 }
 
-.searchWindow {
+.adminPhaseReviewWindow {
 	display: flex;
 	flex-direction: column;
 	text-align: center;
-	align-content: space-evenly;
-	justify-content: space-evenly;
-	background-color: #002454;
-	border-style: double;
-	border-color: #FAC01A;
-	border-width: 4px;
-	width: 35vw;
-	height: 50vh;
-	max-height: 100vh;
-	margin: auto;
+	border-style: solid;
+	border-color: #F68300;
+	width: 82%;
+	margin-top: 5ch;
+	margin-left: auto;
+	margin-right: auto;
+	min-width: auto;
 }
+
 
 .embeddedHomePage {
 	display: flex;
@@ -146,27 +174,6 @@ input[type=submit] {
 
 .embeddediframe {
 	height: 100vh;
-}
-
-form.searchBar input[type=text] {
-	padding: 10px;
-  	font-size: 17px;
-  	border: 1px solid #FAC01A;
-  	float: left;
-  	width: 80%;
-  	background: #f1f1f1;
-}
-
-form.searchBar button {
-	float: left;
-  	width: 20%;
-  	padding: 10px;
-  	background: #41B6E6;
-  	color: white;
-  	font-size: 17px;
-  	border: 1px solid grey;
-  	border-left: none; /* Prevent double borders */
-  	cursor: pointer;
 }
 
 
