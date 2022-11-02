@@ -1,4 +1,5 @@
 var userData = 'eml292'; //temporary userID
+// userData = 'al762'; // adam test id
 var completeList;
 var userID;
 
@@ -49,6 +50,7 @@ function prepare()
 {
   var target = document.getElementsByClassName('milestoneDataText');
   var index;
+  var classes;
   for (index = 0; index < target.length; index++) {
     target[index].style.display = "none";
   }
@@ -60,7 +62,19 @@ target = document.getElementsByClassName('fileView');
   for (index = 0; index < target.length; index++) {
     target[index].style.display = "none";
   }
-  pingDB(userID);
+
+  target = document.getElementsByClassName("fileUpload");
+  var elementByID;
+
+  for (index = 0; index < target.length; index++){
+    classes = target[index].classList;
+    elementByID = document.getElementById(target[index].id);
+    target[index].addEventListener('change', () => {
+      uploadFile(classes.item(1), elementByID.files[0])
+    })
+  }
+
+  pingDB();
   parseCompleteList();
 
   checkProgress('milOne');
@@ -109,84 +123,104 @@ function displayFile(doc)
   var index;
 }
 
-function checkFile(doc)
-{
-
-}
-
 function parseCompleteList()
 {
-  phaseCheck('phase1.1');
-  phaseCheck('phase1.2');
-  phaseCheck('phase1.3');
-  phaseCheck('phase1.4');
+  phaseCheck('phase1_1');
+  phaseCheck('phase1_2');
+  phaseCheck('phase1_3');
 
   
-  phaseCheck('phase2.1');
-  phaseCheck('phase2.2');
-  phaseCheck('phase2.3');
-  phaseCheck('phase2.4');
-  phaseCheck('phase2.5');
-  phaseCheck('phase2.6');
+  phaseCheck('phase2_1');
+  phaseCheck('phase2_2');
+  phaseCheck('phase2_3');
+  phaseCheck('phase2_4');
+  phaseCheck('phase2_5');
+  phaseCheck('phase2_6');
   
 
-  phaseCheck('phase3.1');
-  phaseCheck('phase3.2');
-  phaseCheck('phase3.3');
-  phaseCheck('phase3.4');
-  phaseCheck('phase3.5');
+  phaseCheck('phase3_1');
+  phaseCheck('phase3_2');
+  phaseCheck('phase3_3');
+  phaseCheck('phase3_4');
+  phaseCheck('phase3_5');
 
 
-  phaseCheck('phase4.1');
-  phaseCheck('phase4.2');
-  phaseCheck('phase4.3');
-  phaseCheck('phase4.4');
+  phaseCheck('phase4_1');
+  phaseCheck('phase4_2');
+  phaseCheck('phase4_3');
+  phaseCheck('phase4_4');
 }
 
 function phaseCheck(elementID)
 {
   var target = document.getElementById(elementID);
-  /* 
-  if( completeList.querySelector(elementID) && !(target.classList.contains('complete')) )
-  {
-    target.classList.add('complete');
-  }
-  */
+  //if( completeList.querySelector(elementID) && !(target.classList.contains('complete')) )
+  //{
+  // target.classList.add('complete');
+  // const newPre = document.createElement("embed");
+
+  // newPre.setAttribute('src', url of file);
+  // newPre.setAttribute('width, size)
+  // repeat
+  // target.appendChild(newPre);
+  //}
 }
 
-async function pingDB(user)
+async function pingDB()
 {
   
   //const downloadRequest = 'https://doctracker.org:8443/user/all';
-  const downloadRequest = 'https://doctracker.org:8443/user/'+user+'/getFiles';
+  const downloadRequest = 'https://doctracker.org:8443/user/'+userData+'/getFiles';
  
   const downloadOptions = {
-    headers: {'Content-Type' : 'text/plain'},
+    
+    headers: {'Content-Type' : 'application/json'},
   } ;
 
   const request = new Request(downloadRequest, downloadOptions);
 
   const response = await fetch(request);
   
-  const cl = response;
+  completeList = await response.text();
 
-  console.log(cl);
+  console.log(completeList);
   
-
-  /*
-  fetch('https://doctracker.org:8443/user/all', {mode: 'no-cors'})
-    .then(response => response.text())
-    .then(text => console.log(text));
-    */
 }
 
-async function download(milestoneName)
+async function download(fileID)
 {
-  const downloadRequest = 'https://doctracker.org:8443/user/'+userID+'/upload/'+milestoneName;
+  const downloadRequest = 'https://doctracker.org:8443/user/files/'+fileID;
 
   const request = new Request(downloadRequest);
 
   const response = await fetch(request);
+
+}
+
+async function uploadFile(phase, upFile)
+{
+  const uploadRequest = 'https://doctracker.org:8443/user/'+userData+'/upload/'+phase;
+
+  const upload = (file) => {
+    const formData = new FormData()
+
+    formData.append('file', file)
+
+    fetch(uploadRequest, {
+      method: 'POST',
+      body: formData,
+    }).then(
+      response => response.text()
+    ).then(
+      success => console.log(success)
+    ).catch(
+      error => console.error(error)
+    );
+  };
+    
+  upload(upFile);
+
+  pingDB();
 
 }
 
