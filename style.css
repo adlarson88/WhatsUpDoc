@@ -1,0 +1,275 @@
+/* styles the select landing page on the index.html page */
+
+.nauLetterLogo {
+	margin-top: 5ch;
+}
+
+.loginWindow {
+	display: block;
+	flex-direction: column;
+	text-align: center;
+	align-content: space-evenly;
+	justify-content: space-evenly;
+	background-color: #002454;
+	border-style: solid;
+	border-color: #F68300;
+	border-width: 2px;
+	height: 75vh;
+	width: 45vw;
+	margin: auto;
+	max-height:275px;
+	max-width: 500px;
+	min-width: 300px;
+}
+
+.studentAndAdminLoginWindow {
+	display: block;
+	flex-direction: column;
+	text-align: center;
+	align-content: space-evenly;
+	justify-content: space-evenly;
+	background-color: #002454;
+	border-style: solid;
+	border-color: #F68300;
+	border-width: 2px;
+	width: 40vw;
+	height: 30vh;
+	margin: auto;
+
+}
+
+.carrotBanner {
+	text-align: center;
+	display: block;
+	margin: auto;
+	margin-top: 15%;
+}
+
+/* #### All Google Sign-In Button STYLING BEGINS HERE #### */
+.g_id_signin {
+	text-align: center;
+	width: auto;
+	margin: auto;
+	max-width: fit-content;
+}
+
+#buttonDiv {
+	text-align: center;
+	width: auto;
+	margin: auto;
+	max-width: fit-content;
+}
+
+/* #### All Form styling begins here #### */
+.formWindow {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	align-content: space-evenly;
+	justify-content: space-evenly;
+	background-color: #007A33;
+	border-style: solid;
+	border-color: #002454;
+	border-width: 2px;
+	height: 75vh;
+	width: 45vw;
+	margin: auto;
+	margin-top: 500px;
+	max-height:250px;
+	max-width: 325px;
+	min-width: 325px;
+}
+
+input[type=submit] {
+	background-color: #ffffff;
+	border: none;
+	color: rgb(0, 0, 0);
+	padding: 7px 15px;
+	text-decoration: none;
+	margin: 20px 20px;
+	cursor: pointer;
+}
+
+/* #### Styles the admin.html page #### */
+.adminControlsTaskBar {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: stretch;
+	background-color: #002454;
+	border-style: solid;
+	border-color: #FAC01A;
+	width: 30vw;
+	height: 10vh;
+	left: 5vw;
+	top: 5vh;
+	margin: auto;
+	min-width: 30vw;
+	min-height: 10vh;
+}
+
+.adminControlButton {
+	background-color: #FAC01A;
+	color: #002454;
+	font-size: large;
+}
+
+.adminStudentControlsWindow {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	border-style: solid;
+	border-color: #007A33;
+	width: 75%;
+	margin-top: 5ch;
+	margin-left: auto;
+	margin-right: auto;
+	min-width: auto;
+}
+
+.adminPhaseReviewWindow {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	border-style: solid;
+	border-color: #F68300;
+	width: 82%;
+	margin-top: 5ch;
+	margin-left: auto;
+	margin-right: auto;
+	min-width: auto;
+}
+
+
+.embeddedHomePage {
+	display: flex;
+	flex-direction:column;
+	text-align: center;
+	background-color: #1e9e49;
+	width: 35vw;
+	height: 50vh;
+	max-height: 100vh;
+	margin: auto;
+}
+
+.embeddediframe {
+	height: 100vh;
+}
+
+form.searchBar input[type=text] {
+	padding: 10px;
+  	font-size: 17px;
+  	border: 1px solid #FAC01A;
+  	float: left;
+  	width: 80%;
+  	background: #f1f1f1;
+}
+
+form.searchBar button {
+	float: left;
+  	width: 20%;
+  	padding: 10px;
+  	background: #41B6E6;
+  	color: white;
+  	font-size: 17px;
+  	border: 1px solid grey;
+  	border-left: none; /* Prevent double borders */
+  	cursor: pointer;
+}
+
+
+/* #### HOME.HTML STYLING WILL FOLLOW UNDER HERE #### */
+/* styles all the forms on the home page */
+form {
+	display: flex;
+	align-items: center;
+	flex: 1;
+	align-content: space-evenly;
+	justify-content: space-evenly;
+}
+
+/* styles the phases bar on the home page */
+.progressBar {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: stretch;
+	background-color: #002454;
+	border-style: solid;
+	border-color: #000000;
+	width: 99vw;
+	left: 5vw;
+	top: 5vh;
+	margin: auto;
+}
+/* styles the milestones in the progress bar */
+.milestone{
+	flex: 1;
+	border-style: solid;
+	border-top-style: none;
+	border-width: 0.1vw;
+	border-spacing: 0px;
+	border-color: #000000;
+	background-color: #002454;
+	text-align: center;
+	text-justify: center;
+	cursor: pointer;
+	font-size: 1vw;
+	color: #ffffff;
+	text-decoration: underline;
+}
+
+
+/* styles the drop down menu */
+.milestoneData{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: stretch;
+	background-color: #002454;
+	border-width: 0.2vw;
+	border-style: solid;
+	border-top-style: none;
+	border-color: #000000;
+	width: 20vw;
+	left: 4.70vw;
+	top: 8vh;
+}
+
+/* styles the task bars in the drop down menu */
+.milestoneDataText{
+	flex: 1;
+	width: inherit;
+	border-style: none;
+	border-top-style: solid;
+	border-color: #000000;
+	border-width: 0.2vw;
+	background-color: #002454;
+	text-align: center;
+	font-size: 1vw;
+	color: #ffffff;
+	text-justify: center;
+	cursor: pointer;
+	height: 15vh;
+}
+
+.dropdown {
+	display: none;
+}
+
+.signOut {
+	vertical-align: right;
+}
+
+.fileView {
+	position: absolute;
+	background-color: #002454;
+	border-style: solid;
+	border-color: #000000;
+	border-width: 0.2vw;
+	width: 75vw;
+	height: 85vh;
+	left: 20.5vw;
+	font-size: 1vw;
+	color: #ffffff;
+}

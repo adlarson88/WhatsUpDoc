@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="scripts/admin.js"></script>
+  </head> 
+
+  <body onload="preparePage()">
+  
+    <div class="nauLetterLogo" style="text-align: center;">
+      <img src="images/naulogo1noaxe.png" alt="NAU Axe Logo" style="width:17vw;height:15vh;max-width:200px;max-height: 75px;">
+    </div>
+
+    <div class="adminControlsTaskBar">
+      <button onclick="openAdminStudentControlsWindow()" class="adminControlButton" id="adminStudentControlsButton">Add/Remove Students</button>
+      <button onclick="openPhaseReviewWindow()" class="adminControlButton" id="phaseReviewControlsButton">Phase Review</button>
+    </div>
+  
+
+    <div class="adminStudentControlsWindow" id="adminStudentControlsWindow">
+      <script src="https://c6idm1wud5.cloudtables.io/loader/7b725cc4-59f8-11ed-aabf-c3802a2548b5/table/bs4"
+              data-apiKey="CFz90BJ187AEMpkI0qYjPy0n"
+              data-clientId="911436566286-36r6uc7oavbrmqcmn7b2ijo3q34mn1gi.apps.googleusercontent.com"></script>
+    </div>
+
+    <div class="adminPhaseReviewWindow" id="adminPhaseReviewWindow">
+      <script src="https://c6idm1wud5.cloudtables.io/loader/ab64512e-59fa-11ed-8623-eb8f8a4c8424/table/bs4"
+              data-apiKey="CFz90BJ187AEMpkI0qYjPy0n"
+              data-clientId="911436566286-36r6uc7oavbrmqcmn7b2ijo3q34mn1gi.apps.googleusercontent.com"></script>
+    </div>
+
+    <div class="formWindow">
+      <form action="index.html">
+        <input type="submit" value="Sign Out">
+      </form>
+    </div>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+  </body>
+</html>
