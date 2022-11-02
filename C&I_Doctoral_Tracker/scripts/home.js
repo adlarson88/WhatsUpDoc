@@ -1,4 +1,5 @@
 var userData = 'eml292'; //temporary userID
+// userData = 'al762'; // adam test id
 var completeList;
 var userID;
 
@@ -146,38 +147,31 @@ function parseCompleteList()
 function phaseCheck(elementID)
 {
   var target = document.getElementById(elementID);
-  /* 
-  if( completeList.querySelector(elementID) && !(target.classList.contains('complete')) )
-  {
-    target.classList.add('complete');
-  }
-  */
+  //if( completeList.querySelector(elementID) && !(target.classList.contains('complete')) )
+  //{
+  //  target.classList.add('complete');
+  //}
 }
 
 async function pingDB(user)
 {
   
   //const downloadRequest = 'https://doctracker.org:8443/user/all';
-  const downloadRequest = 'https://doctracker.org:8443/user/'+user+'/getFiles';
+  const downloadRequest = 'https://doctracker.org:8443/user/'+userData+'/getFiles';
  
   const downloadOptions = {
-    headers: {'Content-Type' : 'text/plain'},
+    
+    headers: {'Content-Type' : 'application/json'},
   } ;
 
   const request = new Request(downloadRequest, downloadOptions);
 
   const response = await fetch(request);
   
-  const cl = response;
+  completeList = await response.text();
 
-  console.log(cl);
+  console.log(completeList);
   
-
-  /*
-  fetch('https://doctracker.org:8443/user/all', {mode: 'no-cors'})
-    .then(response => response.text())
-    .then(text => console.log(text));
-    */
 }
 
 async function download(milestoneName)
