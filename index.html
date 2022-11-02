@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>Landing Page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<div class="nauLetterLogo" style="text-align: center;">
+  <img src="images/naulogo1noaxe.png" alt="NAU Axe Logo" style="width:17vw;height:15vh;max-width:200px;max-height: 75px;">
+</div>
+
+<body>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <div class="loginWindow">
+
+    <h1 style="color:#FAC01A;">Welcome to the Curriculum & Instruction Doctoral Tracker!</h1>
+    <p style="color:#F68300; font-size: 3ch;">Sign In with your NAU gmail account:</p>
+    
+    <div class="g_signin_button" style="text-align: center;">
+
+      <div class="g_signin_button" style="text-align: center;">
+        <div id="g_id_onload" 
+            data-client_id="911436566286-36r6uc7oavbrmqcmn7b2ijo3q34mn1gi.apps.googleusercontent.com"
+            data-context="signin"
+            data-ux_mode="popup"
+            data-login_uri="https://ceias.nau.edu/capstone/projects/CS/2022/WhatsUpDoc_S22/C&I_Doctoral_Tracker/home.html?"
+            data-itp_support="true">
+        </div>
+  
+        <div class="g_id_signin" 
+            data-type="standard"
+            data-shape="pill"
+            data-theme="filled_blue"
+            data-text="signin_with"
+            data-size="large"
+            data-locale="en-US"
+            data-logo_alignment="left"
+            data-width="275">
+        </div>
+
+      <script>
+        //function handleCredentialResponse(response) {
+            
+            // console.log("Encoded JWT ID token: " + response.credential);
+            
+            // ### COMMENTED OUT THE SECTION ATTEMPTING TO SEND JWT TOKEN TO BACK END ### 
+            /*
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'https://142.11.236.52:8080/user', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            // Set custom header for CRSF
+            xhr.setRequestHeader('X-Requested-With', 'XmlHttpRequest');
+            xhr.onload = function() {
+            console.log('Auth code response: ' + xhr.responseText);
+            };
+            xhr.send('Encoded JWT ID=' + response.credential);
+            */
+        //}
+        /*
+        window.onload = function () {
+            google.accounts.id.initialize({
+              client_id: "911436566286-36r6uc7oavbrmqcmn7b2ijo3q34mn1gi.apps.googleusercontent.com",
+              
+            });
+            google.accounts.id.renderButton(
+              document.getElementById("buttonDiv"),
+              { theme: "filled_blue", size: "large", type: "standard", shape: "pill", text: "signin-with", 
+                locale: "en-US", logo_alignment: "left", width: "275"}  // customization attributes
+            );
+            google.accounts.id.prompt(); // also display the One Tap dialog
+
+            ** make sure to include <div id="buttonDiv"></div>  outside script **
+        }
+        */
+      </script>
+      
+    </div>
+  </div>
+</body>
+<tail>
+  
+  <div class="carrotBanner">
+    <a href="https://ceias.nau.edu/capstone/projects/CS/2022/WhatsUpDoc_S22/index.html">
+      <img src="images/Carrot _banner.png" alt="Carrot Banner" style="width:15vw;height:10vh;max-width:150px;max-height:50px; text-align: center;">
+    </a>
+
+    <p style="color:#007A33;">Click Carrot to reach Developing Team's Website</p>
+  </div>
+
+  <div class="formWindow">
+    <h3 style="color:#FFDA0B;">**For Developer Use Only!**</h3>
+
+    <form action="https://ceias.nau.edu/capstone/projects/CS/2022/WhatsUpDoc_S22/C&I_Doctoral_Tracker/adminlogin.html">
+      <input type="submit" value="Click Here for ADMINISTRATOR Login Page" />
+    </form>
+  </div>
+</tail>
+</html>

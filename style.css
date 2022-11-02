@@ -1,7 +1,7 @@
 /* styles the select landing page on the index.html page */
 
 .nauLetterLogo {
-	margin-top: 25px;
+	margin-top: 5ch;
 }
 
 .loginWindow {
@@ -42,7 +42,7 @@
 	text-align: center;
 	display: block;
 	margin: auto;
-	margin-top: 75px;
+	margin-top: 15%;
 }
 
 /* #### All Google Sign-In Button STYLING BEGINS HERE #### */
