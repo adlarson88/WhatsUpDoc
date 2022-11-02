@@ -7,105 +7,237 @@
     <script src="scripts/home.js"></script>
   </head>
 
-  <body onload="prepare(); dropDown('milOne'); dropDown('milOne task1.1');" style="background-color: #C3B8B2;">
-    <a class="signOut" href="index.html">Sign Out</a>
+  <body onload="prepare(); dropDown('milOne'); dropDown('milOne phase1.1');" style="background-color: #C3B8B2;">
 
     <div class="progressBar">
         <button onclick="hideClass('milestone'); dropDown('milOne'); 
-            hideClass('milestoneDataText'); dropDown('milOne task1.1');" class="milestone" id="milOne">Phase 1: Coursework</button>
+            hideClass('milestoneDataText'); dropDown('milOne phase1.1');" class="milestone" id="milOne">Phase 1: Coursework</button>
         <button onclick="hideClass('milestone'); dropDown('milTwo');
-            hideClass('milestoneDataText'); dropDown('milTwo task2.1');" class="milestone" id="milTwo">Phase 2: Qualitative Research Project/ Comprehensive Exams</button>
+            hideClass('milestoneDataText'); dropDown('milTwo phase2.1');" class="milestone" id="milTwo">Phase 2: Qualitative Research Project/ Comprehensive Exams</button>
         <button onclick="hideClass('milestone'); dropDown('milThree');
-            hideClass('milestoneDataText'); dropDown('milThree task3.1');" class="milestone" id="milThree">Phase 3: Proposal and Prospectus</button>
+            hideClass('milestoneDataText'); dropDown('milThree phase3.1');" class="milestone" id="milThree">Phase 3: Proposal and Prospectus</button>
         <button onclick="hideClass('milestone'); dropDown('milFour');
-            hideClass('milestoneDataText'); dropDown('milFour task4.1');" class="milestone" id="milFour">Phase 4: Research and Dissertation</button>
+            hideClass('milestoneDataText'); dropDown('milFour phase4.1');" class="milestone" id="milFour">Phase 4: Research and Dissertation</button>
     </div>
 
 <!--Phase Dropdowns-->
     <div class="milOne milestoneData">
-        <div class="milOne task1.1 fileView">Initial Program of Study</div>
-        <div class="milOne task1.2 fileView">Residency Plan Form</div>
-        <div class="milOne task1.3 fileView">Student Self-Evaluation 1</div>
-        <div class="milOne task1.4 fileView">Petition for Transfer Credit Form</div>
-        <button onclick="hideClass('milestoneDataText'); dropDown('milOne task1.1');" class="milOne milestoneDataText" id='task1.1'>Initial Program of Study:
+        <div class="milOne phase1.1 fileView">Initial Program of Study
+            <form action="/action_page.php" class="uploadForm">
+                <input type="file" id="myFile" name="filename">
+                <input type="submit">
+            </form>
+        </div>
+        <div class="milOne phase1.2 fileView">Residency Plan Form
+            <form action="/action_page.php" class="uploadForm">
+                <input type="file" id="myFile" name="filename">
+                <input type="submit">
+            </form>
+        </div>
+        <div class="milOne phase1.3 fileView">Student Self-Evaluation 1
+            <form action="/action_page.php" class="uploadForm">
+                <input type="file" id="myFile" name="filename">
+                <input type="submit">
+            </form>
+        </div>
+        <div class="milOne phase1.4 fileView">Petition for Transfer Credit Form
+            <form action="/action_page.php" class="uploadForm">
+                <input type="file" id="myFile" name="filename">
+                <input type="submit">
+            </form>
+        </div>
+        <button onclick="hideClass('milestoneDataText'); dropDown('milOne phase1.1');" 
+        title="This is where your courses are listed out and when you are taking them"
+        class="milOne milestoneDataText" id='phase1.1'>Initial Program of Study:
             <p>Completed 1/6/2020!</p>
         </button>
-        <button onclick="hideClass('milestoneDataText'); dropDown('milOne task1.2');" class="milOne milestoneDataText" id='task1.2'>Residency Plan Form:
+        <button onclick="hideClass('milestoneDataText'); dropDown('milOne phase1.2');" 
+        title="This is where you list your professional development of 5 hours"
+        class="milOne milestoneDataText" id='phase1.2'>Residency Plan Form:
             <p></p>
         </button>
-        <button onclick="hideClass('milestoneDataText'); dropDown('milOne task1.3');" class="milOne milestoneDataText" id='task1.3'>Student Self-Evaluation 1:
+        <button onclick="hideClass('milestoneDataText'); dropDown('milOne phase1.3');" 
+        title="Complete this every year and discuss with your advisor"
+        class="milOne milestoneDataText" id='phase1.3'>Student Self-Evaluation 1:
             <p></p>
         </button>
-        <button onclick="hideClass('milestoneDataText'); dropDown('milOne task1.4');" class="milOne milestoneDataText" id='task1.4'>Petition for Transfer Credit Form:
+        <button onclick="hideClass('milestoneDataText'); dropDown('milOne phase1.4');" 
+        title="Is this an EXTRA file instead of phase 1?"
+        class="milOne milestoneDataText" id='phase1.4'>Petition for Transfer Credit Form:
             <p></p>
         </button>
     </div>
 
     <div class="milTwo milestoneData">
-      <div class="milTwo task2.1 fileView">Qualifying Research Completion Form</div>
-      <div class="milTwo task2.2 fileView">Comprehensive Exam Scheduling Form</div>
-      <div class="milTwo task2.3 fileView">Comprehensive Exam Results Form</div>
-      <div class="milTwo task2.4 fileView">Recommendation of Dissertation Committee Form (completed with chair)</div>
-      <div class="milTwo task2.5 fileView">Graduate college letter confirming dissertation committee</div>
-      <div class="milTwo task2.6 fileView">Student Self-Evaluation 2 </div>
-      <button onclick="hideClass('milestoneDataText'); dropDown('milTwo task2.1');" class="milTwo milestoneDataText" id='task2.1'>Qualifying Research Completion form:
+      <div class="milTwo phase2.1 fileView">Qualifying Research Completion Form
+        <form action="/action_page.php" class="uploadForm">
+            <input type="file" id="myFile" name="filename">
+            <input type="submit">
+        </form>
+      </div>
+      <div class="milTwo phase2.2 fileView">Comprehensive Exam Scheduling Form
+        <form action="/action_page.php" class="uploadForm">
+            <input type="file" id="myFile" name="filename">
+            <input type="submit">
+        </form>
+      </div>
+      <div class="milTwo phase2.3 fileView">Comprehensive Exam Results Form
+        <form action="/action_page.php" class="uploadForm">
+            <input type="file" id="myFile" name="filename">
+            <input type="submit">
+        </form>
+      </div>
+      <div class="milTwo phase2.4 fileView">Recommendation of Dissertation Committee Form
+        <form action="/action_page.php" class="uploadForm">
+            <input type="file" id="myFile" name="filename">
+            <input type="submit">
+        </form>
+      </div>
+      <div class="milTwo phase2.5 fileView">Graduate college letter confirming dissertation committee
+        <form action="/action_page.php" class="uploadForm">
+            <input type="file" id="myFile" name="filename">
+            <input type="submit">
+        </form>
+      </div>
+      <div class="milTwo phase2.6 fileView">Student Self-Evaluation 2
+        <form action="/action_page.php" class="uploadForm">
+            <input type="file" id="myFile" name="filename">
+            <input type="submit">
+        </form>
+      </div>
+      <button onclick="hideClass('milestoneDataText'); dropDown('milTwo phase2.1');" 
+      title="This is completed when you have finished your QRP"
+      class="milTwo milestoneDataText" id='phase2.1'>Qualifying Research Completion form:
           <p>Completed 2/6/2020!</p>
       </button>
-      <button onclick="hideClass('milestoneDataText'); dropDown('milTwo task2.2');" class="milTwo milestoneDataText" id='task2.2'>Comprehensive Exam Scheduling Form:
+      <button onclick="hideClass('milestoneDataText'); dropDown('milTwo phase2.2');" 
+      title="This is completed with your comp exam chair."
+      class="milTwo milestoneDataText" id='phase2.2'>Comprehensive Exam Scheduling Form:
           <p></p>
       </button>
-      <button onclick="hideClass('milestoneDataText'); dropDown('milTwo task2.3');" class="milTwo milestoneDataText" id='task2.3'>Comprehensive Exam Results Form:
+      <button onclick="hideClass('milestoneDataText'); dropDown('milTwo phase2.3');" 
+      title="This is completed with your comp exam chair"
+      class="milTwo milestoneDataText" id='phase2.3'>Comprehensive Exam Results Form:
           <p></p>
       </button>
-      <button onclick="hideClass('milestoneDataText'); dropDown('milTwo task2.4');" class="milTwo milestoneDataText" id='task2.4'>Recommendation of Dissertation Committee Form (completed with chair):
+      <button onclick="hideClass('milestoneDataText'); dropDown('milTwo phase2.4');" 
+      title="Your chair will complete it and give you a copy to upload"
+      class="milTwo milestoneDataText" id='phase2.4'>Recommendation of Dissertation Committee Form:
           <p></p>
       </button>
-      <button onclick="hideClass('milestoneDataText'); dropDown('milTwo task2.5');" class="milTwo milestoneDataText" id='task2.5'>Graduate college letter confirming dissertation committee:
+      <button onclick="hideClass('milestoneDataText'); dropDown('milTwo phase2.5');" 
+      title="Upload this as confirmation that Grad college has your committee on file"
+      class="milTwo milestoneDataText" id='phase2.5'>Graduate college letter confirming dissertation committee:
           <p></p>
       </button>
-      <button onclick="hideClass('milestoneDataText'); dropDown('milTwo task2.6');" class="milTwo milestoneDataText" id='task2.5'>Student Self-Evaluation 2 :
+      <button onclick="hideClass('milestoneDataText'); dropDown('milTwo phase2.6');" 
+      title="Complete this every year and discuss with the advisor"
+      class="milTwo milestoneDataText" id='phase2.5'>Student Self-Evaluation 2 :
         <p></p>
       </button>
     </div>
 
     <div class="milThree milestoneData">
-      <div class="milThree task3.1 fileView">Prospectus Defense Scheduling Form</div>
-      <div class="milThree task3.2 fileView">Prospectus Title Page With Signatures</div>
-      <div class="milThree task3.3 fileView">Final Signed Program of Study</div>
-      <div class="milThree task3.4 fileView">Application For Candidacy Form</div>
-      <div class="milThree task3.5 fileView">Student Self-Evaluation 3</div>
-      <button onclick="hideClass('milestoneDataText'); dropDown('milThree task3.1');" class="milThree milestoneDataText" id='task3.1'>Prospectus Defense Scheduling Form:
+      <div class="milThree phase3.1 fileView">Prospectus Defense Scheduling Form
+        <form action="/action_page.php" class="uploadForm">
+            <input type="file" id="myFile" name="filename">
+            <input type="submit">
+        </form>
+      </div>
+      <div class="milThree phase3.2 fileView">Prospectus Title Page With Signatures
+        <form action="/action_page.php" class="uploadForm">
+            <input type="file" id="myFile" name="filename">
+            <input type="submit">
+        </form>
+      </div>
+      <div class="milThree phase3.3 fileView">Final Signed Program of Study
+        <form action="/action_page.php" class="uploadForm">
+            <input type="file" id="myFile" name="filename">
+            <input type="submit">
+        </form>
+      </div>
+      <div class="milThree phase3.4 fileView">Application For Candidacy Form
+        <form action="/action_page.php" class="uploadForm">
+            <input type="file" id="myFile" name="filename">
+            <input type="submit">
+        </form>
+      </div>
+      <div class="milThree phase3.5 fileView">Student Self-Evaluation 3
+        <form action="/action_page.php" class="uploadForm">
+            <input type="file" id="myFile" name="filename">
+            <input type="submit">
+        </form>
+      </div>
+      <button onclick="hideClass('milestoneDataText'); dropDown('milThree phase3.1');" 
+      title="Complete this with your dissertation chair"
+      class="milThree milestoneDataText" id='phase3.1'>Prospectus Defense Scheduling Form:
           <p>Completed 3/6/2020!</p>
       </button>
-      <button onclick="hideClass('milestoneDataText'); dropDown('milThree task3.2');" class="milThree milestoneDataText" id='task3.2'>Prospectus Title Page With Signatures:
+      <button onclick="hideClass('milestoneDataText'); dropDown('milThree phase3.2');" 
+      title="Upload a copy of the signed page to verify you passed"
+      class="milThree milestoneDataText" id='phase3.2'>Prospectus Title Page With Signatures:
           <p></p>
       </button>
-      <button onclick="hideClass('milestoneDataText'); dropDown('milThree task3.3');" class="milThree milestoneDataText" id='task3.3'>Final Signed Program of Study:
+      <button onclick="hideClass('milestoneDataText'); dropDown('milThree phase3.3');" 
+      title="This is a signed and complete program of study which should be uploaded"
+      class="milThree milestoneDataText" id='phase3.3'>Final Signed Program of Study:
           <p></p>
       </button>
-      <button onclick="hideClass('milestoneDataText'); dropDown('milThree task3.4');" class="milThree milestoneDataText" id='task3.4'>Application For Candidacy Form:
+      <button onclick="hideClass('milestoneDataText'); dropDown('milThree phase3.4');" 
+      title="This form is completed with your advisor and will be a package given to the admin"
+      class="milThree milestoneDataText" id='phase3.4'>Application For Candidacy Form:
           <p></p>
       </button>
-      <button onclick="hideClass('milestoneDataText'); dropDown('milThree task3.5');" class="milThree milestoneDataText" id='task3.5'>Student Self-Evaluation 3:
+      <button onclick="hideClass('milestoneDataText'); dropDown('milThree phase3.5');" 
+      title="Complete this every year and discuss with the advisor"
+      class="milThree milestoneDataText" id='phase3.5'>Student Self-Evaluation 3:
           <p></p>
       </button>
     </div>
 
     <div class="milFour milestoneData">
-      <div class="milFour task4.1 fileView">Apply for Graduation (NO FORM) (upload pdf of email)</div>
-      <div class="milFour task4.2 fileView">Dissertation format review (No Form)(upload pdf of email)</div>
-      <div class="milFour task4.3 fileView">Oral Defense Scheduling Form</div>
-      <div class="milFour task4.4 fileView">Pro-Quest – Dissertation (No Form)(upload pdf of email)</div>
-      <button onclick="hideClass('milestoneDataText'); dropDown('milFour task4.1');" class="milFour milestoneDataText" id='task4.1'>Apply for Graduation (NO FORM) (upload pdf of email):
+      <div class="milFour phase4.1 fileView">Apply for Graduation
+        <form action="/action_page.php" class="uploadForm">
+            <input type="file" id="myFile" name="filename">
+            <input type="submit">
+        </form>
+      </div>
+      <div class="milFour phase4.2 fileView">Dissertation format review
+        <form action="/action_page.php" class="uploadForm">
+            <input type="file" id="myFile" name="filename">
+            <input type="submit">
+        </form>
+      </div>
+      <div class="milFour phase4.3 fileView">Oral Defense Scheduling Form
+        <form action="/action_page.php" class="uploadForm">
+            <input type="file" id="myFile" name="filename">
+            <input type="submit">
+        </form>
+      </div>
+      <div class="milFour phase4.4 fileView">Pro-Quest - Dissertation
+        <form action="/action_page.php" class="uploadForm">
+            <input type="file" id="myFile" name="filename">
+            <input type="submit">
+        </form>
+      </div>
+      <button onclick="hideClass('milestoneDataText'); dropDown('milFour phase4.1');" 
+      title="NO FORM - upload pdf of email"
+      class="milFour milestoneDataText" id='phase4.1'>Apply for Graduation:
           <p>Completed 4/6/2020!</p>
       </button>
-      <button onclick="hideClass('milestoneDataText'); dropDown('milFour task4.2');" class="milFour milestoneDataText" id='task4.2'>Dissertation format review (No Form)(upload pdf of email):
+      <button onclick="hideClass('milestoneDataText'); dropDown('milFour phase4.2');" 
+      title="NO FORM - upload pdf of email"
+      class="milFour milestoneDataText" id='phase4.2'>Dissertation format review:
           <p></p>
       </button>
-      <button onclick="hideClass('milestoneDataText'); dropDown('milFour task4.3');" class="milFour milestoneDataText" id='task4.3'>Oral Defense Scheduling Form:
+      <button onclick="hideClass('milestoneDataText'); dropDown('milFour phase4.3');" 
+      title=""
+      class="milFour milestoneDataText" id='phase4.3'>Oral Defense Scheduling Form:
           <p></p>
       </button>
-      <button onclick="hideClass('milestoneDataText'); dropDown('milFour task4.4');" class="milFour milestoneDataText" id='task4.4'>Pro-Quest – Dissertation (No Form)(upload pdf of email):
+      <button onclick="hideClass('milestoneDataText'); dropDown('milFour phase4.4');" 
+      title="NO FORM - upload pdf of email"
+      class="milFour milestoneDataText" id='phase4.4'>Pro-Quest – Dissertation:
           <p></p>
       </button>
     </div>

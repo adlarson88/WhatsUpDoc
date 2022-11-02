@@ -1,3 +1,7 @@
+var userData = 'eml292'; //temporary userID
+var completeList;
+var userID;
+
 function dropDown(doc)
 {
     var target = document.getElementsByClassName(doc);
@@ -9,18 +13,22 @@ function dropDown(doc)
         target[index].style.display = "block";
 
       }
-      else if(doc.includes('task')){
+      else if(doc.includes('phase')){
 
         target[index].style.display = "block";
 
       }
     }
-    if (!doc.includes('task')) {
+    if (!doc.includes('phase')) {
       target = document.getElementById(doc);
 
       target.style.fontWeight = "bold";
       target.style.borderStyle = 'solid';
       target.style.borderWidth = '.4vw';
+      if (!(target.classList.contains('complete')))
+      {
+        target.style.borderColor = '#C3B8B2';
+      }
 
     } else {
       taskDoc = doc.split(" ");
@@ -29,6 +37,10 @@ function dropDown(doc)
       target.style.fontWeight = "bold"; 
       target.style.borderStyle = 'solid';
       target.style.borderWidth = '.4vw';
+      if (!(target.classList.contains('complete')))
+      {
+        target.style.borderColor = '#C3B8B2';
+      }
 
     }
 }
@@ -48,6 +60,8 @@ target = document.getElementsByClassName('fileView');
   for (index = 0; index < target.length; index++) {
     target[index].style.display = "none";
   }
+  pingDB(userID);
+  parseCompleteList();
 
   checkProgress('milOne');
   checkProgress('milTwo');
@@ -83,6 +97,7 @@ function checkProgress(doc)
   {
     target.style.backgroundColor = "#FAC01A";
     target.style.color = "#002454";
+    target.classList.add('complete');
   }
 }
 
@@ -94,10 +109,85 @@ function displayFile(doc)
   var index;
 }
 
-function upload(doc)
+function checkFile(doc)
 {
 
-  checkProgress(doc);
+}
+
+function parseCompleteList()
+{
+  phaseCheck('phase1.1');
+  phaseCheck('phase1.2');
+  phaseCheck('phase1.3');
+  phaseCheck('phase1.4');
+
+  
+  phaseCheck('phase2.1');
+  phaseCheck('phase2.2');
+  phaseCheck('phase2.3');
+  phaseCheck('phase2.4');
+  phaseCheck('phase2.5');
+  phaseCheck('phase2.6');
+  
+
+  phaseCheck('phase3.1');
+  phaseCheck('phase3.2');
+  phaseCheck('phase3.3');
+  phaseCheck('phase3.4');
+  phaseCheck('phase3.5');
+
+
+  phaseCheck('phase4.1');
+  phaseCheck('phase4.2');
+  phaseCheck('phase4.3');
+  phaseCheck('phase4.4');
+}
+
+function phaseCheck(elementID)
+{
+  var target = document.getElementById(elementID);
+  /* 
+  if( completeList.querySelector(elementID) && !(target.classList.contains('complete')) )
+  {
+    target.classList.add('complete');
+  }
+  */
+}
+
+async function pingDB(user)
+{
+  
+  //const downloadRequest = 'https://doctracker.org:8443/user/all';
+  const downloadRequest = 'https://doctracker.org:8443/user/'+user+'/getFiles';
+ 
+  const downloadOptions = {
+    headers: {'Content-Type' : 'text/plain'},
+  } ;
+
+  const request = new Request(downloadRequest, downloadOptions);
+
+  const response = await fetch(request);
+  
+  const cl = response;
+
+  console.log(cl);
+  
+
+  /*
+  fetch('https://doctracker.org:8443/user/all', {mode: 'no-cors'})
+    .then(response => response.text())
+    .then(text => console.log(text));
+    */
+}
+
+async function download(milestoneName)
+{
+  const downloadRequest = 'https://doctracker.org:8443/user/'+userID+'/upload/'+milestoneName;
+
+  const request = new Request(downloadRequest);
+
+  const response = await fetch(request);
+
 }
 
 function hideClass(doc)
@@ -113,6 +203,7 @@ function hideClass(doc)
       target[index].style.borderStyle = 'none';
       target[index].style.borderTopStyle = 'solid';
       target[index].style.borderWidth = '0.2vw';
+      target[index].style.borderColor = '#000000';
     }
   }
   else if(doc.includes('milestoneData')){
@@ -127,6 +218,7 @@ function hideClass(doc)
     for (index = 0; index < target.length; index++) {
       target[index].style.fontWeight = "normal";
       target[index].style.borderWidth = '0.2vw';
+      target[index].style.borderColor = '#000000';
     }
   }
   if(doc.includes('fileView')){
