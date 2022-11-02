@@ -5,13 +5,14 @@
   <head>
     <title>Login Page</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="scripts/admin.js"></script>
   </head> 
 
   <body onload="preparePage()">
 
     <div class="g_id_signout">
-      <a href="#" onclick="signOut();">Sign out</a>
+      <button class="signOutButton" onclick="signOut();">Sign-Out</button>
     </div>
   
     <div class="nauLetterLogo" style="text-align: center;">
@@ -21,6 +22,7 @@
     <div class="adminControlsTaskBar">
       <button onclick="openAdminStudentControlsWindow()" class="adminControlButton" id="adminStudentControlsButton">Add/Remove Students</button>
       <button onclick="openPhaseReviewWindow()" class="adminControlButton" id="phaseReviewControlsButton">Phase Review</button>
+      <button onclick="openStudentProgressWindow()" class="adminControlButton" id="studentProgressControlsButton">Student Progress Viewer</button>
     </div>
   
 
@@ -34,6 +36,14 @@
       <script src="https://c6idm1wud5.cloudtables.io/loader/ab64512e-59fa-11ed-8623-eb8f8a4c8424/table/bs4"
               data-apiKey="CFz90BJ187AEMpkI0qYjPy0n"
               data-clientId="911436566286-36r6uc7oavbrmqcmn7b2ijo3q34mn1gi.apps.googleusercontent.com"></script>
+    </div>
+
+    <div class="studentProgressWindow" id="studentProgressWindow">
+      <form class="studentSearch">
+        <input type="text" placeholder="Enter valid Student userID:" name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+      <iframe class= "embeddediframe" src="https://ceias.nau.edu/capstone/projects/CS/2022/WhatsUpDoc_S22/C&I_Doctoral_Tracker/home.html" title="Student Phase Viewer"></iframe>
     </div>
 
     <script src="https://accounts.google.com/gsi/client" async defer></script>

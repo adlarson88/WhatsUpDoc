@@ -1,7 +1,6 @@
 /* styles the select landing page on the index.html page */
 
 .nauLetterLogo {
-	margin-top: 2ch;
 }
 
 .loginWindow {
@@ -81,23 +80,25 @@
 }
 
 .g_id_signout {
-	display: flex;
+	display: inline;
 	flex-direction: column;
 	text-align: center;
 	align-content: space-evenly;
 	justify-content: space-evenly;
-	background-color: #007A33;
-	border-style: solid;
-	border-color: #002454;
-	border-width: 2px;
-	height: 5vh;
+	height: 10vh;
 	width: 5vw;
 	margin: auto;
-	margin-top: 2ch;
-	margin-left: 93%;
+	margin-top: 1ch;
+	margin-left: 90%;
 	max-height:10%;
-	max-width: 325px;
-	min-width: 5%;
+	max-width: 300px;
+	min-width: 8%;
+	min-height: 7%;
+}
+
+.signOutButton {
+	color: #ffffff;
+	background-color: #CF4527;
 }
 
 input[type=submit] {
@@ -110,6 +111,31 @@ input[type=submit] {
 	cursor: pointer;
 }
 
+/* Style the search field */
+form.studentSearch input[type=text] {
+	margin-top: 2ch;
+	padding: 10px;
+	font-size: 17px;
+	border: 1px solid grey;
+	align-content: center;
+	width: 30%;
+	background: #f1f1f1;
+  }
+
+/* Style the submit button */
+form.studentSearch button {
+	margin-top: 2ch;
+	float: center;
+	width: 20%;
+	padding: 10px;
+	background: #2196F3;
+	color: white;
+	font-size: 17px;
+	border: 1px solid grey;
+	border-left: none; /* Prevent double borders */
+	cursor: pointer;
+  }
+
 /* #### Styles the admin.html page #### */
 .adminControlsTaskBar {
 	display: flex;
@@ -119,8 +145,8 @@ input[type=submit] {
 	background-color: #002454;
 	border-style: solid;
 	border-color: #FAC01A;
-	width: 30vw;
-	height: 10vh;
+	width: 35vw;
+	height: 14vh;
 	left: 5vw;
 	top: 5vh;
 	margin: auto;
@@ -131,7 +157,10 @@ input[type=submit] {
 .adminControlButton {
 	background-color: #FAC01A;
 	color: #002454;
-	font-size: large;
+	font-size: 100%;
+	width: 25%;
+	text-align: center;
+	align-content: center;
 }
 
 .adminStudentControlsWindow {
@@ -174,6 +203,7 @@ input[type=submit] {
 
 .embeddediframe {
 	height: 100vh;
+	width: 100vw;
 }
 
 
