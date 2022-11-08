@@ -104,7 +104,7 @@ target = document.getElementsByClassName('fileView');
 function uploadEventListener(targetID)
 {
   var target = document.getElementById(targetID);
-  classes = target.classList;
+  var classes = target.classList;
   target.addEventListener('change', () => {
     uploadFile(classes.item(1), target.files[0])
   });
