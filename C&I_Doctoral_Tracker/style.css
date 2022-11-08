@@ -311,3 +311,8 @@ form {
 	margin : auto;
 	display: block;
 }
+
+.help {
+	width: 5%;
+	float: right;
+}
