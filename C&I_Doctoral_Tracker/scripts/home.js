@@ -130,14 +130,14 @@ function checkProgress(doc)
     {
       tasks[index].style.backgroundColor = "#FAC01A";
       tasks[index].style.color = "#002454";
-      tasks[index].style.borderColor = '#C3B8B2';
+      tasks[index].style.borderColor = '#000000';
     }
   }
   if( completed )
   {
     target.style.backgroundColor = "#FAC01A";
     target.style.color = "#002454";
-    target.style.borderColor = '#C3B8B2';
+    target.style.borderColor = '#000000';
     target.classList.add('complete');
   }
 }
