@@ -1,7 +1,5 @@
 /* styles the select landing page on the index.html page */
 
-.nauLetterLogo {
-}
 
 .loginWindow {
 	display: block;
@@ -299,6 +297,17 @@ form {
 	width: 75vw;
 	height: 85vh;
 	left: 20.5vw;
-	font-size: 1vw;
+	font-size: 2vw;
 	color: #ffffff;
+	text-align: center;
+}
+
+.fileUpload{
+	margin : auto;
+	display : block;
+}
+
+.fileDownload {
+	margin : auto;
+	display: block;
 }
