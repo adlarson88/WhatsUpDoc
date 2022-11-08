@@ -1,7 +1,6 @@
 var userData = 'eml292'; //temporary userID
 // userData = 'al762'; // adam test id
 var completeList;
-var userID;
 
 function dropDown(doc)
 {
@@ -66,22 +65,49 @@ target = document.getElementsByClassName('fileView');
   target = document.getElementsByClassName("fileUpload");
   var elementByID;
 
+  /*
   for (index = 0; index < target.length; index++){
     classes = target[index].classList;
     elementByID = document.getElementById(target[index].id);
     target[index].addEventListener('change', () => {
       uploadFile(classes.item(1), elementByID.files[0])
-    })
+    });
   }
+*/
+
+  uploadEventListener('file1_1');
+  uploadEventListener('file1_2');
+  uploadEventListener('file1_3');
+
+  uploadEventListener('file2_1');
+  uploadEventListener('file2_2');
+  uploadEventListener('file2_3');
+  uploadEventListener('file2_4');
+  uploadEventListener('file2_5');
+  uploadEventListener('file2_6');
+
+  uploadEventListener('file3_1');
+  uploadEventListener('file3_2');
+  uploadEventListener('file3_3');
+  uploadEventListener('file3_4');
+  uploadEventListener('file3_5');
+  
+  uploadEventListener('file4_1');
+  uploadEventListener('file4_2');
+  uploadEventListener('file4_3');
+  uploadEventListener('file4_4');
 
   pingDB();
-  parseCompleteList();
 
-  checkProgress('milOne');
-  checkProgress('milTwo');
-  checkProgress('milThree');
-  checkProgress('milFour');
+}
 
+function uploadEventListener(targetID)
+{
+  var target = document.getElementById(targetID);
+  classes = target.classList;
+  target.addEventListener('change', () => {
+    uploadFile(classes.item(1), target.files[0])
+  });
 }
 
 function checkProgress(doc)
@@ -89,8 +115,7 @@ function checkProgress(doc)
   var index;
   var target;
   var tasks;
-  var completed; 
-  completed = true;
+  var completed = true;
   target = document.getElementById(doc);
   tasks = document.getElementsByClassName(doc);
   for (var index = 0; index < tasks.length; index++) 
@@ -105,12 +130,14 @@ function checkProgress(doc)
     {
       tasks[index].style.backgroundColor = "#FAC01A";
       tasks[index].style.color = "#002454";
+      tasks[index].style.borderColor = '#C3B8B2';
     }
   }
   if( completed )
   {
     target.style.backgroundColor = "#FAC01A";
     target.style.color = "#002454";
+    target.style.borderColor = '#C3B8B2';
     target.classList.add('complete');
   }
 }
@@ -154,16 +181,25 @@ function parseCompleteList()
 function phaseCheck(elementID)
 {
   var target = document.getElementById(elementID);
-  //if( completeList.querySelector(elementID) && !(target.classList.contains('complete')) )
-  //{
-  // target.classList.add('complete');
-  // const newPre = document.createElement("embed");
+  var splitPhase = elementID.split("");
+  var len = splitPhase.length;
+  var phaseNum = splitPhase[len-3] + splitPhase[len-2] + splitPhase[len-1];
+  var fileID;
+  var index;
+  
+  for (index = 0; index < completeList.length; index++)
+  {
+    if( completeList[index].uploaded_as == elementID && !(target.classList.contains('complete')) )
+    {
+    target.classList.add('complete');
+    // const newPre = document.createElement("embed");
+    // newPre.setAttribute('src', url of file); will need fileID variable
+    // newPre.setAttribute('width, size)
+    // repeat all attributes needed
+    // target.appendChild(newPre);
 
-  // newPre.setAttribute('src', url of file);
-  // newPre.setAttribute('width, size)
-  // repeat
-  // target.appendChild(newPre);
-  //}
+    }
+  }
 }
 
 async function pingDB()
@@ -184,17 +220,31 @@ async function pingDB()
   completeList = await response.text();
 
   console.log(completeList);
+
+  completeList = JSON.parse(completeList);
+
   
+  parseCompleteList();
+  
+  checkProgress('milOne');
+  checkProgress('milTwo');
+  checkProgress('milThree');
+  checkProgress('milFour');
+
 }
 
-async function download(fileID)
+function download(filename)
 {
-  const downloadRequest = 'https://doctracker.org:8443/user/files/'+fileID;
-
-  const request = new Request(downloadRequest);
-
-  const response = await fetch(request);
-
+  var fileID;
+  var index;
+  for (index = 0; index < completeList.length; index++)
+  {
+    if(completeList[index].uploaded_as == filename)
+    {
+      fileID = completeList[index].uploadID;
+      window.open('https://doctracker.org:8443/user/files/'+fileID, '_blank');
+    }
+  }
 }
 
 async function uploadFile(phase, upFile)
