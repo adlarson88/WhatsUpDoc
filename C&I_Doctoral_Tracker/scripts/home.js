@@ -186,18 +186,32 @@ function phaseCheck(elementID)
   var phaseNum = splitPhase[len-3] + splitPhase[len-2] + splitPhase[len-1];
   var fileID;
   var index;
+  var search;
+  var fileURL;
+  var parent;
   
   for (index = 0; index < completeList.length; index++)
   {
     if( completeList[index].uploaded_as == elementID && !(target.classList.contains('complete')) )
     {
-    target.classList.add('complete');
-    // const newPre = document.createElement("embed");
-    // newPre.setAttribute('src', url of file); will need fileID variable
-    // newPre.setAttribute('width, size)
-    // repeat all attributes needed
-    // target.appendChild(newPre);
+      for (search = 0; search < completeList.length; search++)
+      {
+        if(completeList[search].uploaded_as == elementID)
+        {
+          fileID = completeList[search].uploadID;
+        }
+      }
+      fileURL = 'https://doctracker.org:8443/user/files/'+fileID+'.pdf';
+      target.classList.add('complete');
+      const newPre = document.createElement("embed");
+      newPre.setAttribute('src', fileURL); //will need fileID variable
+      newPre.setAttribute('width', '80%');
+      newPre.setAttribute('height', '80%');
+      newPre.setAttribute('class', 'previewer');
+      //repeat all attributes needed;
 
+      parent = document.getElementsByClassName(elementID + ' fileView');
+      parent[0].appendChild(newPre);
     }
   }
 }
