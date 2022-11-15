@@ -280,6 +280,7 @@ function download(filename)
     {
       fileID = completeList[index].uploadID;
       window.open('https://doctracker.org:8443/user/files/'+fileID, '_blank');
+      break;
     }
   }
 }
@@ -305,10 +306,49 @@ async function uploadFile(phase, upFile)
     );
   };
     
+
   upload(upFile);
 
   pingDB();
+  
+}
 
+function deleteFile(phase)
+{
+  var fileID;
+  var index;
+
+  for (index = 0; index < completeList.length; index++)
+  {
+    if(completeList[index].uploaded_as == phase)
+    {
+      fileID = completeList[index].uploadID;
+      break;
+    }
+  }
+
+  const uploadRequest = 'https://doctracker.org:8443/user/delete/'+fileID;
+
+  const remFile = () => {
+
+    fetch(uploadRequest, {
+      method: 'DELETE',
+    }).then(
+      response => response.text()
+    ).then(
+      success => console.log(success)
+    ).catch(
+      error => console.error(error)
+    );
+  };
+  
+  if (confirm("Are you sure you want to remove this file? A copy will be downloaded as a backup."))
+  {  
+    download(phase);
+    remFile();
+
+    pingDB();
+  }
 }
 
 function hideClass(doc)
