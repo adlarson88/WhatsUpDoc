@@ -63,17 +63,7 @@ target = document.getElementsByClassName('fileView');
   }
 
   target = document.getElementsByClassName("fileUpload");
-  var elementByID;
 
-  /*
-  for (index = 0; index < target.length; index++){
-    classes = target[index].classList;
-    elementByID = document.getElementById(target[index].id);
-    target[index].addEventListener('change', () => {
-      uploadFile(classes.item(1), elementByID.files[0])
-    });
-  }
-*/
 
   uploadEventListener('file1_1');
   uploadEventListener('file1_2');
@@ -178,7 +168,7 @@ function parseCompleteList()
   phaseCheck('phase4_4');
 }
 
-function phaseCheck(elementID)
+async function phaseCheck(elementID)
 {
   var target = document.getElementById(elementID);
   var splitPhase = elementID.split("");
@@ -187,7 +177,7 @@ function phaseCheck(elementID)
   var fileID;
   var index;
   var search;
-  var fileURL;
+  var blobData;
   var parent;
   
   for (index = 0; index < completeList.length; index++)
@@ -201,19 +191,52 @@ function phaseCheck(elementID)
           fileID = completeList[search].uploadID;
         }
       }
-      fileURL = 'https://doctracker.org:8443/user/files/'+fileID+'.pdf';
+      
       target.classList.add('complete');
-      const newPre = document.createElement("embed");
-      newPre.setAttribute('src', fileURL); //will need fileID variable
-      newPre.setAttribute('width', '80%');
-      newPre.setAttribute('height', '80%');
+      
+      blobData = await dbPreview('https://doctracker.org:8443/user/preview/'+fileID);
+      var newPre = document.createElement("object");
+      newPre.style.width = '80%';
+      newPre.style.height = '80%';
       newPre.setAttribute('class', 'previewer');
+      newPre.type = 'application/pdf';
+      newPre.data = 'data:application/pdf;base64,' + blobData;
+      newPre.filename = elementID; 
       //repeat all attributes needed;
 
       parent = document.getElementsByClassName(elementID + ' fileView');
       parent[0].appendChild(newPre);
     }
   }
+}
+
+async function dbPreview(fileURL)
+{
+  // fetch request with fileURL
+  const downloadOptions = {
+    
+    headers: {'Content-Type' : 'text/plain'},
+  } ;
+
+  const request = new Request(fileURL, downloadOptions);
+
+  const response = await fetch(request);
+
+  var bD = await response.text();
+
+  return bD;
+}
+
+function b64toBlob(b64Data, contentType='')
+{
+  var url = "data:"+contentType+";base64,"+b64Data;
+  var blob;
+
+  fetch(url)
+  .then(res => res.blob())
+  .then(blob)
+
+  return blob;
 }
 
 async function pingDB()
