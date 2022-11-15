@@ -63,17 +63,7 @@ target = document.getElementsByClassName('fileView');
   }
 
   target = document.getElementsByClassName("fileUpload");
-  var elementByID;
 
-  /*
-  for (index = 0; index < target.length; index++){
-    classes = target[index].classList;
-    elementByID = document.getElementById(target[index].id);
-    target[index].addEventListener('change', () => {
-      uploadFile(classes.item(1), elementByID.files[0])
-    });
-  }
-*/
 
   uploadEventListener('file1_1');
   uploadEventListener('file1_2');
@@ -104,7 +94,7 @@ target = document.getElementsByClassName('fileView');
 function uploadEventListener(targetID)
 {
   var target = document.getElementById(targetID);
-  classes = target.classList;
+  var classes = target.classList;
   target.addEventListener('change', () => {
     uploadFile(classes.item(1), target.files[0])
   });
@@ -178,7 +168,7 @@ function parseCompleteList()
   phaseCheck('phase4_4');
 }
 
-function phaseCheck(elementID)
+async function phaseCheck(elementID)
 {
   var target = document.getElementById(elementID);
   var splitPhase = elementID.split("");
@@ -186,20 +176,67 @@ function phaseCheck(elementID)
   var phaseNum = splitPhase[len-3] + splitPhase[len-2] + splitPhase[len-1];
   var fileID;
   var index;
+  var search;
+  var blobData;
+  var parent;
   
   for (index = 0; index < completeList.length; index++)
   {
     if( completeList[index].uploaded_as == elementID && !(target.classList.contains('complete')) )
     {
-    target.classList.add('complete');
-    // const newPre = document.createElement("embed");
-    // newPre.setAttribute('src', url of file); will need fileID variable
-    // newPre.setAttribute('width, size)
-    // repeat all attributes needed
-    // target.appendChild(newPre);
+      for (search = 0; search < completeList.length; search++)
+      {
+        if(completeList[search].uploaded_as == elementID)
+        {
+          fileID = completeList[search].uploadID;
+        }
+      }
+      
+      target.classList.add('complete');
+      
+      blobData = await dbPreview('https://doctracker.org:8443/user/preview/'+fileID);
+      var newPre = document.createElement("object");
+      newPre.style.width = '80%';
+      newPre.style.height = '80%';
+      newPre.setAttribute('class', 'previewer');
+      newPre.type = 'application/pdf';
+      newPre.data = 'data:application/pdf;base64,' + blobData;
+      newPre.filename = elementID; 
+      //repeat all attributes needed;
 
+      parent = document.getElementsByClassName(elementID + ' fileView');
+      parent[0].appendChild(newPre);
     }
   }
+}
+
+async function dbPreview(fileURL)
+{
+  // fetch request with fileURL
+  const downloadOptions = {
+    
+    headers: {'Content-Type' : 'text/plain'},
+  } ;
+
+  const request = new Request(fileURL, downloadOptions);
+
+  const response = await fetch(request);
+
+  var bD = await response.text();
+
+  return bD;
+}
+
+function b64toBlob(b64Data, contentType='')
+{
+  var url = "data:"+contentType+";base64,"+b64Data;
+  var blob;
+
+  fetch(url)
+  .then(res => res.blob())
+  .then(blob)
+
+  return blob;
 }
 
 async function pingDB()
@@ -243,6 +280,7 @@ function download(filename)
     {
       fileID = completeList[index].uploadID;
       window.open('https://doctracker.org:8443/user/files/'+fileID, '_blank');
+      break;
     }
   }
 }
@@ -268,10 +306,49 @@ async function uploadFile(phase, upFile)
     );
   };
     
+
   upload(upFile);
 
   pingDB();
+  
+}
 
+function deleteFile(phase)
+{
+  var fileID;
+  var index;
+
+  for (index = 0; index < completeList.length; index++)
+  {
+    if(completeList[index].uploaded_as == phase)
+    {
+      fileID = completeList[index].uploadID;
+      break;
+    }
+  }
+
+  const uploadRequest = 'https://doctracker.org:8443/user/delete/'+fileID;
+
+  const remFile = () => {
+
+    fetch(uploadRequest, {
+      method: 'DELETE',
+    }).then(
+      response => response.text()
+    ).then(
+      success => console.log(success)
+    ).catch(
+      error => console.error(error)
+    );
+  };
+  
+  if (confirm("Are you sure you want to remove this file? A copy will be downloaded as a backup."))
+  {  
+    download(phase);
+    remFile();
+
+    pingDB();
+  }
 }
 
 function hideClass(doc)
