@@ -3,8 +3,9 @@
 <html>
 
   <head>
-    <title>Login Page</title>
+    <title>Admin Page</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.13.1/af-2.5.1/b-2.3.3/b-colvis-2.3.3/b-html5-2.3.3/b-print-2.3.3/cr-1.6.1/date-1.2.0/fc-4.2.1/fh-3.3.1/kt-2.8.0/r-2.4.0/rr-1.3.1/sc-2.0.7/sb-1.4.0/sp-2.1.0/sl-1.5.0/sr-1.2.0/datatables.min.css"/>
     <link rel="stylesheet" href="style.css">
    
@@ -34,22 +35,35 @@
   
 
     <div class="adminStudentControlsWindow" id="adminStudentControlsWindow">
-      <table id="adminStudentControlsTable" class="table table-striped table-bordered" style="width:100%">
+      <table id="adminStudentControlsTable" class="table table-striped table-bordered border-dark" style="width:100%">
         <thead>
             <tr>
-                <th>userID</th>
-                <th>Last Name</th>
-                <th>First Name</th>
-                <th>Advisor Name (LastName, FirstName)</th>
-                <th>Term Activation</th>
-                <th>Admin Status</th>
+                <th class="table-primary">userID</th>
+                <th class="table-success">Last Name</th>
+                <th class="table-success">First Name</th>
+                <th class="table-info">Advisor Name (LastName, FirstName)</th>
+                <th class="table-warning">Term Activation</th>
+                <th class="table-danger">Admin Status</th>
             </tr>
         </thead>
       </table>
     </div>
 
     <div class="adminPhaseReviewWindow" id="adminPhaseReviewWindow">
-
+      <table id="phaseReviewTable" class="table table-striped table-bordered border-dark" style="width:100%">
+        <thead>
+            <tr>
+                <th class="table-primary">userID:</th>
+                <th class="table-primary">Last Name:</th>
+                <th class="table-primary">First Name:</th>
+                <th class="table-primary">Term Activation:</th>
+                <th class="table-success">Phase 1 Milestones (0/3):</th>
+                <th class="table-info">Phase 2 Milestones (0/5):</th>
+                <th class="table-warning">Phase 3 Milestones (0/5):</th>
+                <th class="table-danger">Phase 4 Milestones (0/4):</th>
+            </tr>
+        </thead>
+      </table>
     </div>
 
     <div class="studentProgressWindow" id="studentProgressWindow">
