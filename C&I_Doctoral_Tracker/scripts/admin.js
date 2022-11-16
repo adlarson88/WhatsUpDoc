@@ -1,6 +1,8 @@
 // Editor/DataTables stuff
 var userIDdata = 'eml292'; // temp userID
-var completeList;
+var allUsers, phaseReviewData;
+
+
 
 // page onload function
 async function preparePage() {
@@ -19,24 +21,19 @@ async function preparePage() {
         headers: {'Content-Type' : 'application/json'},
     } ;
     
-    const request = new Request(downloadRequest, downloadOptions);
+    // reqeust to populate student table
+    const studentTableRequest = new Request(downloadRequest, downloadOptions);
 
-    const response = await fetch(request);
+    const studentTableResponse = await fetch(studentTableRequest);
 
-    completeList = await response.text();
-
-    console.log(completeList);
-
-    completeList = JSON.parse(completeList);
-    
+    allUsers = await studentTableResponse.text();
+    console.log(allUsers);
+    allUsers = JSON.parse(allUsers);
 
     $(document).ready( function () {
         var studentTable = $('#adminStudentControlsTable').DataTable( {
-            data: completeList,
+            data: allUsers,
             dom: 'Bfrtip',
-            buttons: [
-                'copy', 'excel', 'pdf'
-            ],
             columns: [
                 { data: 'userID' },
                 { data: 'last_name' },
@@ -44,12 +41,44 @@ async function preparePage() {
                 { data: 'advisor' },
                 { data: 'term_activation' },
                 { data: 'admin' },
-            ]
+            ],
+            buttons: [
+                {text: 'New Student'},
+                'spacer',
+                {text: 'Edit Student'},
+                'spacer',
+                {text: 'Delete Student'},
+                'spacer',
+                'spacer', 'spacer', 'spacer',
+                'copy', 'spacer', 'csv', 'spacer', 'excel', 'spacer', 'pdf', 'spacer', 'spacer', 'spacer', 'spacer', 'spacer', 'spacer', 'spacer', 'spacer', 'spacer', 'spacer', 'spacer', 'spacer', 
+            ],
         } );
 
         studentTable.buttons().container()
         .appendTo( $('.col-sm-6:eq(0)', studentTable.table().container() ) );
     } );
+
+    // reqeust to populate phase review table
+    const phaseReviewTableRequest = new Request(downloadRequest, downloadOptions);
+
+    const phaseReviewTableResponse = await fetch(phaseReviewTableRequest);
+
+    phaseReviewData = await phaseReviewTableResponse.text();
+    phaseReviewData = JSON.parse(phaseReviewData);
+
+    $(document).ready( function () {
+        var phaseReviewTable = $('#phaseReviewTable').DataTable( {
+            data: phaseReviewData,
+            columns: [
+                { data: 'userID' },
+                { data: 'last_name' },
+                { data: 'first_name' },
+                { data: 'term_activation' },
+            ]
+        } );
+    } );
+
+    
 
 }
 
