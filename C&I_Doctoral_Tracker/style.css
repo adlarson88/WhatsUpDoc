@@ -77,6 +77,52 @@
 	min-width: 325px;
 }
 
+.createUserForm {
+	display: block;
+}
+
+.editUserForm {
+	display: block;
+}
+
+.modal {
+	display: none; /* Hidden by default */
+  	position: fixed; /* Stay in place */
+  	z-index: 1; /* Sit on top */
+  	padding-top: 100px; /* Location of the box */
+  	left: 0;
+  	top: 0;
+  	width: 100%; /* Full width */
+  	height: 100%; /* Full height */
+  	overflow: auto; /* Enable scroll if needed */
+  	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+.createUserModalContent {
+	text-align: left;
+	color:#ffffff;
+	align-content: space-evenly;
+	justify-content: space-evenly;
+	background-color: #002454;
+  	margin: auto;
+ 	padding: 7px;
+  	border: 1px solid #FAC01A;
+  	width: 30%; /* Could be more or less, depending on screen size */
+	height: 50%;
+	min-width: 300px;
+	min-height: 475px;
+}
+
+.headerWrapper {
+	text-align: center;
+	background-color: #FAC01A;
+	color:#000000
+}
+
+.submitFormHolder {
+	text-align: center;
+}
+
 .g_id_signout {
 	display: inline;
 	flex-direction: column;
@@ -144,18 +190,21 @@ form.studentSearch button {
 	border-style: solid;
 	border-color: #FAC01A;
 	width: 35vw;
-	height: 14vh;
+	height: 13vh;
 	left: 5vw;
 	top: 5vh;
 	margin: auto;
 	min-width: 30vw;
 	min-height: 10vh;
+	max-width: 35vw;
+	max-height: 100px;
 }
+
 
 .adminControlButton {
 	background-color: #FAC01A;
 	color: #002454;
-	font-size: 100%;
+	font-size: 0.95em;
 	width: 25%;
 	text-align: center;
 	align-content: center;
@@ -167,11 +216,39 @@ form.studentSearch button {
 	text-align: center;
 	border-style: solid;
 	border-color: #007A33;
-	width: 75%;
-	margin-top: 5ch;
+	width: auto;
+	max-width: 75%;
+	height: auto;
+	margin-top: 3ch;
 	margin-left: auto;
 	margin-right: auto;
-	min-width: auto;
+	min-width: 60%;
+}
+
+#divBeforeStudentTable {
+	margin: auto;
+	text-align: center;
+	justify-content: space-evenly;
+	background-color: #F68300;
+	border-style: solid;
+	border-color: #007A33;	
+	margin-bottom: 2vh;
+	width: auto;
+	height: 15%;
+	padding: 1%;
+}
+
+#divBeforePhaseReviewTable {
+	margin: auto;
+	text-align: center;
+	justify-content: space-evenly;
+	background-color: #41B6E6;
+	border-style: solid;
+	border-color: #007A33;	
+	margin-bottom: 2vh;
+	width: auto;
+	height: 15%;
+	padding: 1%;
 }
 
 .adminPhaseReviewWindow {
@@ -180,11 +257,13 @@ form.studentSearch button {
 	text-align: center;
 	border-style: solid;
 	border-color: #F68300;
-	width: 82%;
-	margin-top: 5ch;
+	width: auto;
+	max-width: 75%;
+	height: auto;
+	margin-top: 3ch;
 	margin-left: auto;
 	margin-right: auto;
-	min-width: auto;
+	min-width: 60%;
 }
 
 
