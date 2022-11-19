@@ -2,6 +2,9 @@
 var selectedUserToEdit;
 var allUsers, phaseReviewData;
 
+var allModals = document.getElementsByClassName("modal");
+
+
 // page onload function
 async function preparePage() {
 
@@ -64,6 +67,7 @@ async function preparePage() {
                     setSelectedUserToEdit(selectedUserToEdit.userID);
                     var editUserModal = document.getElementById("editUserModal");
                     editUserModal.style.display = "block";
+
                 }},
                 'spacer',
                 {text: 'Delete User',
@@ -149,7 +153,6 @@ async function submitEditUserForm() {
 
     const localSelectedUser = getSelectedUserToEdit();
 
-    var editUserID = document.getElementById('editUserID');
     var editFirstName = document.getElementById('editFirstName');
     var editLastName = document.getElementById('editLastName');
     var editAdvisor = document.getElementById('editAdvisor');
@@ -158,10 +161,9 @@ async function submitEditUserForm() {
     var editAdminStatus = document.getElementById('editAdminStatus');
     
 
-    var editedDataArray = {"userID":editUserID.value, "first_name":editFirstName.value, 
-                         "last_name":editLastName.value, "admin":editAdminStatus.value,
-                         "advisor":editAdvisor.value, "enrollment_status":editEnrollmentStatus.value,
-                         "term_activation":editTermActivation.value 
+    var editedDataArray = {"first_name":editFirstName.value, "last_name":editLastName.value, 
+                           "admin":editAdminStatus.value, "advisor":editAdvisor.value, 
+                           "enrollment_status":editEnrollmentStatus.value, "term_activation":editTermActivation.value 
                         };
     
     let jsonEditedData = JSON.stringify(editedDataArray);
@@ -262,3 +264,8 @@ function signOut() {
     window.location.href = "https://ceias.nau.edu/capstone/projects/CS/2022/WhatsUpDoc_S22/C&I_Doctoral_Tracker/index.html?";
   }
 
+const closeModal = function () {
+    allModals.style.display = "none";
+  };
+
+allModals.addEventListener("click", closeModal);
