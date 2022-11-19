@@ -107,8 +107,10 @@
   	margin: auto;
  	padding: 7px;
   	border: 1px solid #FAC01A;
-  	width: 33%; /* Could be more or less, depending on screen size */
-	height: 100%;
+  	width: 30%; /* Could be more or less, depending on screen size */
+	height: 50%;
+	min-width: 300px;
+	min-height: 475px;
 }
 
 .headerWrapper {
