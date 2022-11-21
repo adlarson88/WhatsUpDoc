@@ -1,72 +1,261 @@
+// Editor/DataTables stuff
+var selectedUserToEdit;
+var allUsers, phaseReviewData;
+
+var allModals = document.getElementsByClassName("modal");
+
+
 // page onload function
-function preparePage() {
+async function preparePage() {
 
-    var tableClicked = document.getElementById("adminStudentControlsWindow");
-    var tableUnclicked = document.getElementById("adminPhaseReviewWindow");
-    var embeddedWindowUnclicked = document.getElementById("studentProgressWindow");
+    var studentTable = document.getElementById("adminStudentControlsWindow");
+    var phaseReviewTable = document.getElementById("adminPhaseReviewWindow");
+    var embeddedWindow = document.getElementById("studentProgressWindow");
 
-    tableClicked.style.display = "block";
-    tableUnclicked.style.display = "none";
-    embeddedWindowUnclicked.style.display = "none";
+    studentTable.style.display = "block";
+    phaseReviewTable.style.display = "none";
+    embeddedWindow.style.display = "none";
+    
+
+    const downloadRequest = 'https://doctracker.org:8443/user/all';
+    const downloadOptions = {
+    
+        headers: {'Content-Type' : 'application/json'},
+    } ;
+    
+    // reqeust to populate student table
+    const studentTableRequest = new Request(downloadRequest, downloadOptions);
+
+    const studentTableResponse = await fetch(studentTableRequest);
+
+    allUsers = await studentTableResponse.text();
+
+    
+    // console.log(allUsers);
+    allUsers = JSON.parse(allUsers);
+
+    // instantiate DataTables
+    $(document).ready( function () {
+        var studentTable = $('#adminStudentControlsTable').DataTable( {
+            data: allUsers,
+            autoWidth: true,
+            select: 'single',
+            paging: true,
+            scrollY: 500,
+            scrollCollapse: true,
+            lengthChange: true,
+            columns: [
+                { data: 'userID' },
+                { data: 'last_name' },
+                { data: 'first_name' },
+                { data: 'advisor' },
+                { data: 'term_activation' },
+                { data: 'enrollment_status'},
+                { data: 'admin' },
+            ],
+            buttons: [
+                {text: 'New User',
+                 action: function ( e, dt, node, config ) {
+                    var createUserModal = document.getElementById("createUserModal");
+                    createUserModal.style.display = "block";
+                 }},
+                'spacer',
+                {text: 'Edit User',
+                 extend: 'selected',
+                 action: function( e, dt, node, config ) {
+                    var selectedUserToEdit = dt.row( { selected: true } ).data();
+                    setSelectedUserToEdit(selectedUserToEdit.userID);
+                    var editUserModal = document.getElementById("editUserModal");
+                    editUserModal.style.display = "block";
+
+                }},
+                'spacer',
+                {text: 'Delete User',
+                 extend: 'selected',
+                 action: function ( e, dt, node, config ) {
+                    var selectedUserToDelete = dt.row( { selected: true } ).data();
+                    deleteSelectedUser(selectedUserToDelete.userID);
+                }}, 'spacer',
+                {text: 'Refresh Table',
+                action: function ( e, dt, node, config ) {
+                    location.reload();
+                }},
+                'spacer',
+                'spacer', 'spacer', 'spacer',
+                'copy', 'spacer', 'csv', 'spacer', 'excel', 'spacer', 'pdf',
+            ],
+        } );
+
+        studentTable.buttons().container()
+        .appendTo( "#divBeforeStudentTable" );
+    } );
+
+    // reqeust to populate phase review table
+    const phaseReviewTableRequest = new Request(downloadRequest, downloadOptions);
+
+    const phaseReviewTableResponse = await fetch(phaseReviewTableRequest);
+
+    phaseReviewData = await phaseReviewTableResponse.text();
+    phaseReviewData = JSON.parse(phaseReviewData);
+
+    $(document).ready( function () {
+        var phaseReviewTable = $('#phaseReviewTable').DataTable( {
+            data: phaseReviewData,
+            autoWidth: true,
+            scrollCollapse: true,
+            lengthChange: true,
+            columns: [
+                { data: 'userID' },
+                { data: 'last_name' },
+                { data: 'first_name' },
+                { data: 'term_activation' },
+            ],
+            buttons: ['copy', 'spacer', 'csv', 'spacer', 'excel', 'spacer', 'pdf']
+        } );
+        
+        phaseReviewTable.buttons().container()
+        .appendTo( "#divBeforePhaseReviewTable" );
+    } );
 }
 
+async function submitNewUserForm() {
 
+    var formUserID = document.getElementById('formUserID');
+    var formFirstName = document.getElementById('formFirstName');
+    var formLastName = document.getElementById('formLastName');
+    var formAdvisor = document.getElementById('formAdvisor');
+    var formTermActivation = document.getElementById('formTerm');
+    var formEnrollmentStatus = document.getElementById('formEnrollmentStatus');
+    var formAdminStatus = document.getElementById('formAdminStatus');
+    
+    var formDataArray = {"userID":formUserID.value, "first_name":formFirstName.value, 
+                         "last_name":formLastName.value, "admin":formAdminStatus.value,
+                         "advisor":formAdvisor.value, "enrollment_status":formEnrollmentStatus.value,
+                         "term_activation":formTermActivation.value 
+                        };
+    
+    let jsonFormData = JSON.stringify(formDataArray);
 
+    const createUserRequestURL = 'https://doctracker.org:8443/user/create';
+
+    fetch(createUserRequestURL, {
+        method: 'POST',
+        headers: {
+            'Accept':'application/json','Content-type': 'application/json'
+        },
+        body: jsonFormData
+      }).then(response => response.json()).then(json => console.log(json));
+    
+    return true;
+}
+
+async function submitEditUserForm() {
+
+    const localSelectedUser = getSelectedUserToEdit();
+
+    var editFirstName = document.getElementById('editFirstName');
+    var editLastName = document.getElementById('editLastName');
+    var editAdvisor = document.getElementById('editAdvisor');
+    var editTermActivation = document.getElementById('editTerm');
+    var editEnrollmentStatus = document.getElementById('editEnrollmentStatus');
+    var editAdminStatus = document.getElementById('editAdminStatus');
+    
+
+    var editedDataArray = {"first_name":editFirstName.value, "last_name":editLastName.value, 
+                           "admin":editAdminStatus.value, "advisor":editAdvisor.value, 
+                           "enrollment_status":editEnrollmentStatus.value, "term_activation":editTermActivation.value 
+                        };
+    
+    let jsonEditedData = JSON.stringify(editedDataArray);
+
+    const editUserRequestURL = 'https://doctracker.org:8443/user/'+localSelectedUser+'/update';
+
+    fetch(editUserRequestURL, {
+        method: 'PUT',
+        headers: {
+            'Accept':'application/json','Content-type': 'application/json'
+        },
+        body: jsonEditedData
+      }).then(response => response.json()).then(json => console.log(json));
+    
+    return true;
+}
+
+async function deleteSelectedUser(selectedUser) {
+    const deleteUserRequestURL = 'https://doctracker.org:8443/user/'+selectedUser+'/deleteStudent';
+
+    fetch(deleteUserRequestURL, {
+        method: 'DELETE',
+      }).then(response => response.json()).then(json => console.log(json));
+    return true;
+}
 
 // Function that opens the admin student control window upon navigation button click
 function openAdminStudentControlsWindow() {
-    
-    var tableClicked = document.getElementById("adminStudentControlsWindow");
-    var tableUnclicked = document.getElementById("adminPhaseReviewWindow");
-    var embeddedWindowUnclicked = document.getElementById("studentProgressWindow");
 
-    if (tableClicked.style.display === "none" && tableUnclicked.style.display === "block" && embeddedWindowUnclicked.style.display === "none")
+    var studentTable = document.getElementById("adminStudentControlsWindow");
+    var phaseReviewTable = document.getElementById("adminPhaseReviewWindow");
+    var embeddedWindow = document.getElementById("studentProgressWindow");
+    // if phase Review Table tab is open, close it and open the add/remove student window
+    if (studentTable.style.display === "none" && phaseReviewTable.style.display === "block" && embeddedWindow.style.display === "none")
         {
-            tableClicked.style.display = "block";
-            tableUnclicked.style.display = "none";
+            phaseReviewTable.style.display = "none";
+            studentTable.style.display = "block";
         }
-    else if (tableClicked.style.display === "none" && tableUnclicked.style.display === "none" && embeddedWindowUnclicked.style.display === "block")
+    // if the embeddedWindow tab is open, close it and open the add/remove student window
+    else if (studentTable.style.display === "none" && phaseReviewTable.style.display === "none" && embeddedWindow.style.display === "block")
         {
-            tableClicked.style.display = "block";
-            embeddedWindowUnclicked.style.display = "none";
+            embeddedWindow.style.display = "none";
+            studentTable.style.display = "block";
         }
 }
 
   // Function that opens the admin phase review window upon navigation button click
 function openPhaseReviewWindow() {
     
-    var tableClicked = document.getElementById("adminPhaseReviewWindow");
-    var tableUnclicked = document.getElementById("adminStudentControlsWindow");
-    var embeddedWindowUnclicked = document.getElementById("studentProgressWindow");
-
-    if (tableClicked.style.display === "none" && tableUnclicked.style.display === "block" && embeddedWindowUnclicked.style.display === "none")
+    var studentTable = document.getElementById("adminStudentControlsWindow");
+    var phaseReviewTable = document.getElementById("adminPhaseReviewWindow");
+    var embeddedWindow = document.getElementById("studentProgressWindow");
+    // if student table tab is open, close it and open the phase review table
+    if (phaseReviewTable.style.display === "none" && studentTable.style.display === "block" && embeddedWindow.style.display === "none")
         {
-            tableClicked.style.display = "block";
-            tableUnclicked.style.display = "none";
+            studentTable.style.display = "none";
+            phaseReviewTable.style.display = "block";
         }
-    else if (tableClicked.style.display === "none" && tableUnclicked.style.display === "none" && embeddedWindowUnclicked.style.display === "block")
+    else if (phaseReviewTable.style.display === "none" && studentTable.style.display === "none" && embeddedWindow.style.display === "block")
         {
-            tableClicked.style.display = "block";
-            embeddedWindowUnclicked.style.display = "none";
+            embeddedWindow.style.display = "none";
+            phaseReviewTable.style.display = "block";
         }
 }
 
 // Function that opens the student progress viewer window upon navigation button click
 function openStudentProgressWindow() {
-    var embeddedWindowClicked = document.getElementById("studentProgressWindow");
-    var tableOneUnclicked = document.getElementById("adminStudentControlsWindow");
-    var tableTwoUnclicked = document.getElementById("adminPhaseReviewWindow");
 
-    if (embeddedWindowClicked.style.display === "none" && tableOneUnclicked.style.display === "block" && tableTwoUnclicked.style.display === "none")
+    var studentTable = document.getElementById("adminStudentControlsWindow");
+    var phaseReviewTable = document.getElementById("adminPhaseReviewWindow");
+    var embeddedWindow = document.getElementById("studentProgressWindow");
+    // if student table tab is open, close it and open the embeddedWindow view
+    if (embeddedWindow.style.display === "none" && studentTable.style.display === "block" && phaseReviewTable.style.display === "none")
         {
-            embeddedWindowClicked.style.display = "block";
-            tableOneUnclicked.style.display = "none";
+            studentTable.style.display = "none";
+            embeddedWindow.style.display = "block";
         }
-    else if (embeddedWindowClicked.style.display === "none" && tableOneUnclicked.style.display === "none" && tableTwoUnclicked.style.display === "block")
+    // if phase review tab is open, close it and open the embeddedWindow view
+    else if (embeddedWindow.style.display === "none" && studentTable.style.display === "none" && phaseReviewTable.style.display === "block")
         {
-            embeddedWindowClicked.style.display = "block";
-            tableTwoUnclicked.style.display = "none";
+            phaseReviewTable.style.display = "none";
+            embeddedWindow.style.display = "block";
         }
+}
+
+function setSelectedUserToEdit(selectedUserToReplace) {
+    selectedUserToEdit = selectedUserToReplace;
+    return true;
+}
+
+function getSelectedUserToEdit() {
+    return selectedUserToEdit;
 }
 
 // configure google sign-out button
@@ -75,3 +264,8 @@ function signOut() {
     window.location.href = "https://ceias.nau.edu/capstone/projects/CS/2022/WhatsUpDoc_S22/C&I_Doctoral_Tracker/index.html?";
   }
 
+const closeModal = function () {
+    allModals.style.display = "none";
+  };
+
+allModals.addEventListener("click", closeModal);
