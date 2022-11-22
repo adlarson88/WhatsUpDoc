@@ -8,7 +8,7 @@
   </head>
 
   <body onload="prepare(); dropDown('milOne'); dropDown('milOne phase1_1');" style="background-color: #C3B8B2;">
-
+    <button class="refreshButton" onclick="pingDB()"><img class="refreshIMG" src="images/circleArrow.png"></button>
     <div class="progressBar">
         <button onclick="hideClass('milestone'); dropDown('milOne'); 
             hideClass('milestoneDataText'); dropDown('milOne phase1_1');" class="milestone" id="milOne">Phase 1: Coursework</button>
@@ -26,31 +26,34 @@
             Initial Program of Study
             <input class="fileUpload phase1_1" type="file" id="file1_1" name="filename">
             <button class="fileDownload phase1_1" id="download1_1" onclick="download('phase1_1')">Download</button>
+            <button class="fileDelete phase1_1" id="delete1_1" onclick="deleteFile('phase1_1')">Delete</button>
         </div>
         <div class="milOne phase1_2 fileView">
             Residency Plan Form
             <input class="fileUpload phase1_2" type="file" id="file1_2" name="filename">
             <button class="fileDownload phase1_2" id="download1_2" onclick="download('phase1_2')">Download</button>
+            <button class="fileDelete phase1_2" id="delete1_2" onclick="deleteFile('phase1_2')">Delete</button>
         </div>
         <div class="milOne phase1_3 fileView">
             Student Self-Evaluation 1
             <input class="fileUpload phase1_3" type="file" id="file1_3" name="filename">
             <button class="fileDownload phase1_3" id="download1_3" onclick="download('phase1_3')">Download</button>
+            <button class="fileDelete phase1_3" id="delete1_3" onclick="deleteFile('phase1_3')">Delete</button>
         </div>
         <button onclick="hideClass('milestoneDataText'); dropDown('milOne phase1_1');"
         class="milOne milestoneDataText" id='phase1_1'>Initial Program of Study:
-            <p>Completed 1/6/2020!</p>
+            <p class="date phase1_1"></p>
             <img class="help" title="This is where your courses are listed out and when you are taking them" src="images/qmark.png">
         </button>
         <button onclick="hideClass('milestoneDataText'); dropDown('milOne phase1_2');"
         class="milOne milestoneDataText" id='phase1_2'>Residency Plan Form:
-            <p></p>
+            <p class="date phase1_2"></p>
             <img class="help" title="This is where you list your professional development of 5 hours" src="images/qmark.png">
         </button>
         <button onclick="hideClass('milestoneDataText'); dropDown('milOne phase1_3');" 
         class="milOne milestoneDataText" id='phase1_3'>
         Student Self-Evaluation 1:
-            <p></p>
+            <p class="date phase1_3"></p>
             <img class="help" title="Complete this every year and discuss with your advisor"src="images/qmark.png">
         </button>
     </div>
@@ -89,32 +92,32 @@
       </div>
       <button onclick="hideClass('milestoneDataText'); dropDown('milTwo phase2_1');"
       class="milTwo milestoneDataText" id='phase2_1'>Qualifying Research Completion form:
-          <p>Completed 2/6/2020!</p>
+          <p class="date phase2_1">Completed 2/6/2020!</p>
           <img class="help" title="This is completed when you have finished your QRP" src="images/qmark.png">
       </button>
       <button onclick="hideClass('milestoneDataText'); dropDown('milTwo phase2_2');" 
       class="milTwo milestoneDataText" id='phase2_2'>Comprehensive Exam Scheduling Form:
-          <p></p>
+          <p class="date phase2_2"></p>
           <img class="help" title="This is completed with your comp exam chair." src="images/qmark.png">
       </button>
       <button onclick="hideClass('milestoneDataText'); dropDown('milTwo phase2_3');" 
       class="milTwo milestoneDataText" id='phase2_3'>Comprehensive Exam Results Form:
-          <p></p>
+          <p class="date phase2_3"></p>
           <img class="help" title="This is completed with your comp exam chair" src="images/qmark.png">
       </button>
       <button onclick="hideClass('milestoneDataText'); dropDown('milTwo phase2_4');" 
       class="milTwo milestoneDataText" id='phase2_4'>Recommendation of Dissertation Committee Form:
-          <p></p>
+          <p class="date phase2_4"></p>
           <img class="help" title="Your chair will complete it and give you a copy to upload" src="images/qmark.png">
       </button>
       <button onclick="hideClass('milestoneDataText'); dropDown('milTwo phase2_5');" 
       class="milTwo milestoneDataText" id='phase2_5'>Graduate college letter confirming dissertation committee:
-          <p></p>
+          <p class="date phase2_5"></p>
           <img class="help" title="Upload this as confirmation that Grad college has your committee on file" src="images/qmark.png">
       </button>
       <button onclick="hideClass('milestoneDataText'); dropDown('milTwo phase2_6');" 
       class="milTwo milestoneDataText" id='phase2_6'>Student Self-Evaluation 2 :
-        <p></p>
+        <p class="date phase2_6"></p>
         <img class="help" title="Complete this every year and discuss with the advisor" src="images/qmark.png">
       </button>
     </div>
@@ -147,27 +150,27 @@
       </div>
       <button onclick="hideClass('milestoneDataText'); dropDown('milThree phase3_1');" 
       class="milThree milestoneDataText" id='phase3_1'>Prospectus Defense Scheduling Form:
-          <p>Completed 3/6/2020!</p>
+          <p class="date phase3_1"></p>
           <img class="help" title="Complete this with your dissertation chair" src="images/qmark.png">
       </button>
       <button onclick="hideClass('milestoneDataText'); dropDown('milThree phase3_2');" 
       class="milThree milestoneDataText" id='phase3_2'>Prospectus Title Page With Signatures:
-          <p></p>
+          <p class="date phase3_2"></p>
           <img class="help" title="Upload a copy of the signed page to verify you passed" src="images/qmark.png">
       </button>
       <button onclick="hideClass('milestoneDataText'); dropDown('milThree phase3_3');" 
       class="milThree milestoneDataText" id='phase3_3'>Final Signed Program of Study:
-          <p></p>
+          <p class="date phase3_3"></p>
           <img class="help" title="This is a signed and complete program of study which should be uploaded" src="images/qmark.png">
       </button>
       <button onclick="hideClass('milestoneDataText'); dropDown('milThree phase3_4');" 
       class="milThree milestoneDataText" id='phase3_4'>Application For Candidacy Form:
-          <p></p>
+          <p class="date phase3_4"></p>
           <img class="help" title="This form is completed with your advisor and will be a package given to the admin" src="images/qmark.png">
       </button>
       <button onclick="hideClass('milestoneDataText'); dropDown('milThree phase3_5');" 
       class="milThree milestoneDataText" id='phase3_5'>Student Self-Evaluation 3:
-          <p></p>
+          <p class="date phase3_5"></p>
           <img class="help" title="Complete this every year and discuss with the advisor" src="images/qmark.png">
       </button>
     </div>
@@ -195,22 +198,22 @@
       </div>
       <button onclick="hideClass('milestoneDataText'); dropDown('milFour phase4_1');" 
       class="milFour milestoneDataText" id='phase4_1'>Apply for Graduation:
-          <p>Completed 4/6/2020!</p>
+          <p class="date phase4_1"></p>
           <img class="help" title="NO FORM - upload pdf of email" src="images/qmark.png">
       </button>
       <button onclick="hideClass('milestoneDataText'); dropDown('milFour phase4_2');"
       class="milFour milestoneDataText" id='phase4_2'>Dissertation format review:
-          <p></p>
+          <p class="date phase4_2"></p>
           <img class="help" title="NO FORM - upload pdf of email" src="images/qmark.png">
       </button>
       <button onclick="hideClass('milestoneDataText'); dropDown('milFour phase4_3');" 
       class="milFour milestoneDataText" id='phase4_3'>Oral Defense Scheduling Form:
-          <p></p>
+          <p class="date phase4_3"></p>
           <img class="help" title="insert description here" src="images/qmark.png">
       </button>
       <button onclick="hideClass('milestoneDataText'); dropDown('milFour phase4_4');" 
       class="milFour milestoneDataText" id='phase4_4'>Pro-Quest – Dissertation:
-          <p></p>
+          <p class="date phase4_4"></p>
           <img class="help" title="NO FORM - upload pdf of email" src="images/qmark.png">
       </button>
     </div>

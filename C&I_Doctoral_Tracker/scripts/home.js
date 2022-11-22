@@ -2,6 +2,14 @@ var userData = 'eml292'; //temporary userID
 // userData = 'al762'; // adam test id
 var completeList;
 
+class tester 
+{
+  constructor()
+  {
+    this.testResult = false;
+  }
+}
+
 function dropDown(doc)
 {
     var target = document.getElementsByClassName(doc);
@@ -49,7 +57,6 @@ function prepare()
 {
   var target = document.getElementsByClassName('milestoneDataText');
   var index;
-  var classes;
   for (index = 0; index < target.length; index++) {
     target[index].style.display = "none";
   }
@@ -105,6 +112,8 @@ function checkProgress(doc)
   var index;
   var target;
   var tasks;
+  var filePre;
+  var phaseNum;
   var completed = true;
   target = document.getElementById(doc);
   tasks = document.getElementsByClassName(doc);
@@ -115,6 +124,19 @@ function checkProgress(doc)
           || tasks[index].classList.contains('milestoneData') ) )
     {
       completed = false;
+    }
+    if(tasks[index].classList.contains('deleted'))
+    {
+      phaseNum = tasks[index].id;
+
+      filePre = document.getElementsByClassName("previewer " + phaseNum)[0];
+      console.log(phaseNum);
+
+      tasks[index].style.backgroundColor = "#002454";
+      tasks[index].style.color = "#ffffff";
+      tasks[index].style.borderColor = '#000000';
+      tasks[index].classList.remove('deleted');
+      filePre.remove();
     }
     else if (tasks[index].classList.contains('complete'))
     {
@@ -166,19 +188,19 @@ function parseCompleteList()
   phaseCheck('phase4_2');
   phaseCheck('phase4_3');
   phaseCheck('phase4_4');
+
+  return 0;
 }
 
 async function phaseCheck(elementID)
 {
   var target = document.getElementById(elementID);
-  var splitPhase = elementID.split("");
-  var len = splitPhase.length;
-  var phaseNum = splitPhase[len-3] + splitPhase[len-2] + splitPhase[len-1];
+  var upDate;
   var fileID;
   var index;
   var search;
-  var blobData;
-  var parent;
+  var dateP;
+
   
   for (index = 0; index < completeList.length; index++)
   {
@@ -193,22 +215,48 @@ async function phaseCheck(elementID)
       }
       
       target.classList.add('complete');
-      
-      blobData = await dbPreview('https://doctracker.org:8443/user/preview/'+fileID);
-      var newPre = document.createElement("object");
-      newPre.style.width = '80%';
-      newPre.style.height = '80%';
-      newPre.setAttribute('class', 'previewer');
-      newPre.type = 'application/pdf';
-      newPre.data = 'data:application/pdf;base64,' + blobData;
-      newPre.filename = elementID; 
-      //repeat all attributes needed;
 
-      parent = document.getElementsByClassName(elementID + ' fileView');
-      parent[0].appendChild(newPre);
+      if(target.classList.contains("deleted"))
+      {
+        target.classList.remove("deleted");
+      }
+
+      dateP = document.getElementsByClassName("date " + elementID);
+
+      upDate = completeList[index].uploadTime.split(".")[0]; // remove time from the date
+      upDate = upDate.split("/");
+      upDate = upDate[1] + "/" + upDate[0] + "/" + upDate[2]; // converte date to 'murican
+      dateP[0].innerHTML = "Completed " + upDate +"!";
+      
+
+      createPreviewer(fileID, elementID);
+
     }
   }
 }
+
+async function createPreviewer(fileID, elementID)
+{
+  var blobData;
+  var parent;
+  var index;
+  parent = document.getElementsByClassName(elementID + ' fileView');
+  
+
+  blobData = await dbPreview('https://doctracker.org:8443/user/preview/'+fileID);
+  var newPre = document.createElement("object");
+  newPre.style.width = '80%';
+  newPre.style.height = '80%';
+  newPre.setAttribute('class', 'previewer ' + elementID);
+  newPre.type = 'application/pdf';
+  newPre.data = 'data:application/pdf;base64,' + blobData;
+  newPre.filename = elementID; 
+  //repeat all attributes needed;
+
+  parent[0].appendChild(newPre);
+
+}
+
 
 async function dbPreview(fileURL)
 {
@@ -239,7 +287,7 @@ function b64toBlob(b64Data, contentType='')
   return blob;
 }
 
-async function pingDB()
+async function pingDB( tester = null )
 {
   
   //const downloadRequest = 'https://doctracker.org:8443/user/all';
@@ -260,7 +308,6 @@ async function pingDB()
 
   completeList = JSON.parse(completeList);
 
-  
   parseCompleteList();
   
   checkProgress('milOne');
@@ -268,9 +315,14 @@ async function pingDB()
   checkProgress('milThree');
   checkProgress('milFour');
 
+  if(tester != null)
+  {
+    tester.testResult = true;
+  }
+
 }
 
-function download(filename)
+function download(filename, tester)
 {
   var fileID;
   var index;
@@ -280,6 +332,7 @@ function download(filename)
     {
       fileID = completeList[index].uploadID;
       window.open('https://doctracker.org:8443/user/files/'+fileID, '_blank');
+      setTimeout(tester.testResult = true, 300);
       break;
     }
   }
@@ -287,7 +340,10 @@ function download(filename)
 
 async function uploadFile(phase, upFile)
 {
+  var uploadTest = new tester();
+  var pingTest = new tester();
   const uploadRequest = 'https://doctracker.org:8443/user/'+userData+'/upload/'+phase;
+  
 
   const upload = (file) => {
     const formData = new FormData()
@@ -300,23 +356,67 @@ async function uploadFile(phase, upFile)
     }).then(
       response => response.text()
     ).then(
-      success => console.log(success)
+      success => {console.log(success)
+      
+      uploadTest.testResult = true}
     ).catch(
       error => console.error(error)
     );
+
   };
-    
 
   upload(upFile);
-
-  pingDB();
   
+  console.log(pingTest.testResult);
+  recurse(uploadTest, () => {pingDB(pingTest);});
+
+  recurse(pingTest, () => {replacePreview(phase)});
 }
 
-function deleteFile(phase)
+function replacePreview(phase)
+{
+  var parent;
+  var index;
+  var fileID;
+  parent = document.getElementsByClassName(phase + ' fileView');
+  
+  for (index = 0; index < completeList.length; index++)
+  {
+    if(completeList[index].uploaded_as == phase)
+    {
+      fileID = completeList[index].uploadID;
+    }
+  }
+
+  for (index = 0; index < parent[0].children.length; index++)
+  {
+    if(parent[0].children[index].classList.contains("previewer"))
+    {
+      parent[0].children[index].remove();
+      createPreviewer(fileID, phase);
+    }
+  }
+}
+
+function recurse(test, func)
+{
+  if (test.testResult)
+  {
+    func();
+  }
+  else
+  {
+    setTimeout(() => {recurse(test, func)}, 500);
+  }
+}
+
+async function deleteFile(phase)
 {
   var fileID;
   var index;
+  var target = document.getElementById(phase);
+  var deleteTest = new tester();
+  var downloadTest = new tester();
 
   for (index = 0; index < completeList.length; index++)
   {
@@ -336,18 +436,24 @@ function deleteFile(phase)
     }).then(
       response => response.text()
     ).then(
-      success => console.log(success)
+      success => {console.log(success)
+
+      deleteTest.testResult = true}
     ).catch(
       error => console.error(error)
     );
+
   };
   
-  if (confirm("Are you sure you want to remove this file? A copy will be downloaded as a backup."))
-  {  
-    download(phase);
+  if (confirm("Are you sure you want to remove this file?"))
+  { 
+    target.classList.remove("complete");
+    target.classList.add("deleted");
+
     remFile();
 
-    pingDB();
+    recurse(deleteTest, pingDB);
+
   }
 }
 
