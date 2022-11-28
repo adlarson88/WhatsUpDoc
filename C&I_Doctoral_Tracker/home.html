@@ -10,7 +10,7 @@
   <body onload="prepare(); dropDown('milOne'); dropDown('milOne phase1_1');" style="background-color: #C3B8B2;">
     <div style="display: flex; justify-content: space-between;">
       <span id="currUser" style="border-style: solid; border-color: #000000; border: 0.2vw; font-size: 4vh; padding:0;"></span>
-      <img src="images/naulogo1.png" style="height: 5vh; margin:0;">
+      <a href="https://nau.edu/"><img src="images/naulogo1.png" style="height: 5vh; margin:0;"></a>
     </div>
     <div class="progressBar">
         <button onclick="hideClass('milestone'); dropDown('milOne'); 
@@ -27,21 +27,21 @@
     <div class="milOne milestoneData">
         <div class="milOne phase1_1 fileView">
             Initial Program of Study
-            <input class="fileUpload phase1_1" type="file" id="file1_1" name="filename">
+            <input class="fileUpload phase1_1" type="file" id="file1_1" name="filename" style="display: none">
             <button class="fileUpload" onclick="document.getElementById('file1_1').click()">Upload</button>
             <button class="fileDownload phase1_1" id="download1_1" onclick="download('phase1_1')">Download</button>
             <button class="fileDelete phase1_1" id="delete1_1" onclick="deleteFile('phase1_1')">Delete</button>
         </div>
         <div class="milOne phase1_2 fileView">
             Residency Plan Form
-            <input class="fileUpload phase1_2" type="file" id="file1_2" name="filename">
+            <input class="fileUpload phase1_2" type="file" id="file1_2" name="filename" style="display: none">
             <button class="fileUpload" onclick="document.getElementById('file1_2').click()">Upload</button>
             <button class="fileDownload phase1_2" id="download1_2" onclick="download('phase1_2')">Download</button>
             <button class="fileDelete phase1_2" id="delete1_2" onclick="deleteFile('phase1_2')">Delete</button>
         </div>
         <div class="milOne phase1_3 fileView">
             Student Self-Evaluation 1
-            <input class="fileUpload phase1_3" type="file" id="file1_3" name="filename">
+            <input class="fileUpload phase1_3" type="file" id="file1_3" name="filename" style="display: none">
             <button class="fileUpload" onclick="document.getElementById('file1_3').click()">Upload</button>
             <button class="fileDownload phase1_3" id="download1_3" onclick="download('phase1_3')">Download</button>
             <button class="fileDelete phase1_3" id="delete1_3" onclick="deleteFile('phase1_3')">Delete</button>
@@ -143,31 +143,36 @@
     <div class="milThree milestoneData">
       <div class="milThree phase3_1 fileView">
         Prospectus Defense Scheduling Form
-        <input class="fileUpload phase3_1" type="file" id="file3_1" name="filename">
+        <input class="fileUpload phase3_1" type="file" id="file3_1" name="filename" style="display: none">
+        <button class="fileUpload" onclick="document.getElementById('file3_1').click()">Upload</button>
         <button class="fileDownload phase3_1" id="download3_1" onclick="download('phase3_1')">Download</button>
         <button class="fileDelete phase3_1" id="delete3_1" onclick="deleteFile('phase3_1')">Delete</button>
       </div>
       <div class="milThree phase3_2 fileView">
         Prospectus Title Page With Signatures
-        <input class="fileUpload phase3_2" type="file" id="file3_2" name="filename">
+        <input class="fileUpload phase3_2" type="file" id="file3_2" name="filename" style="display: none">
+        <button class="fileUpload" onclick="document.getElementById('file3_2').click()">Upload</button>
         <button class="fileDownload phase3_2" id="download3_2" onclick="download('phase3_2')">Download</button>
         <button class="fileDelete phase3_2" id="delete3_2" onclick="deleteFile('phase3_2')">Delete</button>
       </div>
       <div class="milThree phase3_3 fileView">
         Final Signed Program of Study
-        <input class="fileUpload phase3_3" type="file" id="file3_3" name="filename">
+        <input class="fileUpload phase3_3" type="file" id="file3_3" name="filename" style="display: none">
+        <button class="fileUpload" onclick="document.getElementById('file3_3').click()">Upload</button>
         <button class="fileDownload phase3_3" id="download3_3" onclick="download('phase3_3')">Download</button>
         <button class="fileDelete phase3_3" id="delete3_3" onclick="deleteFile('phase3_3')">Delete</button>
       </div>
       <div class="milThree phase3_4 fileView">
         Application For Candidacy Form
-        <input class="fileUpload phase3_4" type="file" id="file3_4" name="filename">
+        <input class="fileUpload phase3_4" type="file" id="file3_4" name="filename" style="display: none">
+        <button class="fileUpload" onclick="document.getElementById('file3_4').click()">Upload</button>
         <button class="fileDownload phase3_4" id="download3_4" onclick="download('phase3_4')">Download</button>
         <button class="fileDelete phase3_4" id="delete3_4" onclick="deleteFile('phase3_4')">Delete</button>
       </div>
       <div class="milThree phase3_5 fileView">
         Student Self-Evaluation 3
-        <input class="fileUpload phase3_5" type="file" id="file3_5" name="filename">
+        <input class="fileUpload phase3_5" type="file" id="file3_5" name="filename" style="display: none">
+        <button class="fileUpload" onclick="document.getElementById('file3_5').click()">Upload</button>
         <button class="fileDownload phase3_5" id="download3_5" onclick="download('phase3_5')">Download</button>
         <button class="fileDelete phase3_5" id="delete3_5" onclick="deleteFile('phase3_5')">Delete</button>
       </div>
@@ -201,25 +206,29 @@
     <div class="milFour milestoneData">
       <div class="milFour phase4_1 fileView">
         Apply for Graduation
-        <input class="fileUpload phase4_1" type="file" id="file4_1" name="filename">
+        <input class="fileUpload phase4_1" type="file" id="file4_1" name="filename" style="display: none">
+        <button class="fileUpload" onclick="document.getElementById('file4_1').click()">Upload</button>
         <button class="fileDownload phase4_1" id="download4_1" onclick="download('phase4_1')">Download</button>
         <button class="fileDelete phase4_1" id="delete4_1" onclick="deleteFile('phase4_1')">Delete</button>
       </div>
       <div class="milFour phase4_2 fileView">
         Dissertation format review
-        <input class="fileUpload phase4_2" type="file" id="file4_2" name="filename">
+        <input class="fileUpload phase4_2" type="file" id="file4_2" name="filename" style="display: none">
+        <button class="fileUpload" onclick="document.getElementById('file4_2').click()">Upload</button>
         <button class="fileDownload phase4_2" id="download4_2" onclick="download('phase4_2')">Download</button>
         <button class="fileDelete phase4_2" id="delete4_2" onclick="deleteFile('phase4_2')">Delete</button>
       </div>
       <div class="milFour phase4_3 fileView">
         Oral Defense Scheduling Form
-        <input class="fileUpload phase4_3" type="file" id="file4_3" name="filename">
+        <input class="fileUpload phase4_3" type="file" id="file4_3" name="filename" style="display: none">
+        <button class="fileUpload" onclick="document.getElementById('file4_3').click()">Upload</button>
         <button class="fileDownload phase4_3" id="download4_3" onclick="download('phase4_3')">Download</button>
         <button class="fileDelete phase4_3" id="delete4_3" onclick="deleteFile('phase4_3')">Delete</button>
       </div>
       <div class="milFour phase4_4 fileView">
         Pro-Quest - Dissertation
-        <input class="fileUpload phase4_4" type="file" id="file4_4" name="filename">
+        <input class="fileUpload phase4_4" type="file" id="file4_4" name="filename" style="display: none">
+        <button class="fileUpload" onclick="document.getElementById('file4_4').click()">Upload</button>
         <button class="fileDownload phase4_4" id="download4_4" onclick="download('phase4_4')">Download</button>
         <button class="fileDelete phase4_4" id="delete4_4" onclick="deleteFile('phase4_4')">Delete</button>
       </div>
