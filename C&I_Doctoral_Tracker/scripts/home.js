@@ -69,7 +69,8 @@ target = document.getElementsByClassName('fileView');
     target[index].style.display = "none";
   }
 
-  target = document.getElementsByClassName("fileUpload");
+  target = document.getElementById("currUser");
+  target.innerHTML = userData;
 
 
   uploadEventListener('file1_1');
@@ -114,6 +115,7 @@ function checkProgress(doc)
   var tasks;
   var filePre;
   var phaseNum;
+  var dateP;
   var completed = true;
   target = document.getElementById(doc);
   tasks = document.getElementsByClassName(doc);
@@ -128,6 +130,7 @@ function checkProgress(doc)
     if(tasks[index].classList.contains('deleted'))
     {
       phaseNum = tasks[index].id;
+      dateP = document.getElementsByClassName("date " + phaseNum);
 
       filePre = document.getElementsByClassName("previewer " + phaseNum)[0];
       console.log(phaseNum);
@@ -137,6 +140,7 @@ function checkProgress(doc)
       tasks[index].style.borderColor = '#000000';
       tasks[index].classList.remove('deleted');
       filePre.remove();
+      dateP[0].innerHTML = "";
     }
     else if (tasks[index].classList.contains('complete'))
     {
@@ -247,6 +251,10 @@ async function createPreviewer(fileID, elementID)
   var newPre = document.createElement("object");
   newPre.style.width = '80%';
   newPre.style.height = '80%';
+  newPre.style.display = "block";
+  newPre.style.margin = "auto";
+  newPre.style.border = "0";
+  newPre.style.padding = "0";
   newPre.setAttribute('class', 'previewer ' + elementID);
   newPre.type = 'application/pdf';
   newPre.data = 'data:application/pdf;base64,' + blobData;
@@ -332,7 +340,7 @@ function download(filename, tester)
     {
       fileID = completeList[index].uploadID;
       window.open('https://doctracker.org:8443/user/files/'+fileID, '_blank');
-      setTimeout(tester.testResult = true, 300);
+      tester.testResult = true;
       break;
     }
   }
