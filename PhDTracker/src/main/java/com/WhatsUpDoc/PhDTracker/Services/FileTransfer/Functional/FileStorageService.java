@@ -6,15 +6,13 @@ import com.WhatsUpDoc.PhDTracker.Services.Exceptions.NoFilesFoundException;
 import com.WhatsUpDoc.PhDTracker.Services.Repositories.FileRepository;
 import com.WhatsUpDoc.PhDTracker.Services.DBFields.Files;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 
 @Service
 public class FileStorageService {
@@ -40,16 +38,31 @@ public class FileStorageService {
         }
     }
 
-    public Files getFile(String fileId) {
-        return fileRepository.findById(fileId)
+    public Files getFile(String uploadID) {
+        return fileRepository.findById(uploadID)
                 .orElseThrow(NoFilesFoundException::new);
     }
 
-    // temp for testing
-    public HttpStatus fileExists(String fileId) {
-        if (fileRepository.existsByUploadID(fileId)) {
-            return HttpStatus.OK;
-        }
-        return HttpStatus.NOT_FOUND;
+    public Iterable<Files> getUserFiles(String userID) {
+        return fileRepository.findAllByUserID(userID);
     }
+
+    public void removeFile(String fileID) {
+        fileRepository.deleteById(fileID);
+    }
+
+    public void removeIfExists(String userID, String upload_as) {
+        Iterable<Files> tempFiles = getUserFiles(userID);
+        for (Files files : tempFiles) {
+            if ( files.getUploaded_as().equals(upload_as)){
+                removeFile(files.getUploadID());
+                break;
+            }
+        }
+    }
+
+    public Optional<Files> fileExists(String uploadID) {
+        return fileRepository.findById(uploadID);
+    }
+
 }
