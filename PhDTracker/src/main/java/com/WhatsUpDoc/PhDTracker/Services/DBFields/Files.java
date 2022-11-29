@@ -22,13 +22,20 @@ public class Files {
     private String uploaded_as;
 
     public Files() {
-
     }
 
     public Files(String filename, String filetype, byte[] data) {
         this.filename = filename;
         this.filetype = filetype;
         this.data = data;
+    }
+
+    public Files(Files files) {
+        this.uploadID = files.getUploadID();
+        this.filename = files.getFilename();
+        this.filetype = files.getFiletype();
+        this.userID = files.getUserID();
+        this.uploaded_as = files.getUploaded_as();
     }
 
     public Files(String filename, String filetype, byte[] data, String userID, String uploaded_as, String uploadTime) {
