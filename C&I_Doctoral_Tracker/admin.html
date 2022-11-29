@@ -1,271 +1,241 @@
-// Editor/DataTables stuff
-var selectedUserToEdit;
-var allUsers, phaseReviewData;
+<!DOCTYPE html>
 
-var allModals = document.getElementsByClassName("modal");
+<html>
 
+  <head>
+    <title>Admin Page</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.13.1/af-2.5.1/b-2.3.3/b-colvis-2.3.3/b-html5-2.3.3/b-print-2.3.3/cr-1.6.1/date-1.2.0/fc-4.2.1/fh-3.3.1/kt-2.8.0/r-2.4.0/rr-1.3.1/sc-2.0.7/sb-1.4.0/sp-2.1.0/sl-1.5.0/sr-1.2.0/datatables.min.css"/>
+    <link rel="stylesheet" href="style.css">
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.13.1/af-2.5.1/b-2.3.3/b-colvis-2.3.3/b-html5-2.3.3/b-print-2.3.3/cr-1.6.1/date-1.2.0/fc-4.2.1/fh-3.3.1/kt-2.8.0/r-2.4.0/rr-1.3.1/sc-2.0.7/sb-1.4.0/sp-2.1.0/sl-1.5.0/sr-1.2.0/datatables.min.js"></script>
+    <script src="scripts/admin.js"></script>
+  </head> 
 
-// page onload function
-async function preparePage() {
+  <body onload="preparePage()">
 
-    var studentTable = document.getElementById("adminStudentControlsWindow");
-    var phaseReviewTable = document.getElementById("adminPhaseReviewWindow");
-    var embeddedWindow = document.getElementById("studentProgressWindow");
+    <div class="g_id_signout">
+      <button class="signOutButton" onclick="signOut();">Sign-Out</button>
+    </div>
+  
+    <div class="nauLetterLogo" style="text-align: center;">
+      <img src="images/naulogo1noaxe.png" alt="NAU Axe Logo" style="width:10vw;height:7vh;max-width:200px;max-height: 75px;">
+    </div>
 
-    studentTable.style.display = "block";
-    phaseReviewTable.style.display = "none";
-    embeddedWindow.style.display = "none";
+    <div class="adminControlsTaskBar">
+      <button onclick="openAdminStudentControlsWindow()" class="adminControlButton" id="adminStudentControlsButton">Add/Remove Students</button>
+      <button onclick="openPhaseReviewWindow()" class="adminControlButton" id="phaseReviewControlsButton">Phase Review</button>
+      <button onclick="openStudentProgressWindow()" class="adminControlButton" id="studentProgressControlsButton">Student Progress Viewer</button>
+    </div>
+  
+
+    <div class="adminStudentControlsWindow" id="adminStudentControlsWindow">
+      <div id="divBeforeStudentTable"></div>
+      <table id="adminStudentControlsTable" class="table table-striped table-bordered border-dark" style="width:100%">
+        <thead>
+            <tr>
+                <th class="table-primary">userID</th>
+                <th class="table-success">Last Name</th>
+                <th class="table-success">First Name</th>
+                <th class="table-info">Advisor (Last Name) </th>
+                <th class="table-warning">Term Activation</th>
+                <th class="table-danger">Enrollment Status</th>
+                <th class="table-secondary">Admin Status</th>
+            </tr>
+        </thead>
+      </table>
+    </div>
+
     
 
-    const downloadRequest = 'https://doctracker.org:8443/user/all';
-    const downloadOptions = {
-    
-        headers: {'Content-Type' : 'application/json'},
-    } ;
-    
-    // reqeust to populate student table
-    const studentTableRequest = new Request(downloadRequest, downloadOptions);
+    <div id="createUserModal" class="modal">
+      <div class="createUserModalContent">
+        <div class="headerWrapper">
+          <h4>Enter New User's Information:</h4>
+        </div>
+        <form class="createUserForm" onsubmit="submitNewUserForm()">
+          <label for="userID">userID:</label>
+          <input type="text" id="formUserID" name="userID" value="abc123"><br></br>
 
-    const studentTableResponse = await fetch(studentTableRequest);
+          <label for="lastName">Last Name:</label>
+          <input type="text" id="formLastName" name="last_name" value="lastName"><br></br>
 
-    allUsers = await studentTableResponse.text();
+          <label for="firstName">First Name:</label>
+          <input type="text" id="formFirstName" name="first_name" value="firstName"><br></br>
 
-    
-    // console.log(allUsers);
-    allUsers = JSON.parse(allUsers);
+          <label for="advisor">Advisor (Last Name):</label>
+          <input type="text" id="formAdvisor" name="advisor" value="Advisorson"><br></br>
 
-    // instantiate DataTables
-    $(document).ready( function () {
-        var studentTable = $('#adminStudentControlsTable').DataTable( {
-            data: allUsers,
-            autoWidth: true,
-            select: 'single',
-            paging: true,
-            scrollY: 500,
-            scrollCollapse: true,
-            lengthChange: true,
-            columns: [
-                { data: 'userID' },
-                { data: 'last_name' },
-                { data: 'first_name' },
-                { data: 'advisor' },
-                { data: 'term_activation' },
-                { data: 'enrollment_status'},
-                { data: 'admin' },
-            ],
-            buttons: [
-                {text: 'New User',
-                 action: function ( e, dt, node, config ) {
-                    var createUserModal = document.getElementById("createUserModal");
-                    createUserModal.style.display = "block";
-                 }},
-                'spacer',
-                {text: 'Edit User',
-                 extend: 'selected',
-                 action: function( e, dt, node, config ) {
-                    var selectedUserToEdit = dt.row( { selected: true } ).data();
-                    setSelectedUserToEdit(selectedUserToEdit.userID);
-                    var editUserModal = document.getElementById("editUserModal");
-                    editUserModal.style.display = "block";
+          <label for="termActivation">Term Activation:</label>
+          <select id="formTerm" name="term_activation">
+            <option value="s2014">Spring 2014</option>
+            <option value="f2014">Fall  2014</option>
 
-                }},
-                'spacer',
-                {text: 'Delete User',
-                 extend: 'selected',
-                 action: function ( e, dt, node, config ) {
-                    var selectedUserToDelete = dt.row( { selected: true } ).data();
-                    deleteSelectedUser(selectedUserToDelete.userID);
-                }}, 'spacer',
-                {text: 'Refresh Table',
-                action: function ( e, dt, node, config ) {
-                    location.reload();
-                }},
-                'spacer',
-                'spacer', 'spacer', 'spacer',
-                'copy', 'spacer', 'csv', 'spacer', 'excel', 'spacer', 'pdf',
-            ],
-        } );
+            <option value="s2015">Spring 2015</option>
+            <option value="f2015">Fall  2015</option>
 
-        studentTable.buttons().container()
-        .appendTo( "#divBeforeStudentTable" );
-    } );
+            <option value="s2016">Spring 2016</option>
+            <option value="f2016">Fall  2016</option>
 
-    // reqeust to populate phase review table
-    const phaseReviewTableRequest = new Request(downloadRequest, downloadOptions);
+            <option value="s2017">Spring 2017</option>
+            <option value="f2017">Fall  2017</option>
 
-    const phaseReviewTableResponse = await fetch(phaseReviewTableRequest);
+            <option value="s2018">Spring 2018</option>
+            <option value="f2018">Fall  2018</option>
 
-    phaseReviewData = await phaseReviewTableResponse.text();
-    phaseReviewData = JSON.parse(phaseReviewData);
+            <option value="s2019">Spring 2019</option>
+            <option value="f2019">Fall  2019</option>
 
-    $(document).ready( function () {
-        var phaseReviewTable = $('#phaseReviewTable').DataTable( {
-            data: phaseReviewData,
-            autoWidth: true,
-            scrollCollapse: true,
-            lengthChange: true,
-            columns: [
-                { data: 'userID' },
-                { data: 'last_name' },
-                { data: 'first_name' },
-                { data: 'term_activation' },
-            ],
-            buttons: ['copy', 'spacer', 'csv', 'spacer', 'excel', 'spacer', 'pdf']
-        } );
-        
-        phaseReviewTable.buttons().container()
-        .appendTo( "#divBeforePhaseReviewTable" );
-    } );
-}
+            <option value="s2020">Spring 2020</option>
+            <option value="f2020">Fall  2020</option>
+            
+            <option value="s2021">Spring 2021</option>
+            <option value="f2021">Fall  2021</option>
 
-async function submitNewUserForm() {
+            <option value="s2022">Spring 2022</option>
+            <option value="f2022">Fall  2022</option>
 
-    var formUserID = document.getElementById('formUserID');
-    var formFirstName = document.getElementById('formFirstName');
-    var formLastName = document.getElementById('formLastName');
-    var formAdvisor = document.getElementById('formAdvisor');
-    var formTermActivation = document.getElementById('formTerm');
-    var formEnrollmentStatus = document.getElementById('formEnrollmentStatus');
-    var formAdminStatus = document.getElementById('formAdminStatus');
-    
-    var formDataArray = {"userID":formUserID.value, "first_name":formFirstName.value, 
-                         "last_name":formLastName.value, "admin":formAdminStatus.value,
-                         "advisor":formAdvisor.value, "enrollment_status":formEnrollmentStatus.value,
-                         "term_activation":formTermActivation.value 
-                        };
-    
-    let jsonFormData = JSON.stringify(formDataArray);
+            <option value="s2023">Spring 2023</option>
+            <option value="f2023">Fall  2023</option>
 
-    const createUserRequestURL = 'https://doctracker.org:8443/user/create';
+            <option value="s2024">Spring 2024</option>
+            <option value="f2024">Fall  2024</option>
 
-    fetch(createUserRequestURL, {
-        method: 'POST',
-        headers: {
-            'Accept':'application/json','Content-type': 'application/json'
-        },
-        body: jsonFormData
-      }).then(response => response.json()).then(json => console.log(json));
-    
-    return true;
-}
+            <option value="s2025">Spring 2025</option>
+            <option value="f2025">Fall  2025</option>
 
-async function submitEditUserForm() {
+            <option value="s2026">Spring 2026</option>
+            <option value="f2026">Fall  2026</option>
+          </select><br></br>
 
-    const localSelectedUser = getSelectedUserToEdit();
+          <label for="enrollmentStatus">Enrollment Status:</label>
+          <select id="formEnrollmentStatus" name="enrollment_status">
+            <option value="full">Full</option>
+            <option value="part">Part</option>
+          </select><br></br>
 
-    var editFirstName = document.getElementById('editFirstName');
-    var editLastName = document.getElementById('editLastName');
-    var editAdvisor = document.getElementById('editAdvisor');
-    var editTermActivation = document.getElementById('editTerm');
-    var editEnrollmentStatus = document.getElementById('editEnrollmentStatus');
-    var editAdminStatus = document.getElementById('editAdminStatus');
-    
+          <label for="adminStatus">Admin Status:</label>
+          <select id="formAdminStatus" name="admin">
+            <option value="false">False</option>
+            <option value="true">True</option>
+          </select><br></br>
 
-    var editedDataArray = {"first_name":editFirstName.value, "last_name":editLastName.value, 
-                           "admin":editAdminStatus.value, "advisor":editAdvisor.value, 
-                           "enrollment_status":editEnrollmentStatus.value, "term_activation":editTermActivation.value 
-                        };
-    
-    let jsonEditedData = JSON.stringify(editedDataArray);
+          <div class="submitFormHolder">
+            <input type="submit" value="Submit">
+          </div>
+        </form>
+      </div>
+    </div>
 
-    const editUserRequestURL = 'https://doctracker.org:8443/user/'+localSelectedUser+'/update';
+    <div id="editUserModal" class="modal">
+      <div class="createUserModalContent">
+        <div class="headerWrapper">
+          <h4>Edit Selected User's Information:</h4>
+        </div>
+        <form class="editUserForm" onsubmit="submitEditUserForm()">
 
-    fetch(editUserRequestURL, {
-        method: 'PUT',
-        headers: {
-            'Accept':'application/json','Content-type': 'application/json'
-        },
-        body: jsonEditedData
-      }).then(response => response.json()).then(json => console.log(json));
-    
-    return true;
-}
+          <label for="lastName">Last Name:</label>
+          <input type="text" id="editLastName" name="last_name"><br></br>
 
-async function deleteSelectedUser(selectedUser) {
-    const deleteUserRequestURL = 'https://doctracker.org:8443/user/'+selectedUser+'/deleteStudent';
+          <label for="firstName">First Name:</label>
+          <input type="text" id="editFirstName" name="first_name"><br></br>
 
-    fetch(deleteUserRequestURL, {
-        method: 'DELETE',
-      }).then(response => response.json()).then(json => console.log(json));
-    return true;
-}
+          <label for="advisor">Advisor (Last Name):</label>
+          <input type="text" id="editAdvisor" name="advisor"><br></br>
 
-// Function that opens the admin student control window upon navigation button click
-function openAdminStudentControlsWindow() {
+          <label for="termActivation">Term Activation:</label>
+          <select id="editTerm" name="term_activation">
+            <option value="s2014">Spring 2014</option>
+            <option value="f2014">Fall  2014</option>
 
-    var studentTable = document.getElementById("adminStudentControlsWindow");
-    var phaseReviewTable = document.getElementById("adminPhaseReviewWindow");
-    var embeddedWindow = document.getElementById("studentProgressWindow");
-    // if phase Review Table tab is open, close it and open the add/remove student window
-    if (studentTable.style.display === "none" && phaseReviewTable.style.display === "block" && embeddedWindow.style.display === "none")
-        {
-            phaseReviewTable.style.display = "none";
-            studentTable.style.display = "block";
-        }
-    // if the embeddedWindow tab is open, close it and open the add/remove student window
-    else if (studentTable.style.display === "none" && phaseReviewTable.style.display === "none" && embeddedWindow.style.display === "block")
-        {
-            embeddedWindow.style.display = "none";
-            studentTable.style.display = "block";
-        }
-}
+            <option value="s2015">Spring 2015</option>
+            <option value="f2015">Fall  2015</option>
 
-  // Function that opens the admin phase review window upon navigation button click
-function openPhaseReviewWindow() {
-    
-    var studentTable = document.getElementById("adminStudentControlsWindow");
-    var phaseReviewTable = document.getElementById("adminPhaseReviewWindow");
-    var embeddedWindow = document.getElementById("studentProgressWindow");
-    // if student table tab is open, close it and open the phase review table
-    if (phaseReviewTable.style.display === "none" && studentTable.style.display === "block" && embeddedWindow.style.display === "none")
-        {
-            studentTable.style.display = "none";
-            phaseReviewTable.style.display = "block";
-        }
-    else if (phaseReviewTable.style.display === "none" && studentTable.style.display === "none" && embeddedWindow.style.display === "block")
-        {
-            embeddedWindow.style.display = "none";
-            phaseReviewTable.style.display = "block";
-        }
-}
+            <option value="s2016">Spring 2016</option>
+            <option value="f2016">Fall  2016</option>
 
-// Function that opens the student progress viewer window upon navigation button click
-function openStudentProgressWindow() {
+            <option value="s2017">Spring 2017</option>
+            <option value="f2017">Fall  2017</option>
 
-    var studentTable = document.getElementById("adminStudentControlsWindow");
-    var phaseReviewTable = document.getElementById("adminPhaseReviewWindow");
-    var embeddedWindow = document.getElementById("studentProgressWindow");
-    // if student table tab is open, close it and open the embeddedWindow view
-    if (embeddedWindow.style.display === "none" && studentTable.style.display === "block" && phaseReviewTable.style.display === "none")
-        {
-            studentTable.style.display = "none";
-            embeddedWindow.style.display = "block";
-        }
-    // if phase review tab is open, close it and open the embeddedWindow view
-    else if (embeddedWindow.style.display === "none" && studentTable.style.display === "none" && phaseReviewTable.style.display === "block")
-        {
-            phaseReviewTable.style.display = "none";
-            embeddedWindow.style.display = "block";
-        }
-}
+            <option value="s2018">Spring 2018</option>
+            <option value="f2018">Fall  2018</option>
 
-function setSelectedUserToEdit(selectedUserToReplace) {
-    selectedUserToEdit = selectedUserToReplace;
-    return true;
-}
+            <option value="s2019">Spring 2019</option>
+            <option value="f2019">Fall  2019</option>
 
-function getSelectedUserToEdit() {
-    return selectedUserToEdit;
-}
+            <option value="s2020">Spring 2020</option>
+            <option value="f2020">Fall  2020</option>
+            
+            <option value="s2021">Spring 2021</option>
+            <option value="f2021">Fall  2021</option>
 
-// configure google sign-out button
-function signOut() {
-    google.accounts.id.disableAutoSelect();
-    window.location.href = "index.html?";
-  }
+            <option value="s2022">Spring 2022</option>
+            <option value="f2022">Fall  2022</option>
 
-const closeModal = function () {
-    allModals.style.display = "none";
-  };
+            <option value="s2023">Spring 2023</option>
+            <option value="f2023">Fall  2023</option>
 
-allModals.addEventListener("click", closeModal);
+            <option value="s2024">Spring 2024</option>
+            <option value="f2024">Fall  2024</option>
+
+            <option value="s2025">Spring 2025</option>
+            <option value="f2025">Fall  2025</option>
+
+            <option value="s2026">Spring 2026</option>
+            <option value="f2026">Fall  2026</option>
+          </select><br></br>
+
+          <label for="enrollmentStatus">Enrollment Status:</label>
+          <select id="editEnrollmentStatus" name="enrollment_status">
+            <option value="full">Full</option>
+            <option value="part">Part</option>
+          </select><br></br>
+
+          <label for="adminStatus">Admin Status:</label>
+          <select id="editAdminStatus" name="admin">
+            <option value="false">False</option>
+            <option value="true">True</option>
+          </select><br></br>
+
+          <div class="submitFormHolder">
+            <input type="submit" value="Submit">
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="adminPhaseReviewWindow" id="adminPhaseReviewWindow">
+      <div id="divBeforePhaseReviewTable"></div>
+      <table id="phaseReviewTable" class="table table-striped table-bordered border-dark" style="width:100%">
+        <thead>
+            <tr>
+                <th class="table-primary">userID</th>
+                <th class="table-primary">Last Name</th>
+                <th class="table-primary">First Name</th>
+                <th class="table-primary">Term Activation</th>
+                <th class="table-success">Phase 1 Milestones (0/3)</th>
+                <th class="table-info">Phase 2 Milestones (0/5)</th>
+                <th class="table-warning">Phase 3 Milestones (0/5)</th>
+                <th class="table-danger">Phase 4 Milestones (0/4)</th>
+            </tr>
+        </thead>
+      </table>
+    </div>
+
+  
+    <div class="studentProgressWindow" id="studentProgressWindow">
+      <form class="studentSearch">
+        <input type="text" placeholder="Enter valid Student userID:" name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+      <iframe class= "embeddediframe" src="home.html" title="Student Phase Viewer"></iframe>
+    </div>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+  </body>
+</html>
