@@ -33,7 +33,6 @@
       <button onclick="openStudentProgressWindow()" class="adminControlButton" id="studentProgressControlsButton">Student Progress Viewer</button>
     </div>
   
-
     <div class="adminStudentControlsWindow" id="adminStudentControlsWindow">
       <div id="divBeforeStudentTable"></div>
       <table id="adminStudentControlsTable" class="table table-striped table-bordered border-dark" style="width:100%">
@@ -50,8 +49,6 @@
         </thead>
       </table>
     </div>
-
-    
 
     <div id="createUserModal" class="modal">
       <div class="createUserModalContent">
@@ -126,6 +123,7 @@
           </select><br></br>
 
           <div class="submitFormHolder">
+            <span class="close">&times;</span>
             <input type="submit" value="Submit">
           </div>
         </form>
@@ -140,13 +138,13 @@
         <form class="editUserForm" onsubmit="submitEditUserForm()">
 
           <label for="lastName">Last Name:</label>
-          <input type="text" id="editLastName" name="last_name"><br></br>
+          <input type="text" id="editLastName" value="lastName" name="last_name"><br></br>
 
           <label for="firstName">First Name:</label>
-          <input type="text" id="editFirstName" name="first_name"><br></br>
+          <input type="text" id="editFirstName" value="firstName" name="first_name"><br></br>
 
           <label for="advisor">Advisor (Last Name):</label>
-          <input type="text" id="editAdvisor" name="advisor"><br></br>
+          <input type="text" id="editAdvisor" value="Advisorson" name="advisor"><br></br>
 
           <label for="termActivation">Term Activation:</label>
           <select id="editTerm" name="term_activation">
@@ -203,6 +201,7 @@
           </select><br></br>
 
           <div class="submitFormHolder">
+            <span class="close">&times;</span>
             <input type="submit" value="Submit">
           </div>
         </form>
@@ -218,10 +217,10 @@
                 <th class="table-primary">Last Name</th>
                 <th class="table-primary">First Name</th>
                 <th class="table-primary">Term Activation</th>
-                <th class="table-success">Phase 1 Milestones (0/3)</th>
-                <th class="table-info">Phase 2 Milestones (0/5)</th>
-                <th class="table-warning">Phase 3 Milestones (0/5)</th>
-                <th class="table-danger">Phase 4 Milestones (0/4)</th>
+                <th class="table-success">Phase 1 Milestones (Out of 3)</th>
+                <th class="table-info">Phase 2 Milestones (Out of 6)</th>
+                <th class="table-warning">Phase 3 Milestones (Out of 5)</th>
+                <th class="table-danger">Phase 4 Milestones (Out of 4)</th>
             </tr>
         </thead>
       </table>
@@ -229,11 +228,11 @@
 
   
     <div class="studentProgressWindow" id="studentProgressWindow">
-      <form class="studentSearch">
-        <input type="text" placeholder="Enter valid Student userID:" name="search">
+      <form class="studentSearch" onsubmit="searchForStudentHomePage()">
+        <input type="text" id="studentSearchBar" placeholder="Enter valid Student userID:" value ="abc123" name="search">
         <button type="submit"><i class="fa fa-search"></i></button>
       </form>
-      <iframe class= "embeddediframe" src="https://ceias.nau.edu/capstone/projects/CS/2022/WhatsUpDoc_S22/C&I_Doctoral_Tracker/home.html" title="Student Phase Viewer"></iframe>
+      <iframe class= "embeddediframe" src="home.html" title="Student Phase Viewer"></iframe>
     </div>
 
     <script src="https://accounts.google.com/gsi/client" async defer></script>

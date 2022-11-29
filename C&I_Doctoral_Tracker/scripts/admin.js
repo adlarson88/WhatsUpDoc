@@ -2,11 +2,15 @@
 var selectedUserToEdit;
 var allUsers, phaseReviewData;
 
-var allModals = document.getElementsByClassName("modal");
-
+var createUserModal;
+var editUserModal;
+var modalCloseButton;
 
 // page onload function
 async function preparePage() {
+    createUserModal = document.getElementById("createUserModal");
+    editUserModal = document.getElementById("editUserModal");
+    modalCloseButton = document.getElementsByClassName("close");
 
     var studentTable = document.getElementById("adminStudentControlsWindow");
     var phaseReviewTable = document.getElementById("adminPhaseReviewWindow");
@@ -18,6 +22,7 @@ async function preparePage() {
     
 
     const downloadRequest = 'https://doctracker.org:8443/user/all';
+    const downloadSummaryRequest = 'https://doctracker.org:8443/user/all/summary';
     const downloadOptions = {
     
         headers: {'Content-Type' : 'application/json'},
@@ -91,7 +96,7 @@ async function preparePage() {
     } );
 
     // reqeust to populate phase review table
-    const phaseReviewTableRequest = new Request(downloadRequest, downloadOptions);
+    const phaseReviewTableRequest = new Request(downloadSummaryRequest, downloadOptions);
 
     const phaseReviewTableResponse = await fetch(phaseReviewTableRequest);
 
@@ -109,13 +114,26 @@ async function preparePage() {
                 { data: 'last_name' },
                 { data: 'first_name' },
                 { data: 'term_activation' },
+                { data: 'phase1Summary'},
+                { data: 'phase2Summary'},
+                { data: 'phase3Summary'},
+                { data: 'phase4Summary'}
             ],
-            buttons: ['copy', 'spacer', 'csv', 'spacer', 'excel', 'spacer', 'pdf']
+            buttons: [{text: 'Refresh Table',
+                       action: function ( e, dt, node, config ) {
+                           location.reload();
+                           // This should also load the phaseReview table not the studentReview table
+                           // openPhaseReviewWindow();
+                      }},
+                      'spacer','copy', 'spacer', 'csv', 'spacer', 'excel', 'spacer', 'pdf']
         } );
         
         phaseReviewTable.buttons().container()
         .appendTo( "#divBeforePhaseReviewTable" );
     } );
+ 
+    modalCloseButton[0].addEventListener("click", closeCreateUserModal);
+    modalCloseButton[1].addEventListener("click", closeEditUserModal);
 }
 
 async function submitNewUserForm() {
@@ -258,14 +276,42 @@ function getSelectedUserToEdit() {
     return selectedUserToEdit;
 }
 
+function searchForStudentHomePage() {
+    var searchThisStudent = document.getElementById('studentSearchBar');
+    
+    var addStudentTab = document.getElementById('adminStudentControlsWindow');
+    var phaseReviewTab = document.getElementById('adminPhaseReviewWindow');
+    var studentProgressTab = document.getElementById('studentProgressWindow');
+
+    addStudentTab.style.display = "none";
+    phaseReviewTab.style.display = "none";
+    studentProgressTab.style.display = "block";
+
+    console.log("Here is your userID:"+searchThisStudent.value); 
+
+    /*
+    const iframe = document.createElement("iframe");
+    iframe.style.display = "none";
+    iframe.src = "https://ceias.nau.edu/capstone/projects/CS/2022/WhatsUpDoc_S22/C&I_Doctoral_Tracker/";
+    document.body.appendChild(iframe);
+
+    */
+    return true;
+
+}
+
+function closeCreateUserModal() {
+    createUserModal.style.display = "none";
+    
+}
+
+function closeEditUserModal() {
+    editUserModal.style.display = "none";
+}
+
+
 // configure google sign-out button
 function signOut() {
     google.accounts.id.disableAutoSelect();
-    window.location.href = "index.html?";
+    window.location.href = "index.html";
   }
-
-const closeModal = function () {
-    allModals.style.display = "none";
-  };
-
-allModals.addEventListener("click", closeModal);
