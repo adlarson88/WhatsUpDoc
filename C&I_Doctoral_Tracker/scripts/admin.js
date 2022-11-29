@@ -261,7 +261,7 @@ function getSelectedUserToEdit() {
 // configure google sign-out button
 function signOut() {
     google.accounts.id.disableAutoSelect();
-    window.location.href = "https://ceias.nau.edu/capstone/projects/CS/2022/WhatsUpDoc_S22/C&I_Doctoral_Tracker/index.html?";
+    window.location.href = "index.html?";
   }
 
 const closeModal = function () {
