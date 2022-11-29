@@ -396,10 +396,6 @@ form {
 	display: none;
 }
 
-.signOut {
-	vertical-align: right;
-}
-
 .fileView {
 	position: absolute;
 	background-color: #002454;
@@ -414,6 +410,35 @@ form {
 	text-align: center;
 }
 
+.help {
+	width: 5%;
+	float: right;
+}
+
+.refreshButton{
+	margin-right: 0;
+	margin-left: auto;
+	display: block;
+	padding: 0;
+	border: 0;
+	background-color: inherit;
+}
+
+.refreshIMG{
+	height: 1vh;
+	width: 1vw;
+	padding: 0;
+	border: 0;
+}
+
+.fileDelete{
+	position: relative;
+	top: 84%;
+	/*left: 45%;*/
+	display: block;
+	margin: auto;
+}
+
 .fileUpload{
 	margin : auto;
 	display : block;
@@ -422,9 +447,4 @@ form {
 .fileDownload {
 	margin : auto;
 	display: block;
-}
-
-.help {
-	width: 5%;
-	float: right;
 }
