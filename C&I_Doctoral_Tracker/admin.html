@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 
+<!-- Code written and commented by Brandon James Shaffer. With acknowledgements made to 
+     Google and DataTables where appropriate, as their docuumentation was immensely helpful
+     in the development of this web application. -->
+
 <html>
 
+  <!-- The head tag in the admin.html file is very important because it specifies many of the CDNs 
+       needed to get DataTables working and styled correctly. 
+       
+       The first four links are all style related.
+       The first two stylesheet links are related to DataTables, which are styled using Bootstrap 5.
+       The third stylesheet is related to search icon on the third tab of the admin.html web page.
+       The fourth stylesheet refers to the local style sheet used to style the remaining parts of the web pages. 
+      
+       The next five CDN links are all JavaScript related and are required for functionality purposes. 
+       The first script source is Google API's CDN for jQuery 3.6.1 (which is utilized to populate the DataTables table).
+       The second script source is a CDN needed to get Bootstrap 5 styling correctly implemented for all DataTables.
+       The third and fourth script sources are CDNs needed to allow the Admins to export the DataTables to PDF using 
+       a button within the DataTables table.
+       The fifth script source is a long-winded CDN directly from DataTables themselves, which is needed for all of 
+       DataTables special buttons and features, including: copy to clipboard, export to CSV, include Data time stamps, 
+       search functionality, sorting, and pagination. -->
   <head>
     <title>Admin Page</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.13.1/af-2.5.1/b-2.3.3/b-colvis-2.3.3/b-html5-2.3.3/b-print-2.3.3/cr-1.6.1/date-1.2.0/fc-4.2.1/fh-3.3.1/kt-2.8.0/r-2.4.0/rr-1.3.1/sc-2.0.7/sb-1.4.0/sp-2.1.0/sl-1.5.0/sr-1.2.0/datatables.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -17,24 +37,54 @@
     <script src="scripts/admin.js"></script>
   </head> 
 
+  <!-- The body tag for the admin.html has a special onload function, which will prepare the page
+       so that the proper tables are open upon page refresh. Without this function, all divs/tables
+       would appear on the same page and the tabs would not do their jobs of compartmentalizing the tables.
+       The default table that should be open upon refresh is the Add/Remove Students table. -->
   <body onload="preparePage()">
 
+    <!-- This div is called g_id_signout and it encompasses the Sign Out button.
+         As of the current iteration, this button only redirects you back to the index.html landing page. 
+         It does not sign you out of your Google account in your browser. Users have to sign out of their Google accounts manually 
+         through their browser until this can be implemented. -->
     <div class="g_id_signout">
       <button class="signOutButton" onclick="signOut();">Sign-Out</button>
     </div>
   
+    <!-- Include the div containing the nice NAU logo, for continuity and university affiliation! -->
     <div class="nauLetterLogo" style="text-align: center;">
       <img src="images/naulogo1noaxe.png" alt="NAU Axe Logo" style="width:10vw;height:7vh;max-width:200px;max-height: 75px;">
     </div>
 
+    <!-- The adminControlsTaskBar div encompasses the task bar that admins will interact with on the page.
+         As of this iteration, there are only three buttons on the admin task bar.
+         The first button calls a JavaScript function which opens the Add/Remove Users DataTable and hides the other two divs.
+         The second button calls a JS function which opens the Phase Review DataTable and hides the other two divs.
+         The third button calls a JS function which opens up the Student Progress div and hides the other two divs.  -->
     <div class="adminControlsTaskBar">
-      <button onclick="openAdminStudentControlsWindow()" class="adminControlButton" id="adminStudentControlsButton">Add/Remove Students</button>
+      <button onclick="openAdminStudentControlsWindow()" class="adminControlButton" id="adminStudentControlsButton">Add/Remove Users</button>
       <button onclick="openPhaseReviewWindow()" class="adminControlButton" id="phaseReviewControlsButton">Phase Review</button>
       <button onclick="openStudentProgressWindow()" class="adminControlButton" id="studentProgressControlsButton">Student Progress Viewer</button>
     </div>
   
+    <!-- This div encompasses the Add/Remove Users DataTable and is called the adminStudentControlsWindow. -->
     <div class="adminStudentControlsWindow" id="adminStudentControlsWindow">
       <div id="divBeforeStudentTable"></div>
+      
+      <!-- Here we create our first table, titled the adminStudentControlsTable, AKA the Add/Remove Users table. 
+           I include some table and border styling in the class attribute. In the table head, you place your 
+           table rows. 
+           
+           ***IMPORTANT*** Whatever is between the <th></th> tags is what the table column will be named.
+           
+           The class name of each <th> tag will always be "table" followed by a hyphen and then another word
+           used to describe the color of the column header box within the table.
+           "table-primary" is blue.
+           "table-success" is green.
+           "table-info" is teal.
+           "table-warning" is yellow.
+           "table-danger" is red.
+           "table-secondary" is gray. -->
       <table id="adminStudentControlsTable" class="table table-striped table-bordered border-dark" style="width:100%">
         <thead>
             <tr>
@@ -50,11 +100,31 @@
       </table>
     </div>
 
+    <!-- The createUserModal div encompasses one of two modals used within the Add/Remove Users DataTable.
+         This first modal relates to creating students and will be opened once the admin clicks the "New User" button
+         within the Add/Remove Users DataTable. Modals are meant to be like "popups" and should gray out the
+         background page until the modal form has been completed. Therefore, we need two main divs per modal.
+         
+         The first div is the wrapper div named createUserModal: this div will be styled to opaquely gray out the page 
+         behind the modal.
+        
+         The second div is the createUserModalContent which will contain the actual modal window itself and its contents.-->
     <div id="createUserModal" class="modal">
       <div class="createUserModalContent">
+        <!-- Header div to describe what the modal popup is for. -->
         <div class="headerWrapper">
           <h4>Enter New User's Information:</h4>
         </div>
+
+        <!-- Each modal will use its own form to query information from the user. The createUserForm will call
+             the submitNewUserForm() JavaScript function on form submit for information handling.
+            
+             This form asks the admin to create an entirely new user within the doctoral program and adds it to the DataTable+database:
+             this entails entering in the userID, last name, first name, advisor last name, 
+             term activation year (which I have explicitly given dropdown options for in a 12 year window as of right now.), 
+             enrollment status, and finally admin status.
+             Lastly, the form has a submit button so the admin can submit the form and a close button in case the admin
+             wants to leave the modal window without submitting the form. -->
         <form class="createUserForm" onsubmit="submitNewUserForm()">
           <label for="userID">userID:</label>
           <input type="text" id="formUserID" name="userID" value="abc123"><br></br>
@@ -68,6 +138,8 @@
           <label for="advisor">Advisor (Last Name):</label>
           <input type="text" id="formAdvisor" name="advisor" value="Advisorson"><br></br>
 
+          <!-- The termActivation field is a dropdown menu field that contains 12 years worth of 
+               Fall and Spring semester designations. This will need to be updated as time goes on. -->
           <label for="termActivation">Term Activation:</label>
           <select id="formTerm" name="term_activation">
             <option value="s2014">Spring 2014</option>
@@ -130,11 +202,30 @@
       </div>
     </div>
 
+    <!-- The editUserModal div encompasses one of two modals used within the Add/Remove Users DataTable.
+         This second modal relates to editing users and will be opened once the admin clicks the "Edit User" button
+         within the Add/Remove Users DataTable. Modals are meant to be like "popups" and should gray out the
+         background page until the modal form has been completed. Therefore, we need two main divs per modal.
+      
+         The first div is the wrapper div named editUserModal: this div will be styled to opaquely gray out the page 
+         behind the modal.
+    
+         The second div is the createUserModalContent which will contain the actual modal window itself and its contents. -->
     <div id="editUserModal" class="modal">
       <div class="createUserModalContent">
         <div class="headerWrapper">
           <h4>Edit Selected User's Information:</h4>
         </div>
+        
+        <!-- Each modal will use its own form to query information from the user. The editUserForm will call
+             the submitEditUserForm() JavaScript function on form submit for information handling.
+            
+             This form asks the admin to edit an existing user within the doctoral program after selecting it within the DataTable:
+             the admin MUST explicitly re-enter in the last name, first name, advisor last name, 
+             term activation year (which I have explicitly given dropdown options for in a 12 year window as of right now.), 
+             enrollment status, and finally admin status.
+             Lastly, the form has a submit button so the admin can submit the form and a close button in case the admin
+             wants to leave the modal window without submitting the form. -->
         <form class="editUserForm" onsubmit="submitEditUserForm()">
 
           <label for="lastName">Last Name:</label>
@@ -208,8 +299,24 @@
       </div>
     </div>
 
+    <!-- This div is named adminPhaseReviewWindow and it encompasses the Phase Review DataTable. -->
     <div class="adminPhaseReviewWindow" id="adminPhaseReviewWindow">
       <div id="divBeforePhaseReviewTable"></div>
+      
+      <!-- Here we create our second table, titled the phaseReviewTable.
+           I include some table and border styling in the class attribute. In the table head, you place your 
+           table rows. 
+      
+           ***IMPORTANT*** Whatever is between the <th></th> tags is what the table column will be named.
+      
+           The class name of each <th> tag will always be "table" followed by a hyphen and then another word
+           used to describe the color of the column header box within the table.
+           "table-primary" is blue.
+           "table-success" is green.
+           "table-info" is teal.
+           "table-warning" is yellow.
+           "table-danger" is red.
+           "table-secondary" is gray. -->
       <table id="phaseReviewTable" class="table table-striped table-bordered border-dark" style="width:100%">
         <thead>
             <tr>
@@ -226,7 +333,13 @@
       </table>
     </div>
 
-  
+    <!-- This div is named studentProgressWindow and it encompasses the Student Progress window, AKA
+         the student home page search bar. The intended purpose is to allow admins to search for students
+         within the program by userID and they will see an embedded view of the student's unique home page.
+         
+         This div is still in ***DEVELOPMENT*** and will require further work in order to get it fully functional.
+         Once the Token authorization/authentication is complete and unique student pages are implemented, this
+         feature can accurately be put to use by changing the embedded src URL to include the searched userID. -->
     <div class="studentProgressWindow" id="studentProgressWindow">
       <form class="studentSearch" onsubmit="searchForStudentHomePage()">
         <input type="text" id="studentSearchBar" placeholder="Enter valid Student userID:" value ="abc123" name="search">
@@ -235,6 +348,7 @@
       <iframe class= "embeddediframe" src="home.html" title="Student Phase Viewer"></iframe>
     </div>
 
+    <!-- Must include the Google Services Identity API on any page being redirected to. -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
   </body>
 </html>
