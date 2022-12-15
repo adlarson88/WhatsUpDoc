@@ -13,15 +13,20 @@
 
 .sidebar {
     display: grid;
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 10ch);
     order: 3;
     background-color: #002454;
     border-style: solid;
     border-color: #FAC01A;
+    max-height: 3%;
 }
 
 .content {
+    text-align: justify;
+    padding-left: 2ch;
     order: 4;
+    width: 90%;
+    font-size: 1.5em;
 }
 
 .banner {
@@ -36,9 +41,15 @@
 
 .link {
     background-color: #002454;
-    border-width: 1px;
-    place-self: center;
+    height: 100%;
+    width: 100%;
+    border-width: 2px;
+    text-align: center;
+    padding-top: 2ch;
     font-size: 1.5em;
+    border-style: solid;
+    border-color: #FAC01A;
+    
 }
 
 a {
