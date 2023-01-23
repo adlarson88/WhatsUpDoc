@@ -12,11 +12,11 @@
 	height: 75vh;
 	width: 45vw;
 	margin: auto;
-	max-height:275px;
+	max-height: 350px;
 	max-width: 500px;
 	min-width: 300px;
 }
- 
+
 /* Styles the Team's carrot banner logo seen on many pages.*/
 .carrotBanner {
 	text-align: center;
@@ -55,7 +55,7 @@
 	width: 45vw;
 	margin: auto;
 	margin-top: 500px;
-	max-height:250px;
+	max-height: 250px;
 	max-width: 325px;
 	min-width: 325px;
 }
@@ -79,7 +79,7 @@
 .headerWrapper {
 	text-align: center;
 	background-color: #FAC01A;
-	color:#000000
+	color: #000000
 }
 
 .submitFormHolder {
@@ -88,28 +88,37 @@
 
 /* #### ALL MODAL STYLING FOR THE ADMIN.HTML PAGE WILL BEGIN HERE*/
 .modal {
-	display: none; /* Hidden by default */
-  	position: fixed; /* Stay in place */
-  	z-index: 1; /* Sit on top */
-  	padding-top: 100px; /* Location of the box */
-  	left: 0;
-  	top: 0;
-  	width: 100%; /* Full width */
-  	height: 100%; /* Full height */
-  	overflow: auto; /* Enable scroll if needed */
-  	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
+	display: none;
+	/* Hidden by default */
+	position: fixed;
+	/* Stay in place */
+	z-index: 1;
+	/* Sit on top */
+	padding-top: 100px;
+	/* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%;
+	/* Full width */
+	height: 100%;
+	/* Full height */
+	overflow: auto;
+	/* Enable scroll if needed */
+	background-color: rgba(0, 0, 0, 0.4);
+	/* Black w/ opacity */
+}
 
 .createUserModalContent {
 	text-align: left;
-	color:#ffffff;
+	color: #ffffff;
 	align-content: space-evenly;
 	justify-content: space-evenly;
 	background-color: #002454;
-  	margin: auto;
- 	padding: 7px;
-  	border: 1px solid #FAC01A;
-  	width: 30%; /* Could be more or less, depending on screen size */
+	margin: auto;
+	padding: 7px;
+	border: 1px solid #FAC01A;
+	width: 30%;
+	/* Could be more or less, depending on screen size */
 	height: 50%;
 	min-width: 300px;
 	min-height: 475px;
@@ -118,7 +127,7 @@
 .headerWrapper {
 	text-align: center;
 	background-color: #FAC01A;
-	color:#000000
+	color: #000000
 }
 
 .submitFormHolder {
@@ -131,16 +140,16 @@
 	float: right;
 	font-size: 28px;
 	font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
+}
+
+.close:hover,
+.close:focus {
 	color: #000;
 	text-decoration: none;
 	cursor: pointer;
-  }
+}
 
-  /* #### Sign out Button styling starts here ####*/
+/* #### Sign out Button styling starts here ####*/
 .g_id_signout {
 	display: inline;
 	flex-direction: column;
@@ -152,7 +161,7 @@
 	margin: auto;
 	margin-top: 1ch;
 	margin-left: 90%;
-	max-height:10%;
+	max-height: 10%;
 	max-width: 300px;
 	min-width: 8%;
 	min-height: 7%;
@@ -182,7 +191,7 @@ form.studentSearch input[type=text] {
 	align-content: center;
 	width: 30%;
 	background: #f1f1f1;
-  }
+}
 
 /* Style the submit button */
 form.studentSearch button {
@@ -194,9 +203,10 @@ form.studentSearch button {
 	color: white;
 	font-size: 17px;
 	border: 1px solid grey;
-	border-left: none; /* Prevent double borders */
+	border-left: none;
+	/* Prevent double borders */
 	cursor: pointer;
-  }
+}
 
 /* #### Styling for the admin.html page begins here #### */
 
@@ -254,7 +264,7 @@ TO ATTACH THE TABLE'S BUTTONS TO THIS DIV. */
 	justify-content: space-evenly;
 	background-color: #F68300;
 	border-style: solid;
-	border-color: #007A33;	
+	border-color: #007A33;
 	margin-bottom: 2vh;
 	width: auto;
 	height: 15%;
@@ -269,7 +279,7 @@ TO ATTACH THE TABLE'S BUTTONS TO THIS DIV. */
 	justify-content: space-evenly;
 	background-color: #41B6E6;
 	border-style: solid;
-	border-color: #007A33;	
+	border-color: #007A33;
 	margin-bottom: 2vh;
 	width: auto;
 	height: 15%;
@@ -295,7 +305,7 @@ TO ATTACH THE TABLE'S BUTTONS TO THIS DIV. */
 /* Styles the embedded student home page window. */
 .embeddedHomePage {
 	display: flex;
-	flex-direction:column;
+	flex-direction: column;
 	text-align: center;
 	background-color: #1e9e49;
 	width: 35vw;
@@ -334,8 +344,9 @@ form {
 	top: 5vh;
 	margin: auto;
 }
+
 /* styles the milestones in the progress bar */
-.milestone{
+.milestone {
 	flex: 1;
 	border-style: solid;
 	border-top-style: none;
@@ -353,7 +364,7 @@ form {
 
 
 /* styles the drop down menu */
-.milestoneData{
+.milestoneData {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
@@ -369,7 +380,7 @@ form {
 }
 
 /* styles the task bars in the drop down menu */
-.milestoneDataText{
+.milestoneDataText {
 	flex: 1;
 	width: inherit;
 	border-style: none;
@@ -408,7 +419,7 @@ form {
 	float: right;
 }
 
-.refreshButton{
+.refreshButton {
 	margin-right: 0;
 	margin-left: auto;
 	display: block;
@@ -417,14 +428,14 @@ form {
 	background-color: inherit;
 }
 
-.refreshIMG{
+.refreshIMG {
 	height: 1vh;
 	width: 1vw;
 	padding: 0;
 	border: 0;
 }
 
-.fileDelete{
+.fileDelete {
 	position: relative;
 	top: 84%;
 	/*left: 45%;*/
@@ -432,12 +443,12 @@ form {
 	margin: auto;
 }
 
-.fileUpload{
-	margin : auto;
-	display : block;
+.fileUpload {
+	margin: auto;
+	display: block;
 }
 
 .fileDownload {
-	margin : auto;
+	margin: auto;
 	display: block;
 }

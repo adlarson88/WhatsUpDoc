@@ -17,8 +17,8 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
   datasource:
     url: jdbc:mysql://localhost:3306/capstone
-    username: baseUser!
-    password: basePassword1!
+    username:
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
   servlet:
     multipart:
@@ -32,20 +32,12 @@ spring:
     user:
       name: user
       password: pass
-    oauth2:
-      client:
-        registration:
-          google:
-            clientId: 911436566286-36r6uc7oavbrmqcmn7b2ijo3q34mn1gi.apps.googleusercontent.com
-            clientSecret: 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
-            scope:
-              - email
-              - profile
+
   mail:
     host: mail.privateemail.com
     port: 587
-    username: donotreply@doctracker.org
-    password: S22WhatsUpDocCapstone@
+    username:
+    password:
     properties:
       mail:
         smtp:

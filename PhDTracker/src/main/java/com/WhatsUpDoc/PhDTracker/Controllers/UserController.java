@@ -3,12 +3,8 @@ package com.WhatsUpDoc.PhDTracker.Controllers;
 import com.WhatsUpDoc.PhDTracker.Services.DBFields.FilePopulationInfo;
 import com.WhatsUpDoc.PhDTracker.Services.DBFields.Files;
 import com.WhatsUpDoc.PhDTracker.Services.DBFields.User;
-import com.WhatsUpDoc.PhDTracker.Services.DBFields.UserFileSummary;
 import com.WhatsUpDoc.PhDTracker.Services.Emailer.EmailService;
-import com.WhatsUpDoc.PhDTracker.Services.Exceptions.CannotStoreException;
-import com.WhatsUpDoc.PhDTracker.Services.Exceptions.NoFilesFoundException;
-import com.WhatsUpDoc.PhDTracker.Services.Exceptions.StudentAlreadyExistsException;
-import com.WhatsUpDoc.PhDTracker.Services.Exceptions.StudentNotFoundException;
+import com.WhatsUpDoc.PhDTracker.Services.Exceptions.*;
 import com.WhatsUpDoc.PhDTracker.Services.FileTransfer.Functional.FileStorageService;
 import com.WhatsUpDoc.PhDTracker.Services.Repositories.UserRepository;
 import com.WhatsUpDoc.PhDTracker.Services.UserSummary;
@@ -16,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,11 +30,6 @@ public class UserController {
     private EmailService emailService;
     @Autowired
     private UserSummary userSummary;
-
-    @GetMapping
-    public Map<String, Object> user(@AuthenticationPrincipal OAuth2User principal) {
-        return Collections.singletonMap("name", principal.getAttribute("name"));
-    }
 
     /**
      * Returns the user data that was submitted if successful
@@ -87,6 +76,10 @@ public class UserController {
         throw new StudentNotFoundException();
     }
 
+    /**
+     * Returns
+     * @return
+     */
     @GetMapping(path="/all")
     public @ResponseBody Iterable<User> getAll() {
         // lock out students if admin status != true
@@ -106,16 +99,29 @@ public class UserController {
         return JSONReturnString.toString();
     }
 
-    @GetMapping(path="/{id}/info")
-    public @ResponseBody User getStudent(@PathVariable String id) {
-        // same check as put or with spring goodness
-        Optional<User> oExistingUser = userRepository.findById(id);
-        if (oExistingUser.isPresent()) {
-            return oExistingUser.get();
+    @PostMapping(path="/info")
+    public User getUserData(@RequestBody User user) {
+        Optional<User> optionalUser = userRepository.findById(user.getUserID());
+        if(optionalUser.isPresent()) {
+            if (user.getPass().equals(optionalUser.get().getPass())) {
+                User returnUser = new User();
+                returnUser.setUserID(optionalUser.get().getUserID());
+                returnUser.setAdmin(optionalUser.get().isAdmin());
+                return returnUser;
+            }
+            throw new UnauthorizedAccessException();
         }
         throw new StudentNotFoundException();
     }
 
+//    @GetMapping(path="/{id}/info")
+//    public @ResponseBody User getStudent(@PathVariable String id) {
+//        Optional<User> oExistingUser = userRepository.findById(id);
+//        if (oExistingUser.isPresent()) {
+//            return oExistingUser.get();
+//        }
+//        throw new StudentNotFoundException();
+//    }
 
     @PostMapping("/{id}/upload/{uploadAs}")
     public ResponseEntity<?> handleFileUpload( @RequestParam("file") MultipartFile file, @PathVariable String id,
@@ -131,10 +137,10 @@ public class UserController {
         return ResponseEntity.ok("File uploaded successfully.");
     }
 
-    @DeleteMapping("/delete/{fileID}")
-    public ResponseEntity<String> removeFile(@PathVariable String fileID) {
-        if(fileStorageService.fileExists(fileID).isPresent()) {
-            fileStorageService.removeFile(fileID);
+    @DeleteMapping("/delete/{uploadID}")
+    public ResponseEntity<String> removeFile(@PathVariable String uploadID) {
+        if(fileStorageService.fileExists(uploadID).isPresent()) {
+            fileStorageService.removeFile(uploadID);
             return ResponseEntity.ok("File removed");
         }
         throw new NoFilesFoundException();
@@ -165,6 +171,7 @@ public class UserController {
         return info;
     }
 
+    // check usage, probably a drop
     @DeleteMapping("/{id}/deleteStudent")
     public User deleteStudent(@PathVariable String id) {
         Optional<User> optionalUser = userRepository.findById(id);
@@ -186,5 +193,60 @@ public class UserController {
         return Base64.getEncoder().encodeToString(data);
     }
 
+
+    @GetMapping("/{userID}/authorize")
+    public User authorize(@PathVariable String userID, @RequestParam("p") String pass) {
+        Optional<User> optionalUser = userRepository.findById(userID);
+        if(optionalUser.isPresent() && optionalUser.get().getPass() == pass) {
+            User returnUser = new User();
+            return returnUser.copyFrom(optionalUser.get());
+        }
+        throw new StudentNotFoundException();
+    }
+
+    @PostMapping("/new")
+    public User newUser(@RequestBody User user) {
+        Optional<User> optionalUser = userRepository.findById(user.getUserID());
+        if (Pattern.compile("([a-z][a-z])[a-z]*[0-9]*").matcher(user.getUserID()).matches()) {
+            if (optionalUser.isEmpty()) {
+                User newUser = new User(user.getUserID(), user.getFirst_name(), user.getLast_name(), user.getPass());
+                return userRepository.save(newUser);
+            }
+            throw new StudentAlreadyExistsException();
+        }
+        throw new CannotStoreException();
+    }
+
+//    @PostMapping(path="/authenticate")
+//    public void authenticateUser(@RequestParam("g_csrf_token") String g_csrf_token,
+//                                       @RequestParam("credential") String credential)
+//            throws GeneralSecurityException, IOException {
+//
+//        String clientID = "481483867201-9qp7unc6dcumlj9cj7b70337eik8fgfv.apps.googleusercontent.com";
+//
+//
+//        GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory())
+//                .setAudience(Collections.singletonList(clientID))
+//                .build();
+//
+//        GoogleIdToken idToken = verifier.verify(credential);
+//
+//        if (idToken != null) {
+//            GoogleIdToken.Payload payload = idToken.getPayload();
+//
+//            String email = payload.getEmail();
+//            String userID = email.split("@")[0];
+//            Optional<User> optionalUser = userRepository.findById(userID);
+//
+//            if (optionalUser.isPresent()) {
+//                User copiedUser = optionalUser.get();
+//                copiedUser.setG_csrf_token(g_csrf_token);
+//                copiedUser.setCredential(credential);
+//                userRepository.save(copiedUser);
+//                return;
+//            }
+//        }
+//        throw new AuthenticationFailedException();
+//    }
 
 }

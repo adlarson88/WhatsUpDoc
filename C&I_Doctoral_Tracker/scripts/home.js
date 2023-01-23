@@ -1,5 +1,6 @@
-var userData = 'eml292'; //temporary userID. to be replaced by login token containing user information
+var userData = JSON.parse(sessionStorage.getItem("response")); //temporary userID. to be replaced by login token containing user information
                          // will need to update calls of userData in following code to ensure userID is pulled from userData
+var userID = JSON.parse(sessionStorage.getItem("response")).userID;
 var completeList; // global variable that contains the list of files present on database under current user. 
                   // stored as an array of key value pairs. uploadID is the unique file id on the database, uploaded as is the task the file fulfills
                   // [{"uploadID":"encoded database id","uploaded_as":"phasex_y"},{more}] 
@@ -84,7 +85,7 @@ target = document.getElementsByClassName('fileView');
 
   // sets the userID to appear in the top left of page
   target = document.getElementById("currUser");
-  target.innerHTML = userData;
+  target.innerHTML = userID;
 
 
   // calls uploadEventListener for each task. not looped since each phase has different amount of tasks
@@ -131,7 +132,7 @@ async function uploadFile(phase, upFile)
   var uploadTest = new tester();
   var pingTest = new tester();
   // sets the url for the POST request to include userID in USERDATA and the apropriate phase
-  const uploadRequest = 'https://doctracker.org:8443/user/'+userData+'/upload/'+phase;
+  const uploadRequest = 'https://doctracker.org:8443/user/'+userID+'/upload/'+phase;
   
 
   // function that creates and sends POST
@@ -185,7 +186,7 @@ async function pingDB( tester = null )
 {
   
   // sends database request with userID from USERDATA
-  const downloadRequest = 'https://doctracker.org:8443/user/'+userData+'/getFiles';
+  const downloadRequest = 'https://doctracker.org:8443/user/'+userID+'/getFiles';
  
   const downloadOptions = {
     

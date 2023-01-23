@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<htmk>
+
+    <head>
+        <title>NAU DocTracker</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <div class="nauLetterLogo" style="text-align: center;">
+        <img src="images/naulogo1noaxe.png" alt="NAU Axe Logo"
+            style="width:17vw;height:15vh;max-width:200px;max-height: 75px;">
+    </div>
+
+    <!-- The body div on this page contains the main login window that users will interface with.  -->
+
+
+    <body link="orange" alink="orange" vlink="orange">
+
+        <!-- The div for the main login window. -->
+        <div class="loginWindow">
+
+            <h1 style="color:#FAC01A;">DocTracker: Create your account</h1>
+            <p style="color:#F68300; font-size: 3ch;">Under construction Spring 2023 (still works!)</p>
+
+            <input type="text" placeholder="First Name" id="first">
+            <input type="text" placeholder="Last Name" id="last">
+            <p style="color: #F68300;">Username must be your NAU userID (ex: abc123)</p>
+            <input type="text" placeholder="Username" id="userid">
+            <p style="color: #F68300;">**Logins are managed by a fellow student**<br>Please use a UNIQUE password</p>
+            <input type="password" placeholder="Password" id="password">
+            <input type="password" placeholder="Confirm Pass" id="cpassword">
+            <br>
+            <button type="button" onclick="getNewUserInfo();">Submit</button>
+            <script>
+                async function getNewUserInfo() {
+                    var userID = document.getElementById('userid');
+                    var first_name = document.getElementById('first');
+                    var last_name = document.getElementById('last');
+                    var pass = document.getElementById('password');
+                    var cpass = document.getElementById('cpassword');
+                    if (pass.value != cpass.value) {
+                        alert("Passwords do not match")
+                        return;
+                    }
+
+                    var newUserInfo = {
+                        "userID": userID.value, "first_name": first_name.value,
+                        "last_name": last_name.value, "pass": pass.value
+                    };
+
+                    let json = JSON.stringify(newUserInfo);
+
+                    const createUserRequestURL = 'https://doctracker.org:8443/user/new';
+
+                    fetch(createUserRequestURL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-type': 'application/json'
+                        },
+                        body: json
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                alert("Error creating account");
+                                return Promise.reject(response);
+                            }
+                            return response.json();
+                        })
+                        .then(json => {
+                            alert("Account created successfully");
+                            window.location.href = "https://doctracker.org";
+                        });
+                }
+            </script>
+
+    </body>
+    <tail>
+
+        <!-- The tail houses our carrot icon, which links to Team What's Up Docs personal team website. -->
+        <div class="carrotBanner">
+            <a href="https://ceias.nau.edu/capstone/projects/CS/2022/WhatsUpDoc_S22/">
+                <img src="images/Carrot _banner.png" alt="Carrot Banner"
+                    style="width:15vw;height:10vh;max-width:150px;max-height:50px; text-align: center;">
+            </a>
+
+            <p style="color:#007A33;">Developing Team Website</p>
+    </tail>
+</htmk>
