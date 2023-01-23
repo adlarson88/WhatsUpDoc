@@ -1,11 +1,5 @@
 server:
-  ssl:
-    key-store: classpath:springboot.p12
-    key-store-password: password
-    key-store-type: pkcs12
-    key-alias: springboot
-    key-password: password
-  port: 8443
+
 
 spring:
   jpa:
@@ -16,10 +10,6 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
   datasource:
-    url: jdbc:mysql://localhost:3306/capstone
-    username:
-    password:
-    driver-class-name: com.mysql.cj.jdbc.Driver
   servlet:
     multipart:
       max-file-size: 10MB
@@ -28,19 +18,3 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
-  security:
-    user:
-      name: user
-      password: pass
-
-  mail:
-    host: mail.privateemail.com
-    port: 587
-    username:
-    password:
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
