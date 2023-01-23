@@ -44,7 +44,7 @@ public class EmailServiceImpl implements EmailService {
                     """, html);
 
             javaMailSender.send(mimeMessage);
-            return "Mail Send Successfully";
+            return "Mail Sent Successfully";
         } catch (Exception e) {
             return "Error while Sending Mail";
         }

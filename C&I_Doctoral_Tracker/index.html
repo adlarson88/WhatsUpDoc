@@ -3,140 +3,90 @@
 <html>
 
 <!-- The head div contains our page title (AKA the tab title) and our style sheet. -->
+
 <head>
-  <title>Landing Page</title>
+  <title>NAU DocTracker</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <!-- Here is the first div outside of our head. It contains the Northern Arizona University logo. -->
 <div class="nauLetterLogo" style="text-align: center;">
-  <img src="images/naulogo1noaxe.png" alt="NAU Axe Logo" style="width:17vw;height:15vh;max-width:200px;max-height: 75px;">
+  <img src="images/naulogo1noaxe.png" alt="NAU Axe Logo"
+    style="width:17vw;height:15vh;max-width:200px;max-height: 75px;">
 </div>
 
 <!-- The body div on this page contains the main login window that users will interface with.  -->
-<body>
-  <!-- Users will have to log in using an NAU associated Gmail account. 
-       Therefore, the "Sign In With Google" button must source the Google Services Identity client. -->
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+
+<body link="orange" alink="orange" vlink="orange">
 
   <!-- The div for the main login window. -->
   <div class="loginWindow">
 
     <h1 style="color:#FAC01A;">Welcome to the Curriculum & Instruction Doctoral Tracker!</h1>
-    <p style="color:#F68300; font-size: 3ch;">Sign in with your NAU gmail account:</p>
-    
-    <!-- In order to implement the "Sign In With Google" button, we must create three divs.
-         The first div will be the container for the sign in button. 
-         The two main button divs can be found through Google Identity Services documentation. 
-         The first div has the class "g_signin_button" and relates to the onload information
-         needed to integrate the button. The second div has the class "g_id_signin" 
-         and it specifically styles the Google sign in button. -->
+    <p style="color:#F68300; font-size: 3ch;">Sign in</p>
 
-      <div class="g_signin_button" style="text-align: center;">
-        <!-- The data-client_id attribute is asking for the Client ID given to you when you 
-             create your Google API Credentials page. Products outside of the development stages
-             should ideally hide the client ID so people can't see it in the HTML code with F12. 
-             
-             The data-ux_mode attribute declares whether the Google sign in workflow will be 
-             carried out in a separate window or a popup window. 
-             
-             The data-login_url attribute refers to the URL that you wish to redirect to 
-             if the user successfully logs in using an NAU gmail account. This URL/Domain needs to be
-             explicitly specified on the Google API Credentials page as well. -->
-        <div id="g_id_onload" 
-            data-client_id="911436566286-36r6uc7oavbrmqcmn7b2ijo3q34mn1gi.apps.googleusercontent.com"
-            data-auto_select="false"
-            data-auto_prompt="false"
-            data-context="signin"
-            data-ux_mode="popup"
-            data-login_uri="https://ceias.nau.edu/capstone/projects/CS/2022/WhatsUpDoc_S22/C&I_Doctoral_Tracker/admin.html?"
-            data-itp_support="true">
-        </div>
-  
-        <!-- This div allows the user to customize their Google button. Refer to Google's
-             documentation to better customize your Google button. -->
-        <div class="g_id_signin" 
-            data-type="standard"
-            data-shape="pill"
-            data-theme="filled_blue"
-            data-text="signin_with"
-            data-size="large"
-            data-locale="en-US"
-            data-logo_alignment="left"
-            data-width="275">
-        </div>
+    <input type="text" placeholder="Username" id="userid">
+    <br><br>
+    <input type="password" placeholder="Password" id="password">
+    <br><br>
+    <button type="button" onclick="getUserInfo();">Submit</button>
+    <br><br>
+    <a href="https://doctracker.org/create.html">Create Account</a>
+    <script>
+      function getUserInfo() {
+        var userid = document.getElementById("userid");
+        var password = document.getElementById("password");
 
-      <!-- This script block houses some of the future code needed to send the Google Encoded JWT Payload 
-           to your desired destination. Right now the payload is completely encoded, you would need to either
-           receive the payload on the backend, decode it, process it, save the desired tokens, and then send the tokens back 
-           proper identification and authentication, OR decode it on the front end and send JUST the tokens to the back end to be
-           authenticated, processed, saved, and sent back. The code is commented out until future iterations can expand upon it. -->
-      <script>
-        //function handleCredentialResponse(response) {
-            
-            // console.log("Encoded JWT ID token: " + response.credential);
-            
-            // ### COMMENTED OUT THE SECTION ATTEMPTING TO SEND JWT TOKEN TO BACK END ### 
-            /*
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'INSERT PAYLOAD DESTINATION HERE', true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            
-            // Set custom header for CRSF
-            xhr.setRequestHeader('X-Requested-With', 'XmlHttpRequest');
-            xhr.onload = function() {
-            console.log('Auth code response: ' + xhr.responseText);
-            };
-            xhr.send('Encoded JWT ID=' + response.credential);
-            */
-        //}
-        /*
-        window.onload = function () {
-            google.accounts.id.initialize({
-              client_id: "911436566286-36r6uc7oavbrmqcmn7b2ijo3q34mn1gi.apps.googleusercontent.com",
-              
-            });
-            google.accounts.id.renderButton(
-              document.getElementById("buttonDiv"),
-              { theme: "filled_blue", size: "large", type: "standard", shape: "pill", text: "signin-with", 
-                locale: "en-US", logo_alignment: "left", width: "275"}  // customization attributes
-            );
-            google.accounts.id.prompt(); // also display the One Tap dialog
+        var userInfo = {
+          "userID": userid.value, "pass": password.value
         }
-        */
-      </script>
-      
-  </div>
+        let json = JSON.stringify(userInfo);
+
+        const userDataRequestURL = 'https://doctracker.org:8443/user/info';
+
+        fetch(userDataRequestURL, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: json
+        })
+          .then(response => {
+            if (!response.ok) {
+              alert("Log in error. Please try again.");
+              return Promise.reject(response);
+            }
+            return response.json();
+          })
+          .then(json => {
+            window.sessionStorage.setItem("response", JSON.stringify(json));
+            let response = JSON.parse(sessionStorage.getItem("response"));
+            if (response.admin) {
+              window.location.href = "https://doctracker.org/admin.html";
+              return;
+            }
+            window.location.href = "https://doctracker.org/home.html";
+          });
+      }
+    </script>
+
 </body>
 <tail>
-  
-  <!-- The tail houses our carrot icon, which links to Team What's Up Docs personal team website. -->
+  <div>
+    <p style="color: white;">
+      For technical issues please email Adam Larson at <a href="mailto:al762@nau.edu">al762@nau.edu</a>
+    </p>
+  </div>
+
   <div class="carrotBanner">
     <a href="https://ceias.nau.edu/capstone/projects/CS/2022/WhatsUpDoc_S22/">
-      <img src="images/Carrot _banner.png" alt="Carrot Banner" style="width:15vw;height:10vh;max-width:150px;max-height:50px; text-align: center;">
+      <img src="images/Carrot _banner.png" alt="Carrot Banner"
+        style="width:15vw;height:10vh;max-width:150px;max-height:50px; text-align: center;">
     </a>
 
     <p style="color:#007A33;">Developing Team Website</p>
   </div>
-
-  <!-- The final div on the index.html page is only intended to be in use during the development 
-       stages of this project. If the Sign In With Google Token Authorization + Authentication is working, 
-       then there is no need for these two redirect buttons in the future. 
-      
-       The first button redirects to the local admin home page (named admin.html).
-      
-       The second button redirects to the local student home page (named home.html). -->
-  <div class="formWindow">
-    <h3 style="color:#FFDA0B;">**For Developer Use Only!**</h3>
-
-    <form action="admin.html">
-      <input type="submit" value="Click Here for ADMINISTRATOR Page" />
-    </form>
-
-    <form action="home.html">
-      <input type="submit" value="Click Here for STUDENT Page" />
-    </form>
-
-  </div>
 </tail>
+
 </html>

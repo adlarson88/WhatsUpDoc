@@ -14,8 +14,16 @@ public class User {
     private String advisor;
     private String enrollment_status;
     private String term_activation;
+    private String pass;
 
     public User() {
+    }
+
+    public User(String userID, String first_name, String last_name, String pass) {
+        this.userID = userID;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.pass = pass;
     }
 
     public User(User user) {
@@ -93,5 +101,13 @@ public class User {
 
     public void setTerm_activation(String term_activation) {
         this.term_activation = term_activation;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 }
